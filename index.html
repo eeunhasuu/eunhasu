@@ -63,18 +63,18 @@
         <div class="relative">
             <ul class="flex gap-8 text-lg font-medium">
                 
-                <!-- 메인 (클릭 시 'page-main'으로 이동) -->
+                <!-- MAIN (클릭 시 'page-main'으로 이동) -->
                 <li class="link-item cursor-pointer hover:text-blue-600 transition duration-150 p-2 -m-2 rounded-md"
-                    onclick="navigateTo('page-main')">메인</li>
+                    onclick="navigateTo('page-main')">MAIN</li>
 
-                <!-- 디스코그래피 - 드롭다운 영역 -->
+                <!-- DISCOGRAPHY - 드롭다운 영역 -->
                 <li id="discography-menu" class="relative" 
                     onmouseenter="handleMouseEnter()" 
                     onmouseleave="handleMouseLeave()">
                     
                     <!-- 드롭다운 트리거 텍스트 -->
                     <div class="link-item cursor-pointer hover:text-blue-600 transition duration-150 p-2 -m-2 rounded-md">
-                        디스코그래피
+                        DISCOGRAPHY
                     </div>
 
                     <!-- 드롭다운 메뉴 콘텐츠 -->
@@ -82,16 +82,16 @@
                         class="dropdown-menu absolute left-0 pt-2 z-20 w-40 bg-white text-black rounded-lg shadow-xl ring-1 ring-black ring-opacity-5 flex flex-col overflow-hidden">
                         
                         <!-- 드롭다운 항목들 (클릭 시 해당 페이지로 이동) -->
-                        <li class="px-4 py-2 text-sm hover:bg-blue-50 hover:text-blue-700 transition duration-150 cursor-pointer" onclick="navigateTo('page-producing')">프로듀싱</li>
-                        <li class="px-4 py-2 text-sm hover:bg-blue-50 hover:text-blue-700 transition duration-150 cursor-pointer" onclick="navigateTo('page-arrangement')">편곡</li>
-                        <li class="px-4 py-2 text-sm hover:bg-blue-50 hover:text-blue-700 transition duration-150 cursor-pointer" onclick="navigateTo('page-film-music')">영상음악</li>
-                        <li class="px-4 py-2 text-sm hover:bg-blue-50 hover:text-blue-700 transition duration-150 cursor-pointer" onclick="navigateTo('page-contest')">공모전</li>
+                        <li class="px-4 py-2 text-sm hover:bg-blue-50 hover:text-blue-700 transition duration-150 cursor-pointer" onclick="navigateTo('page-producing')">PRODUCING</li>
+                        <li class="px-4 py-2 text-sm hover:bg-blue-50 hover:text-blue-700 transition duration-150 cursor-pointer" onclick="navigateTo('page-arrangement')">ARRANGEMENT</li>
+                        <li class="px-4 py-2 text-sm hover:bg-blue-50 hover:text-blue-700 transition duration-150 cursor-pointer" onclick="navigateTo('page-film-music')">FILM MUSIC</li>
+                        <li class="px-4 py-2 text-sm hover:bg-blue-50 hover:text-blue-700 transition duration-150 cursor-pointer" onclick="navigateTo('page-contest')">CONTEST</li>
                     </ul>
                 </li>
 
-                <!-- Contact Link (클릭 시 'page-contact'으로 이동) -->
+                <!-- CONTACT Link (클릭 시 'page-contact'으로 이동) -->
                 <li class="link-item cursor-pointer hover:text-blue-600 transition duration-150 p-2 -m-2 rounded-md"
-                    onclick="navigateTo('page-contact')">컨택</li>
+                    onclick="navigateTo('page-contact')">CONTACT</li>
             </ul>
         </div>
     </nav>
@@ -101,39 +101,39 @@
 
         <!-- 1. 메인 페이지 -->
         <div id="page-main" class="page-content active p-8 bg-white rounded-xl shadow-lg">
-            <h1 class="text-3xl font-bold text-gray-800 mb-4">🏠 메인 페이지</h1>
+            <h1 class="text-3xl font-bold text-gray-800 mb-4">🏠 MAIN PAGE</h1>
             <p class="text-gray-600">환영합니다! 이곳은 웹사이트의 메인 페이지입니다.</p>
             <p class="text-gray-500 mt-4">부드러운 전환 효과를 확인해보세요.</p>
         </div>
 
         <!-- 2. 프로듀싱 페이지 (디스코그래피 하위) -->
         <div id="page-producing" class="page-content p-8 bg-white rounded-xl shadow-lg">
-            <h1 class="text-3xl font-bold text-gray-800 mb-4">🎶 프로듀싱 (디스코그래피)</h1>
+            <h1 class="text-3xl font-bold text-gray-800 mb-4">🎶 PRODUCING (DISCOGRAPHY)</h1>
             <p class="text-gray-600">프로듀싱 관련 내용을 여기에 디자인해 봅시다.</p>
             <div class="mt-4 p-4 bg-yellow-50 rounded-lg">여기에 앨범 목록을 보여줄 수 있습니다.</div>
         </div>
 
         <!-- 3. 편곡 페이지 (디스코그래피 하위) -->
         <div id="page-arrangement" class="page-content p-8 bg-white rounded-xl shadow-lg">
-            <h1 class="text-3xl font-bold text-gray-800 mb-4">🎹 편곡 (디스코그래피)</h1>
+            <h1 class="text-3xl font-bold text-gray-800 mb-4">🎹 ARRANGEMENT (DISCOGRAPHY)</h1>
             <p class="text-gray-600">편곡 작업 포트폴리오를 위한 공간입니다.</p>
         </div>
 
         <!-- 4. 영상음악 페이지 (디스코그래피 하위) -->
         <div id="page-film-music" class="page-content p-8 bg-white rounded-xl shadow-lg">
-            <h1 class="text-3xl font-bold text-gray-800 mb-4">🎬 영상음악 (디스코그래피)</h1>
+            <h1 class="text-3xl font-bold text-gray-800 mb-4">🎬 FILM MUSIC (DISCOGRAPHY)</h1>
             <p class="text-gray-600">영상 및 영화 음악 작업물을 전시합니다.</p>
         </div>
 
         <!-- 5. 공모전 페이지 (디스코그래피 하위) -->
         <div id="page-contest" class="page-content p-8 bg-white rounded-xl shadow-lg">
-            <h1 class="text-3xl font-bold text-gray-800 mb-4">🏆 공모전 (디스코그래피)</h1>
+            <h1 class="text-3xl font-bold text-gray-800 mb-4">🏆 CONTEST (DISCOGRAPHY)</h1>
             <p class="text-gray-600">참여한 공모전 이력 및 수상 내역을 정리합니다.</p>
         </div>
 
         <!-- 6. 컨택 페이지 -->
         <div id="page-contact" class="page-content p-8 bg-white rounded-xl shadow-lg">
-            <h1 class="text-3xl font-bold text-gray-800 mb-4">📧 컨택 페이지</h1>
+            <h1 class="text-3xl font-bold text-gray-800 mb-4">📧 CONTACT PAGE</h1>
             <p class="text-gray-600">연락처 정보나 문의 양식을 여기에 넣어봅시다.</p>
         </div>
 
@@ -141,7 +141,7 @@
 
 
     <script>
-        // --- 드롭다운 제어 JavaScript (기존 기능 유지) ---
+        // --- 드롭다운 제어 JavaScript ---
         let closeTimeout = null;
         const dropdown = document.getElementById('dropdown-content');
 
@@ -162,7 +162,7 @@
             }, 150); 
         }
 
-        // --- 페이지 전환 JavaScript (새로 추가된 기능) ---
+        // --- 페이지 전환 JavaScript ---
         const TRANSITION_DURATION = 500; // CSS transition 시간과 동일 (0.5초)
 
         /**
