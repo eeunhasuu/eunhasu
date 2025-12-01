@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,8 +7,14 @@
     <!-- Tailwind CSS CDN 로드 -->
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        /* 기본 스타일: 'Inter' 폰트 사용 */
+        /* 기본 스타일: 'Inter' 폰트 사용 및 부드러운 스크롤 적용 */
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+        
+        /* 1. HTML 태그에 scroll-smooth 클래스 추가 */
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
             font-family: "Inter", sans-serif;
             background-color: #ffffff; 
@@ -29,28 +35,29 @@
             transform: translateY(0);
         }
 
-        /* --- 페이지 컨테이너 스타일 --- */
+        /* * --- 페이지 컨테이너 스타일 --- */
         #page-container {
-            transition: height 0.5s ease-in-out; 
             position: relative;
-            overflow: hidden; 
             min-height: 500px;
+            /* 상단 네비게이션 바 높이만큼 패딩을 주어 콘텐츠가 네비게이션 아래에 위치하도록 함 */
+            padding-top: 5rem; /* 약 80px, 네비게이션 바 높이 (4.5rem)보다 약간 더 줍니다. */
         }
 
-        /* --- 페이지 콘텐츠 스타일 --- */
+        /* * --- 페이지 콘텐츠 스타일 ---
+         * 활성/비활성 상태에 따른 display: block/none 및 opacity/visibility 전환 유지
+         */
         .page-content {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
             opacity: 0;
             visibility: hidden;
             transition: opacity 0.5s ease-in-out, visibility 0.5s;
+            display: none; 
+            /* 개별 페이지의 상단 패딩은 제거 (main 컨테이너에 일괄 적용됨) */
         }
 
         .page-content.active {
             opacity: 1;
             visibility: visible;
+            display: block; 
         }
 
         /* =========================================================================
@@ -73,6 +80,7 @@
             to { opacity: 1; }
         }
 
+        /* 활성화 시 제목과 부제목에 애니메이션 적용 */
         .page-content.active h1 {
             opacity: 0; 
             animation: titleFadeIn 0.3s ease-out 0.05s forwards; 
@@ -83,22 +91,21 @@
             animation: titleFadeIn 0.3s ease-out 0.2s forwards; 
         }
         
-        /* 갤러리 아이템에 애니메이션 적용 (이전 오류 해결책인 forwards 포함) */
+        /* 갤러리 아이템에 순차적 애니메이션 적용 - 9개 항목 */
         .page-content.active .grid > div {
             opacity: 0; 
             animation: fadeInUp 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards; 
         }
 
-        /* 아이템별 애니메이션 지연을 통한 순차적 나타나기(스태거) 효과 적용 - 9개 항목으로 확장 */
         .page-content.active .grid > div:nth-child(1) { animation-delay: 0.3s; }
         .page-content.active .grid > div:nth-child(2) { animation-delay: 0.4s; }
         .page-content.active .grid > div:nth-child(3) { animation-delay: 0.5s; }
         .page-content.active .grid > div:nth-child(4) { animation-delay: 0.6s; }
         .page-content.active .grid > div:nth-child(5) { animation-delay: 0.7s; }
         .page-content.active .grid > div:nth-child(6) { animation-delay: 0.8s; }
-        .page-content.active .grid > div:nth-child(7) { animation-delay: 0.9s; } /* New */
-        .page-content.active .grid > div:nth-child(8) { animation-delay: 1.0s; } /* New */
-        .page-content.active .grid > div:nth-child(9) { animation-delay: 1.1s; } /* New */
+        .page-content.active .grid > div:nth-child(7) { animation-delay: 0.9s; }
+        .page-content.active .grid > div:nth-child(8) { animation-delay: 1.0s; }
+        .page-content.active .grid > div:nth-child(9) { animation-delay: 1.1s; }
 
 
         /* 복사 성공 메시지 스타일 */
@@ -118,17 +125,15 @@
             pointer-events: none;
         }
 
-        /* --- 모달 애니메이션을 위한 CSS 변경 --- */
+        /* --- 모달 애니메이션 스타일 유지 --- */
         .modal-overlay {
-            /* 기존 hidden 클래스 대신 opacity/pointer-events로 제어 */
             opacity: 0;
-            pointer-events: none; /* 클릭 방지 */
+            pointer-events: none;
             transition: opacity 0.3s ease-in-out;
-            /* display: flex는 유지, hidden 클래스 제거 */
             display: flex;
             position: fixed;
             inset: 0;
-            background-color: rgba(17, 24, 39, 0.75); /* bg-gray-900 bg-opacity-75 */
+            background-color: rgba(17, 24, 39, 0.75); 
             z-index: 50;
             align-items: center;
             justify-content: center;
@@ -137,26 +142,23 @@
 
         .modal-overlay.show {
             opacity: 1;
-            pointer-events: auto; /* 클릭 허용 */
+            pointer-events: auto; 
         }
         
-        /* 모달 콘텐츠(흰색 박스) 애니메이션 */
         .modal-content-box {
             background-color: #ffffff;
             padding: 1.5rem;
-            border-radius: 0.75rem; /* rounded-xl */
+            border-radius: 0.75rem; 
             width: 100%;
-            max-width: 32rem; /* max-w-lg */
+            max-width: 32rem; 
             position: relative;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25); /* shadow-2xl */
-            /* 초기 위치 및 투명도 설정 */
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25); 
             transform: translateY(20px); 
             opacity: 0;
             transition: transform 0.3s ease-out, opacity 0.3s ease-out;
         }
 
         .modal-overlay.show .modal-content-box {
-            /* show 클래스 시 최종 위치 및 투명도 설정 */
             transform: translateY(0);
             opacity: 1;
         }
@@ -164,8 +166,9 @@
 </head>
 <body>
 
-    <!-- 내비게이션 바 컴포넌트: border-b border-gray-100 클래스 제거 -->
-    <nav class="w-full bg-white text-black px-6 py-4 flex items-center justify-between z-10 sticky top-0">
+    <!-- 내비게이션 바 컴포넌트 -->
+    <!-- Z-index를 z-50으로 높여 콘텐츠 겹침 현상을 방지 -->
+    <nav class="fixed w-full bg-white text-black px-6 py-4 flex items-center justify-between z-50 top-0">
         
         <!-- 왼쪽 로고 (클릭 시 MAIN PAGE로 이동) -->
         <div class="text-2xl font-extrabold text-gray-800 cursor-pointer" onclick="navigateTo('page-main')">EUNHASU</div>
@@ -208,18 +211,16 @@
     </nav>
     
     <!-- 전체 페이지 콘텐츠 컨테이너 -->
-    <main id="page-container" class="mt-8 px-6 max-w-6xl mx-auto relative">
+    <main id="page-container" class="px-6 max-w-6xl mx-auto relative pt-20">
 
         <!-- 1. MAIN PAGE -->
-        <!-- 아래 여백을 pb-48로 설정 (고정 푸터 높이 확보) -->
-        <div id="page-main" class="page-content pt-8 pb-48">
+        <div id="page-main" class="page-content pb-48">
             <h1 class="text-3xl font-bold text-gray-800 mb-4">MAIN PAGE</h1>
             <p class="text-gray-600">환영합니다! 이곳은 웹사이트의 메인 페이지입니다.</p>
         </div>
 
         <!-- 2. PRODUCING PAGE (6개 항목으로 확장) -->
-        <!-- 아래 여백을 pb-48로 설정 (고정 푸터 높이 확보) -->
-        <div id="page-producing" class="page-content pt-8 pb-48">
+        <div id="page-producing" class="page-content pb-48">
             <h1 class="text-3xl font-bold text-gray-800 mb-8">PRODUCING</h1>
             <!-- 3열 그리드 갤러리 -->
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
@@ -290,8 +291,7 @@
         </div>
 
         <!-- 3. ARRANGEMENT PAGE (6개 항목으로 확장) -->
-        <!-- 아래 여백을 pb-48로 설정 (고정 푸터 높이 확보) -->
-        <div id="page-arrangement" class="page-content pt-8 pb-48">
+        <div id="page-arrangement" class="page-content pb-48">
             <h1 class="text-3xl font-bold text-gray-800 mb-8">ARRANGEMENT</h1>
             <!-- 3열 그리드 갤러리 -->
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
@@ -362,8 +362,7 @@
         </div>
 
         <!-- 4. VIDEO MUSIC PAGE (6개 항목으로 확장) -->
-        <!-- 아래 여백을 pb-48로 설정 (고정 푸터 높이 확보) -->
-        <div id="page-film-music" class="page-content pt-8 pb-48">
+        <div id="page-film-music" class="page-content pb-48">
             <h1 class="text-3xl font-bold text-gray-800 mb-8">VIDEO MUSIC</h1>
             <!-- 3열 그리드 갤러리 -->
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
@@ -413,7 +412,7 @@
                 <!-- VIDEO MUSIC Item 5: NEW -->
                 <div class="group cursor-pointer relative z-10 transform hover:scale-[1.02] transition duration-300" onclick="openModal('vid-5')">
                     <div class="aspect-square bg-gray-100 relative">
-                        <img src="https://placehold.co/400x400/6D28D9/ffffff?text=VIDEO+E" onerror="onerror=null;this.src='https://placehold.co/400x400/6D28D9/ffffff?text=VIDEO+E';" alt="Video E Cover" class="w-full h-full object-cover transition duration-300 group-hover:opacity-95">
+                        <img src="https://placehold.co/400x400/6D28D9/ffffff?text=VIDEO+E" onerror="this.onerror=null;this.src='https://placehold.co/400x400/6D28D9/ffffff?text=VIDEO+E';" alt="Video E Cover" class="w-full h-full object-cover transition duration-300 group-hover:opacity-95">
                     </div>
                     <div class="p-3 text-center">
                         <p class="text-xl font-bold text-gray-800 leading-tight">Educational Content</p>
@@ -434,8 +433,7 @@
         </div>
 
         <!-- 5. CONTEST PAGE (6개 항목으로 확장) -->
-        <!-- 아래 여백을 pb-48로 설정 (고정 푸터 높이 확보) -->
-        <div id="page-contest" class="page-content pt-8 pb-48">
+        <div id="page-contest" class="page-content pb-48">
             <h1 class="text-3xl font-bold text-gray-800 mb-8">CONTEST</h1>
             <!-- 3열 그리드 갤러리 -->
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
@@ -506,8 +504,7 @@
         </div>
 
         <!-- 6. CONTACT PAGE - 미니멀 디자인 -->
-        <!-- 아래 여백을 pb-48로 설정 (고정 푸터 높이 확보) -->
-        <div id="page-contact" class="page-content pt-8 pb-48">
+        <div id="page-contact" class="page-content pb-48">
             <!-- 제목 수정: 이모티콘 및 'PAGE' 제거 -->
             <h1 class="text-3xl font-bold text-gray-800 mb-8">CONTACT</h1>
             
@@ -543,7 +540,6 @@
     </main>
 
     <!-- 팝업 정보창 (모달) 구조 -->
-    <!-- 초기에는 opacity: 0 및 pointer-events: none 상태로 변경 -->
     <div id="item-modal" class="modal-overlay" onclick="closeModal()">
         <!-- 모달 콘텐츠 박스에 애니메이션 클래스 추가 -->
         <div class="modal-content-box" onclick="event.stopPropagation()">
@@ -561,8 +557,8 @@
     <div id="copy-message">이메일 주소가 복사되었습니다!</div>
 
 
-    <!-- 푸터 (Footer): 고정된 하단 푸터로 변경 (fixed inset-x-0 bottom-0) -->
-    <footer class="fixed inset-x-0 bottom-0 z-50 py-6 border-t border-gray-100 bg-white shadow-lg">
+    <!-- 푸터 (Footer): 고정된 하단 푸터로 변경 -->
+    <footer class="fixed inset-x-0 bottom-0 z-50 py-6 bg-white">
         <div class="max-w-6xl mx-auto px-6 text-center">
             <!-- 소셜 아이콘 -->
             <div class="flex justify-center space-x-8 mb-3">
@@ -617,7 +613,7 @@
             }, 150); 
         }
 
-        // --- 페이지 전환 JavaScript ---
+        // --- 페이지 전환 JavaScript (스크롤 가능하도록 수정) ---
         const TRANSITION_DURATION = 500; // CSS transition 시간과 동일 (0.5초)
 
         function navigateTo(targetPageId) {
@@ -628,40 +624,29 @@
             if (currentPage && currentPage.id === targetPageId) {
                 return;
             }
+            
+            // 페이지 전환 전에 스크롤을 맨 위로 이동합니다. (부드러운 스크롤 적용)
+            window.scrollTo({ top: 0, behavior: 'smooth' });
 
             if (newPage) {
-                // 1. 컨테이너 높이를 현재 페이지 높이로 고정하여 갑작스러운 높이 변화를 방지합니다.
+                // 1. 기존 페이지 fade-out 시작
                 if (currentPage) {
-                    // 현재 페이지의 실제 높이를 컨테이너에 적용하여 높이 유지 (점프 방지)
-                    container.style.height = `${currentPage.offsetHeight}px`;
-                    // 기존 페이지 fade-out 시작
                     currentPage.classList.remove('active');
-                } else {
-                    // 첫 로딩 시에는 container 높이를 임시로 'auto'로 설정하여 새 페이지 높이를 측정할 수 있도록 준비
-                    container.style.height = 'auto'; 
+                    
+                    // 트랜지션 시간(500ms) 후 display: none 처리하여 DOM 흐름에서 완전히 제거
+                    setTimeout(() => {
+                        currentPage.style.display = 'none';
+                    }, TRANSITION_DURATION);
                 }
                 
-                // 2. 새로운 페이지의 fade-in 및 애니메이션 시작
-                newPage.classList.add('active');
+                // 2. 새로운 페이지를 display: block으로 설정하여 DOM 흐름에 참여시킵니다.
+                // (이 시점에 opacity는 0이므로 보이지 않지만, 높이는 확보됨)
+                newPage.style.display = 'block';
 
-                // 3. 잠시 후 새로운 페이지의 최종 높이를 측정하고, 컨테이너 높이를 업데이트하여 부드러운 전환을 유도합니다.
-                // NOTE: 애니메이션이 적용되면서 높이가 변하므로, 충분히 시간을 두고 높이를 측정합니다.
+                // 3. 짧은 지연 시간(50ms) 후 active 클래스를 추가하여 fade-in 애니메이션 시작
                 setTimeout(() => {
-                    // 새로운 페이지의 실제 콘텐츠 높이를 scrollHeight로 가져옵니다. (늘어난 pb-48 패딩 포함)
-                    const targetHeight = newPage.scrollHeight;
-                    // 컨테이너의 높이를 새로운 목표 높이로 설정 (CSS transition이 높이를 부드럽게 변경)
-                    container.style.height = `${targetHeight}px`;
-
-                    // 4. 높이 전환이 완료된 후 (안전하게 두 배의 시간을 기다림),
-                    // 다음 페이지 전환 시 유연한 높이 계산을 위해 height 속성을 제거합니다.
-                    setTimeout(() => {
-                        if (container.style.height !== 'auto') {
-                            container.style.height = 'auto';
-                        }
-                    }, TRANSITION_DURATION + 100); // 0.6초 후 height: auto로 돌아가 유연성 확보
-
-                }, 50); // active 클래스 적용 후 짧은 지연 시간 (50ms)
-
+                    newPage.classList.add('active');
+                }, 50);
             }
 
             // 드롭다운 메뉴가 열려 있다면 닫습니다.
@@ -674,7 +659,12 @@
         
         // 페이지 로드 후 'page-main'으로 전환하여 부드러운 페이드인 효과를 적용합니다.
         window.onload = function() {
-            navigateTo('page-main');
+            // 초기 로딩 시에는 기존 페이지가 없으므로 display: block과 active를 바로 적용
+            const initialPage = document.getElementById('page-main');
+            if (initialPage) {
+                initialPage.style.display = 'block';
+                initialPage.classList.add('active');
+            }
         };
 
         // --- 모달 제어 JavaScript ---
