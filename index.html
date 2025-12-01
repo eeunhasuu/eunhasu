@@ -7,7 +7,7 @@
     <!-- Tailwind CSS CDN 로드 -->
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        /* 기본 스타일: 'Inter' 폰트 사용 (이전 버전의 깔끔한 폰트) */
+        /* 기본 스타일: 'Inter' 폰트 사용 */
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
         body {
             font-family: "Inter", sans-serif;
@@ -83,7 +83,7 @@
             animation: titleFadeIn 0.3s ease-out 0.2s forwards; 
         }
         
-        /* 갤러리 아이템에 애니메이션 적용 */
+        /* 갤러리 아이템에 애니메이션 적용 (이전 오류 해결책인 forwards 포함) */
         .page-content.active .grid > div {
             opacity: 0; 
             animation: fadeInUp 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards; 
@@ -148,26 +148,26 @@
     <main id="page-container" class="mt-8 px-6 max-w-6xl mx-auto relative">
 
         <!-- 1. MAIN PAGE -->
-        <div id="page-main" class="page-content py-8">
+        <!-- 수정: py-8 -> pt-8 pb-32 (아래 여백을 크게 확보) -->
+        <div id="page-main" class="page-content pt-8 pb-32">
             <h1 class="text-3xl font-bold text-gray-800 mb-4">🏠 MAIN PAGE</h1>
             <p class="text-gray-600">환영합니다! 이곳은 웹사이트의 메인 페이지입니다.</p>
         </div>
 
-        <!-- 2. PRODUCING PAGE (수정된 갤러리 템플릿 적용) -->
-        <div id="page-producing" class="page-content py-8">
+        <!-- 2. PRODUCING PAGE -->
+        <!-- 수정: py-8 -> pt-8 pb-32 (아래 여백을 크게 확보) -->
+        <div id="page-producing" class="page-content pt-8 pb-32">
             <h1 class="text-3xl font-bold text-gray-800 mb-8">PRODUCING</h1>
             <!-- 3열 그리드 갤러리 -->
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
                 <!-- PRODUCING Item 1: 아티스트 이름 명확하게 수정 -->
                 <div class="group cursor-pointer transform hover:scale-[1.02] transition duration-300 overflow-hidden" onclick="openModal('prod-1')">
                     <div class="aspect-square bg-gray-100 relative">
-                        <!-- 이미지 자체에도 둥근 모서리 없음 -->
                         <img src="https://placehold.co/400x400/2563EB/ffffff?text=PROD+A" onerror="this.onerror=null;this.src='https://placehold.co/400x400/2563EB/ffffff?text=PROD+A';" alt="Project A Cover" class="w-full h-full object-cover transition duration-300 group-hover:opacity-95">
                     </div>
                     <!-- 텍스트 영역: 배경 투명, 두 줄 포맷 적용 -->
                     <div class="p-3 text-center">
                         <p class="text-xl font-bold text-gray-800 leading-tight">The First Star</p>
-                        <!-- 수정: text-base, text-gray-600, mt-1 적용 -->
                         <p class="text-base text-gray-600 font-normal leading-tight mt-1">Artist Name A</p>
                     </div>
                 </div>
@@ -179,7 +179,6 @@
                     <!-- 텍스트 영역: 배경 투명, 두 줄 포맷 적용 -->
                     <div class="p-3 text-center">
                         <p class="text-xl font-bold text-gray-800 leading-tight">City Lights</p>
-                        <!-- 수정: text-base, text-gray-600, mt-1 적용 -->
                         <p class="text-base text-gray-600 font-normal leading-tight mt-1">Artist Name B</p>
                     </div>
                 </div>
@@ -191,15 +190,15 @@
                     <!-- 텍스트 영역: 배경 투명, 두 줄 포맷 적용 -->
                     <div class="p-3 text-center">
                         <p class="text-xl font-bold text-gray-800 leading-tight">Winter Breeze</p>
-                        <!-- 수정: text-base, text-gray-600, mt-1 적용 -->
                         <p class="text-base text-gray-600 font-normal leading-tight mt-1">Artist Name C</p>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- 3. ARRANGEMENT PAGE (수정된 갤러리 템플릿 적용) -->
-        <div id="page-arrangement" class="page-content py-8">
+        <!-- 3. ARRANGEMENT PAGE -->
+        <!-- 수정: py-8 -> pt-8 pb-32 (아래 여백을 크게 확보) -->
+        <div id="page-arrangement" class="page-content pt-8 pb-32">
             <h1 class="text-3xl font-bold text-gray-800 mb-8">ARRANGEMENT</h1>
             <!-- 3열 그리드 갤러리 -->
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
@@ -211,7 +210,6 @@
                     <!-- 텍스트 영역: 배경 투명, 두 줄 포맷 적용 -->
                     <div class="p-3 text-center">
                         <p class="text-xl font-bold text-gray-800 leading-tight">Classic Revisit</p>
-                        <!-- 수정: text-base, text-gray-600, mt-1 적용 -->
                         <p class="text-base text-gray-600 font-normal leading-tight mt-1">Artist Name D</p>
                     </div>
                 </div>
@@ -223,7 +221,6 @@
                     <!-- 텍스트 영역: 배경 투명, 두 줄 포맷 적용 -->
                     <div class="p-3 text-center">
                         <p class="text-xl font-bold text-gray-800 leading-tight">Acoustic Sunset</p>
-                        <!-- 수정: text-base, text-gray-600, mt-1 적용 -->
                         <p class="text-base text-gray-600 font-normal leading-tight mt-1">Artist Name E</p>
                     </div>
                 </div>
@@ -235,15 +232,15 @@
                     <!-- 텍스트 영역: 배경 투명, 두 줄 포맷 적용 -->
                     <div class="p-3 text-center">
                         <p class="text-xl font-bold text-gray-800 leading-tight">Pop Orchestra</p>
-                        <!-- 수정: text-base, text-gray-600, mt-1 적용 -->
                         <p class="text-base text-gray-600 font-normal leading-tight mt-1">Artist Name F</p>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- 4. VIDEO MUSIC PAGE (수정된 갤러리 템플릿 적용) -->
-        <div id="page-film-music" class="page-content py-8">
+        <!-- 4. VIDEO MUSIC PAGE -->
+        <!-- 수정: py-8 -> pt-8 pb-32 (아래 여백을 크게 확보) -->
+        <div id="page-film-music" class="page-content pt-8 pb-32">
             <h1 class="text-3xl font-bold text-gray-800 mb-8">VIDEO MUSIC</h1>
             <!-- 3열 그리드 갤러리 -->
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
@@ -255,7 +252,6 @@
                     <!-- 텍스트 영역: 배경 투명, 두 줄 포맷 적용 -->
                     <div class="p-3 text-center">
                         <p class="text-xl font-bold text-gray-800 leading-tight">Documentary OST</p>
-                        <!-- 수정: text-base, text-gray-600, mt-1 적용 -->
                         <p class="text-base text-gray-600 font-normal leading-tight mt-1">Client Name G</p>
                     </div>
                 </div>
@@ -267,7 +263,6 @@
                     <!-- 텍스트 영역: 배경 투명, 두 줄 포맷 적용 -->
                     <div class="p-3 text-center">
                         <p class="text-xl font-bold text-gray-800 leading-tight">Game Trailer Score</p>
-                        <!-- 수정: text-base, text-gray-600, mt-1 적용 -->
                         <p class="text-base text-gray-600 font-normal leading-tight mt-1">Client Name H</p>
                     </div>
                 </div>
@@ -279,15 +274,15 @@
                     <!-- 텍스트 영역: 배경 투명, 두 줄 포맷 적용 -->
                     <div class="p-3 text-center">
                         <p class="text-xl font-bold text-gray-800 leading-tight">Commercial BGM</p>
-                        <!-- 수정: text-base, text-gray-600, mt-1 적용 -->
                         <p class="text-base text-gray-600 font-normal leading-tight mt-1">Client Name I</p>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- 5. CONTEST PAGE (수정된 갤러리 템플릿 적용) -->
-        <div id="page-contest" class="page-content py-8">
+        <!-- 5. CONTEST PAGE -->
+        <!-- 수정: py-8 -> pt-8 pb-32 (아래 여백을 크게 확보) -->
+        <div id="page-contest" class="page-content pt-8 pb-32">
             <h1 class="text-3xl font-bold text-gray-800 mb-8">CONTEST</h1>
             <!-- 3열 그리드 갤러리 -->
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
@@ -299,7 +294,6 @@
                     <!-- 텍스트 영역: 배경 투명, 두 줄 포맷 적용 -->
                     <div class="p-3 text-center">
                         <p class="text-xl font-bold text-gray-800 leading-tight">National Music Award</p>
-                        <!-- 수정: text-base, text-gray-600, mt-1 적용 -->
                         <p class="text-base text-gray-600 font-normal leading-tight mt-1">Contest Host J</p>
                     </div>
                 </div>
@@ -311,7 +305,6 @@
                     <!-- 텍스트 영역: 배경 투명, 두 줄 포맷 적용 -->
                     <div class="p-3 text-center">
                         <p class="text-xl font-bold text-gray-800 leading-tight">New Artist Challenge</p>
-                        <!-- 수정: text-base, text-gray-600, mt-1 적용 -->
                         <p class="text-base text-gray-600 font-normal leading-tight mt-1">Contest Host K</p>
                     </div>
                 </div>
@@ -323,7 +316,6 @@
                     <!-- 텍스트 영역: 배경 투명, 두 줄 포맷 적용 -->
                     <div class="p-3 text-center">
                         <p class="text-xl font-bold text-gray-800 leading-tight">Digital Single Contest</p>
-                        <!-- 수정: text-base, text-gray-600, mt-1 적용 -->
                         <p class="text-base text-gray-600 font-normal leading-tight mt-1">Contest Host L</p>
                     </div>
                 </div>
@@ -331,7 +323,8 @@
         </div>
 
         <!-- 6. CONTACT PAGE -->
-        <div id="page-contact" class="page-content py-8">
+        <!-- 수정: py-8 -> pt-8 pb-32 (아래 여백을 크게 확보) -->
+        <div id="page-contact" class="page-content pt-8 pb-32">
             <h1 class="text-3xl font-bold text-gray-800 mb-4">📧 CONTACT PAGE</h1>
             <p class="text-gray-600">연락처 정보나 문의 양식을 여기에 넣어봅시다.</p>
         </div>
@@ -438,7 +431,7 @@
                 // 3. 잠시 후 새로운 페이지의 최종 높이를 측정하고, 컨테이너 높이를 업데이트하여 부드러운 전환을 유도합니다.
                 // NOTE: 애니메이션이 적용되면서 높이가 변하므로, 충분히 시간을 두고 높이를 측정합니다.
                 setTimeout(() => {
-                    // 새로운 페이지의 실제 콘텐츠 높이를 scrollHeight로 가져옵니다.
+                    // 새로운 페이지의 실제 콘텐츠 높이를 scrollHeight로 가져옵니다. (늘어난 pb-32 패딩 포함)
                     const targetHeight = newPage.scrollHeight;
                     // 컨테이너의 높이를 새로운 목표 높이로 설정 (CSS transition이 높이를 부드럽게 변경)
                     container.style.height = `${targetHeight}px`;
