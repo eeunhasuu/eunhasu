@@ -10,7 +10,8 @@
         /* 기본 스타일: 'Inter' 폰트 사용 */
         body {
             font-family: "Inter", sans-serif;
-            background-color: #f7f7f7;
+            /* 배경색을 흰색으로 변경 (상단 메뉴와 통일) */
+            background-color: #ffffff; 
             /* 페이지 전환 시 스크롤바가 깜빡이는 것을 방지 */
             overflow-x: hidden; 
         }
@@ -54,7 +55,8 @@
 <body>
 
     <!-- 내비게이션 바 컴포넌트 -->
-    <nav class="w-full bg-white text-black border-b border-gray-200 px-6 py-4 flex items-center justify-between shadow-sm z-10 sticky top-0">
+    <!-- shadow-sm 클래스를 제거하여 구분되는 시각적 경계를 완전히 없앴습니다. -->
+    <nav class="w-full bg-white text-black px-6 py-4 flex items-center justify-between z-10 sticky top-0">
         
         <!-- 왼쪽 로고 (클릭 시 MAIN PAGE로 이동하도록 수정됨) -->
         <div class="text-2xl font-extrabold text-gray-800 cursor-pointer" onclick="navigateTo('page-main')">EUNHASU</div>
@@ -100,41 +102,41 @@
     <!-- 전체 페이지 콘텐츠 컨테이너: 페이지 전환 효과의 기준이 됩니다. -->
     <main id="page-container" class="mt-8 px-6 max-w-4xl mx-auto relative min-h-[500px]">
 
-        <!-- 1. 메인 페이지 -->
-        <div id="page-main" class="page-content active p-8 bg-white rounded-xl shadow-lg">
+        <!-- 1. 메인 페이지 - active 클래스를 제거했습니다. -->
+        <div id="page-main" class="page-content py-8">
             <h1 class="text-3xl font-bold text-gray-800 mb-4">🏠 MAIN PAGE</h1>
             <p class="text-gray-600">환영합니다! 이곳은 웹사이트의 메인 페이지입니다.</p>
             <p class="text-gray-500 mt-4">부드러운 전환 효과를 확인해보세요.</p>
         </div>
 
         <!-- 2. 프로듀싱 페이지 (디스코그래피 하위) -->
-        <div id="page-producing" class="page-content p-8 bg-white rounded-xl shadow-lg">
+        <div id="page-producing" class="page-content py-8">
             <h1 class="text-3xl font-bold text-gray-800 mb-4">🎶 PRODUCING (DISCOGRAPHY)</h1>
             <p class="text-gray-600">프로듀싱 관련 내용을 여기에 디자인해 봅시다.</p>
             <div class="mt-4 p-4 bg-yellow-50 rounded-lg">여기에 앨범 목록을 보여줄 수 있습니다.</div>
         </div>
 
         <!-- 3. 편곡 페이지 (디스코그래피 하위) -->
-        <div id="page-arrangement" class="page-content p-8 bg-white rounded-xl shadow-lg">
+        <div id="page-arrangement" class="page-content py-8">
             <h1 class="text-3xl font-bold text-gray-800 mb-4">🎹 ARRANGEMENT (DISCOGRAPHY)</h1>
             <p class="text-gray-600">편곡 작업 포트폴리오를 위한 공간입니다.</p>
         </div>
 
         <!-- 4. 영상음악 페이지 (디스코그래피 하위) -->
-        <div id="page-film-music" class="page-content p-8 bg-white rounded-xl shadow-lg">
+        <div id="page-film-music" class="page-content py-8">
             <!-- FILM MUSIC -> VIDEO MUSIC으로 변경됨 -->
             <h1 class="text-3xl font-bold text-gray-800 mb-4">🎬 VIDEO MUSIC (DISCOGRAPHY)</h1>
             <p class="text-gray-600">영상 및 영화 음악 작업물을 전시합니다.</p>
         </div>
 
         <!-- 5. 공모전 페이지 (디스코그래피 하위) -->
-        <div id="page-contest" class="page-content p-8 bg-white rounded-xl shadow-lg">
+        <div id="page-contest" class="page-content py-8">
             <h1 class="text-3xl font-bold text-gray-800 mb-4">🏆 CONTEST (DISCOGRAPHY)</h1>
             <p class="text-gray-600">참여한 공모전 이력 및 수상 내역을 정리합니다.</p>
         </div>
 
         <!-- 6. 컨택 페이지 -->
-        <div id="page-contact" class="page-content p-8 bg-white rounded-xl shadow-lg">
+        <div id="page-contact" class="page-content py-8">
             <h1 class="text-3xl font-bold text-gray-800 mb-4">📧 CONTACT PAGE</h1>
             <p class="text-gray-600">연락처 정보나 문의 양식을 여기에 넣어봅시다.</p>
         </div>
@@ -218,6 +220,12 @@
                 closeTimeout = null;
             }
         }
+        
+        // --- 페이지 로드 시 초기 콘텐츠 표시 (추가된 부분) ---
+        window.onload = function() {
+            // 페이지 로드 후 'page-main'으로 전환하여 부드러운 페이드인 효과를 적용합니다.
+            navigateTo('page-main');
+        };
     </script>
 </body>
 </html>
