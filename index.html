@@ -1,103 +1,115 @@
-import React, { useState, useCallback, useRef } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>순수 HTML 내비게이션 바 (Tailwind CSS CDN)</title>
+    <!-- Tailwind CSS CDN 로드 -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* 기본 스타일: 'Inter' 폰트 사용 */
+        body {
+            font-family: "Inter", sans-serif;
+            background-color: #f7f7f7;
+        }
 
-/**
- * Navbar component with a stable, hover-based dropdown menu.
- * Uses Framer Motion for smooth transitions and fixed a common issue
- * where the dropdown disappears when moving the mouse to the submenu items.
- */
-function Navbar() {
-  const [open, setOpen] = useState(false);
-  // Ref to hold the timeout ID for closing the dropdown.
-  const leaveTimeoutRef = useRef(null);
+        /* 드롭다운 메뉴의 초기 상태는 숨김입니다. */
+        .dropdown-menu {
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: opacity 0.2s ease-out, transform 0.2s ease-out, visibility 0.2s;
+        }
+        
+        /* 드롭다운 메뉴가 열린 상태 */
+        .dropdown-menu.open {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
 
-  // Handles mouse entry: opens the menu and cancels any pending close timer.
-  const handleMouseEnter = useCallback(() => {
-    if (leaveTimeoutRef.current) {
-      clearTimeout(leaveTimeoutRef.current);
-      leaveTimeoutRef.current = null;
-    }
-    setOpen(true);
-  }, []);
+    <!-- 내비게이션 바 컴포넌트 -->
+    <nav class="w-full bg-white text-black border-b border-gray-200 px-6 py-4 flex items-center justify-between shadow-sm">
+        
+        <!-- 왼쪽 로고 -->
+        <div class="text-2xl font-extrabold text-gray-800">EUNHASU</div>
 
-  // Handles mouse leave: sets a delay before closing the menu.
-  // This delay allows the mouse to enter the dropdown area without triggering closure.
-  const handleMouseLeave = useCallback(() => {
-    // Prevent setting multiple timeouts
-    if (leaveTimeoutRef.current) return;
+        <!-- 중앙 메뉴 -->
+        <div class="relative">
+            <ul class="flex gap-8 text-lg font-medium">
+                
+                <!-- 공통 메뉴 항목 클래스: 밑줄 없이 깔끔한 버튼 스타일 -->
+                <!-- link-item 클래스를 추가하여 JavaScript에서 쉽게 선택할 수 있도록 합니다. -->
+                <li class="link-item cursor-pointer hover:text-blue-600 transition duration-150 p-2 -m-2 rounded-md">메인</li>
 
-    const timeout = setTimeout(() => {
-      setOpen(false);
-      leaveTimeoutRef.current = null; // Clear ref after execution
-    }, 150); // 150ms delay to cover the gap
+                <!-- 디스코그래피 - 드롭다운 영역 -->
+                <li id="discography-menu" class="relative" 
+                    onmouseenter="handleMouseEnter()" 
+                    onmouseleave="handleMouseLeave()">
+                    
+                    <!-- 드롭다운 트리거 텍스트 -->
+                    <div class="link-item cursor-pointer hover:text-blue-600 transition duration-150 p-2 -m-2 rounded-md">
+                        디스코그래피
+                    </div>
 
-    leaveTimeoutRef.current = timeout;
-  }, []);
+                    <!-- 드롭다운 메뉴 콘텐츠 -->
+                    <ul id="dropdown-content"
+                        class="dropdown-menu absolute left-0 pt-2 z-20 w-40 bg-white text-black rounded-lg shadow-xl ring-1 ring-black ring-opacity-5 flex flex-col overflow-hidden">
+                        
+                        <!-- 드롭다운 항목들 -->
+                        <li class="px-4 py-2 text-sm hover:bg-blue-50 hover:text-blue-700 transition duration-150 cursor-pointer">프로듀싱</li>
+                        <li class="px-4 py-2 text-sm hover:bg-blue-50 hover:text-blue-700 transition duration-150 cursor-pointer">편곡</li>
+                        <li class="px-4 py-2 text-sm hover:bg-blue-50 hover:text-blue-700 transition duration-150 cursor-pointer">영상음악</li>
+                        <li class="px-4 py-2 text-sm hover:bg-blue-50 hover:text-blue-700 transition duration-150 cursor-pointer">공모전</li>
+                    </ul>
+                </li>
 
-  // Common Tailwind classes for main navigation links (styled as buttons, not links)
-  const linkClass = "cursor-pointer hover:text-blue-600 transition duration-150 p-2 -m-2 rounded-md";
-
-  return (
-    <nav className="w-full bg-white text-black border-b border-gray-200 px-6 py-4 flex items-center justify-between shadow-sm">
-      {/* Left Logo */}
-      <div className="text-2xl font-extrabold text-gray-800">EUNHASU</div>
-
-      {/* Center Menu */}
-      <div className="relative">
-        <ul className="flex gap-8 text-lg font-medium">
-          {/* Main Link (메인) */}
-          <li className={linkClass}>메인</li>
-
-          {/* Discography - Dropdown Trigger Area (디스코그래피) */}
-          <li
-            className="relative"
-            onMouseEnter={handleMouseEnter}
-            onMouseLeave={handleMouseLeave}
-          >
-            {/* Dropdown Trigger Text */}
-            <div className={linkClass}>
-              디스코그래피
-            </div>
-
-            {/* Dropdown Menu Content */}
-            <AnimatePresence>
-              {open && (
-                <motion.ul
-                  initial={{ opacity: 0, y: -10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -10 }}
-                  transition={{ duration: 0.2, ease: "easeOut" }}
-                  // pt-2 is used to cover the small gap between the trigger and the dropdown.
-                  className="absolute left-0 pt-2 z-20 w-40 bg-white text-black rounded-lg shadow-xl ring-1 ring-black ring-opacity-5 flex flex-col overflow-hidden"
-                >
-                  {/* Dropdown Items */}
-                  <li className="px-4 py-2 text-sm hover:bg-blue-50 hover:text-blue-700 transition duration-150 cursor-pointer">프로듀싱</li>
-                  <li className="px-4 py-2 text-sm hover:bg-blue-50 hover:text-blue-700 transition duration-150 cursor-pointer">편곡</li>
-                  <li className="px-4 py-2 text-sm hover:bg-blue-50 hover:text-blue-700 transition duration-150 cursor-pointer">영상음악</li>
-                  <li className="px-4 py-2 text-sm hover:bg-blue-50 hover:text-blue-700 transition duration-150 cursor-pointer">공모전</li>
-                </motion.ul>
-              )}
-            </AnimatePresence>
-          </li>
-
-          {/* Contact Link (컨택) */}
-          <li className={linkClass}>컨택</li>
-        </ul>
-      </div>
-    </nav>
-  );
-}
-
-
-/**
- * Main application component. Renders the Navbar in a basic container.
- * This file is ready to be used as App.jsx in a standard React project.
- */
-export default function App() {
-    return (
-        <div className="min-h-screen bg-gray-50 font-['Inter']">
-            <Navbar />
-            {/* Add the rest of your page content here */}
+                <!-- Contact Link (컨택) -->
+                <li class="link-item cursor-pointer hover:text-blue-600 transition duration-150 p-2 -m-2 rounded-md">컨택</li>
+            </ul>
         </div>
-    );
-}
+    </nav>
+    
+    <div class="p-8 max-w-4xl mx-auto">
+        <h1 class="text-3xl font-bold text-gray-800">HTML 버전 네비게이션</h1>
+        <p class="text-gray-600 mt-2">이 파일은 React 없이 순수 HTML과 JavaScript로 작성되었습니다. GitHub에서도 바로 작동합니다.</p>
+    </div>
+
+    <script>
+        // 드롭다운 요소와 타이머를 저장할 변수
+        let closeTimeout = null;
+        const dropdown = document.getElementById('dropdown-content');
+
+        /**
+         * 마우스 진입 시 드롭다운을 열고, 혹시 실행 중인 닫기 타이머를 취소합니다.
+         */
+        function handleMouseEnter() {
+            if (closeTimeout) {
+                clearTimeout(closeTimeout);
+                closeTimeout = null;
+            }
+            // 'open' 클래스를 추가하여 드롭다운을 표시합니다.
+            dropdown.classList.add('open');
+        }
+
+        /**
+         * 마우스 이탈 시 드롭다운을 닫는 동작에 150ms의 지연 시간을 줍니다.
+         * 이 지연 시간 동안 마우스가 드롭다운 메뉴 항목으로 이동할 수 있도록 허용하여,
+         * 메뉴가 갑자기 사라지는 문제를 해결합니다.
+         */
+        function handleMouseLeave() {
+            // 이미 타이머가 설정되어 있다면 다시 설정하지 않습니다.
+            if (closeTimeout) return;
+
+            closeTimeout = setTimeout(() => {
+                // 150ms 후 'open' 클래스를 제거하여 드롭다운을 숨깁니다.
+                dropdown.classList.remove('open');
+                closeTimeout = null; // 타이머 실행 후 초기화
+            }, 150); // 150ms 딜레이
+        }
+    </script>
+</body>
+</html>
