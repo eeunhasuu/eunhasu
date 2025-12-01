@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>EUNHASU Portfolio</title>
+<style>
+body { margin:0; font-family: Arial; background:white; color:black; }
+nav{ display:flex; justify-content:space-between; padding:20px; border-bottom:1px solid black; position:relative;}
+.menu{ display:flex; gap:30px; align-items:center;}
+.dropdown{ position:relative; }
+.dropdown-menu{
+  position:absolute; top:30px; left:0;
+  background:white; border:1px solid black; display:none;
+  flex-direction:column; padding:10px;
+  transition:all 0.2s ease;
+}
+.dropdown:hover .dropdown-menu{
+  display:flex;
+}
+.grid{ display:grid; grid-template-columns:repeat(3,1fr); }
+.square{ aspect-ratio:1/1; border:1px solid #eee; background:#ddd; }
+</style>
+</head>
+<body>
+<nav>
+<div class="logo">EUNHASU</div>
+<div class="menu">
+  <a href="#">메인</a>
+  <div class="dropdown">
+    <span>디스코그래피</span>
+    <div class="dropdown-menu">
+      <a href="#">프로듀싱</a>
+      <a href="#">편곡</a>
+      <a href="#">영상음악</a>
+      <a href="#">공모전</a>
+    </div>
+  </div>
+  <a href="#">컨택</a>
+</div>
+</nav>
+
+<div style="padding:20px;">
+  <h1>디스코그래피 샘플</h1>
+  <div class="grid">
+    <div class="square"></div>
+    <div class="square"></div>
+    <div class="square"></div>
+  </div>
+</div>
+</body>
+</html>
