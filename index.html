@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>순수 HTML 내비게이션 바 (Tailwind CSS CDN)</title>
+    <title>부드러운 페이지 전환 내비게이션 바</title>
     <!-- Tailwind CSS CDN 로드 -->
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
@@ -11,9 +11,11 @@
         body {
             font-family: "Inter", sans-serif;
             background-color: #f7f7f7;
+            /* 페이지 전환 시 스크롤바가 깜빡이는 것을 방지 */
+            overflow-x: hidden; 
         }
 
-        /* 드롭다운 메뉴의 초기 상태는 숨김입니다. */
+        /* --- 드롭다운 메뉴 스타일 (기존 유지) --- */
         .dropdown-menu {
             opacity: 0;
             visibility: hidden;
@@ -21,18 +23,38 @@
             transition: opacity 0.2s ease-out, transform 0.2s ease-out, visibility 0.2s;
         }
         
-        /* 드롭다운 메뉴가 열린 상태 */
         .dropdown-menu.open {
             opacity: 1;
             visibility: visible;
             transform: translateY(0);
         }
+
+        /* --- 페이지 전환 스타일 --- */
+        /* 모든 페이지 콘텐츠는 절대 위치로 설정하여 겹쳐지게 하고, 부모 요소의 높이에 영향을 주지 않도록 합니다. */
+        .page-content {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.5s ease-in-out, visibility 0.5s;
+        }
+
+        /* 활성화된 페이지 스타일 */
+        .page-content.active {
+            opacity: 1;
+            visibility: visible;
+            /* 활성화된 페이지는 상대 위치로 변경하여 부모의 높이를 결정합니다. */
+            position: relative; 
+        }
+
     </style>
 </head>
 <body>
 
     <!-- 내비게이션 바 컴포넌트 -->
-    <nav class="w-full bg-white text-black border-b border-gray-200 px-6 py-4 flex items-center justify-between shadow-sm">
+    <nav class="w-full bg-white text-black border-b border-gray-200 px-6 py-4 flex items-center justify-between shadow-sm z-10 sticky top-0">
         
         <!-- 왼쪽 로고 -->
         <div class="text-2xl font-extrabold text-gray-800">EUNHASU</div>
@@ -41,9 +63,9 @@
         <div class="relative">
             <ul class="flex gap-8 text-lg font-medium">
                 
-                <!-- 공통 메뉴 항목 클래스: 밑줄 없이 깔끔한 버튼 스타일 -->
-                <!-- link-item 클래스를 추가하여 JavaScript에서 쉽게 선택할 수 있도록 합니다. -->
-                <li class="link-item cursor-pointer hover:text-blue-600 transition duration-150 p-2 -m-2 rounded-md">메인</li>
+                <!-- 메인 (클릭 시 'page-main'으로 이동) -->
+                <li class="link-item cursor-pointer hover:text-blue-600 transition duration-150 p-2 -m-2 rounded-md"
+                    onclick="navigateTo('page-main')">메인</li>
 
                 <!-- 디스코그래피 - 드롭다운 영역 -->
                 <li id="discography-menu" class="relative" 
@@ -59,56 +81,140 @@
                     <ul id="dropdown-content"
                         class="dropdown-menu absolute left-0 pt-2 z-20 w-40 bg-white text-black rounded-lg shadow-xl ring-1 ring-black ring-opacity-5 flex flex-col overflow-hidden">
                         
-                        <!-- 드롭다운 항목들 -->
-                        <li class="px-4 py-2 text-sm hover:bg-blue-50 hover:text-blue-700 transition duration-150 cursor-pointer">프로듀싱</li>
-                        <li class="px-4 py-2 text-sm hover:bg-blue-50 hover:text-blue-700 transition duration-150 cursor-pointer">편곡</li>
-                        <li class="px-4 py-2 text-sm hover:bg-blue-50 hover:text-blue-700 transition duration-150 cursor-pointer">영상음악</li>
-                        <li class="px-4 py-2 text-sm hover:bg-blue-50 hover:text-blue-700 transition duration-150 cursor-pointer">공모전</li>
+                        <!-- 드롭다운 항목들 (클릭 시 해당 페이지로 이동) -->
+                        <li class="px-4 py-2 text-sm hover:bg-blue-50 hover:text-blue-700 transition duration-150 cursor-pointer" onclick="navigateTo('page-producing')">프로듀싱</li>
+                        <li class="px-4 py-2 text-sm hover:bg-blue-50 hover:text-blue-700 transition duration-150 cursor-pointer" onclick="navigateTo('page-arrangement')">편곡</li>
+                        <li class="px-4 py-2 text-sm hover:bg-blue-50 hover:text-blue-700 transition duration-150 cursor-pointer" onclick="navigateTo('page-film-music')">영상음악</li>
+                        <li class="px-4 py-2 text-sm hover:bg-blue-50 hover:text-blue-700 transition duration-150 cursor-pointer" onclick="navigateTo('page-contest')">공모전</li>
                     </ul>
                 </li>
 
-                <!-- Contact Link (컨택) -->
-                <li class="link-item cursor-pointer hover:text-blue-600 transition duration-150 p-2 -m-2 rounded-md">컨택</li>
+                <!-- Contact Link (클릭 시 'page-contact'으로 이동) -->
+                <li class="link-item cursor-pointer hover:text-blue-600 transition duration-150 p-2 -m-2 rounded-md"
+                    onclick="navigateTo('page-contact')">컨택</li>
             </ul>
         </div>
     </nav>
     
-    <div class="p-8 max-w-4xl mx-auto">
-        <h1 class="text-3xl font-bold text-gray-800">HTML 버전 네비게이션</h1>
-        <p class="text-gray-600 mt-2">이 파일은 React 없이 순수 HTML과 JavaScript로 작성되었습니다. GitHub에서도 바로 작동합니다.</p>
-    </div>
+    <!-- 전체 페이지 콘텐츠 컨테이너: 페이지 전환 효과의 기준이 됩니다. -->
+    <main id="page-container" class="mt-8 px-6 max-w-4xl mx-auto relative min-h-[500px]">
+
+        <!-- 1. 메인 페이지 -->
+        <div id="page-main" class="page-content active p-8 bg-white rounded-xl shadow-lg">
+            <h1 class="text-3xl font-bold text-gray-800 mb-4">🏠 메인 페이지</h1>
+            <p class="text-gray-600">환영합니다! 이곳은 웹사이트의 메인 페이지입니다.</p>
+            <p class="text-gray-500 mt-4">부드러운 전환 효과를 확인해보세요.</p>
+        </div>
+
+        <!-- 2. 프로듀싱 페이지 (디스코그래피 하위) -->
+        <div id="page-producing" class="page-content p-8 bg-white rounded-xl shadow-lg">
+            <h1 class="text-3xl font-bold text-gray-800 mb-4">🎶 프로듀싱 (디스코그래피)</h1>
+            <p class="text-gray-600">프로듀싱 관련 내용을 여기에 디자인해 봅시다.</p>
+            <div class="mt-4 p-4 bg-yellow-50 rounded-lg">여기에 앨범 목록을 보여줄 수 있습니다.</div>
+        </div>
+
+        <!-- 3. 편곡 페이지 (디스코그래피 하위) -->
+        <div id="page-arrangement" class="page-content p-8 bg-white rounded-xl shadow-lg">
+            <h1 class="text-3xl font-bold text-gray-800 mb-4">🎹 편곡 (디스코그래피)</h1>
+            <p class="text-gray-600">편곡 작업 포트폴리오를 위한 공간입니다.</p>
+        </div>
+
+        <!-- 4. 영상음악 페이지 (디스코그래피 하위) -->
+        <div id="page-film-music" class="page-content p-8 bg-white rounded-xl shadow-lg">
+            <h1 class="text-3xl font-bold text-gray-800 mb-4">🎬 영상음악 (디스코그래피)</h1>
+            <p class="text-gray-600">영상 및 영화 음악 작업물을 전시합니다.</p>
+        </div>
+
+        <!-- 5. 공모전 페이지 (디스코그래피 하위) -->
+        <div id="page-contest" class="page-content p-8 bg-white rounded-xl shadow-lg">
+            <h1 class="text-3xl font-bold text-gray-800 mb-4">🏆 공모전 (디스코그래피)</h1>
+            <p class="text-gray-600">참여한 공모전 이력 및 수상 내역을 정리합니다.</p>
+        </div>
+
+        <!-- 6. 컨택 페이지 -->
+        <div id="page-contact" class="page-content p-8 bg-white rounded-xl shadow-lg">
+            <h1 class="text-3xl font-bold text-gray-800 mb-4">📧 컨택 페이지</h1>
+            <p class="text-gray-600">연락처 정보나 문의 양식을 여기에 넣어봅시다.</p>
+        </div>
+
+    </main>
+
 
     <script>
-        // 드롭다운 요소와 타이머를 저장할 변수
+        // --- 드롭다운 제어 JavaScript (기존 기능 유지) ---
         let closeTimeout = null;
         const dropdown = document.getElementById('dropdown-content');
 
-        /**
-         * 마우스 진입 시 드롭다운을 열고, 혹시 실행 중인 닫기 타이머를 취소합니다.
-         */
         function handleMouseEnter() {
             if (closeTimeout) {
                 clearTimeout(closeTimeout);
                 closeTimeout = null;
             }
-            // 'open' 클래스를 추가하여 드롭다운을 표시합니다.
             dropdown.classList.add('open');
         }
 
-        /**
-         * 마우스 이탈 시 드롭다운을 닫는 동작에 150ms의 지연 시간을 줍니다.
-         * 이 지연 시간 동안 마우스가 드롭다운 메뉴 항목으로 이동할 수 있도록 허용하여,
-         * 메뉴가 갑자기 사라지는 문제를 해결합니다.
-         */
         function handleMouseLeave() {
-            // 이미 타이머가 설정되어 있다면 다시 설정하지 않습니다.
             if (closeTimeout) return;
 
             closeTimeout = setTimeout(() => {
-                // 150ms 후 'open' 클래스를 제거하여 드롭다운을 숨깁니다.
                 dropdown.classList.remove('open');
-                closeTimeout = null; // 타이머 실행 후 초기화
-            }, 150); // 150ms 딜레이
+                closeTimeout = null;
+            }, 150); 
+        }
+
+        // --- 페이지 전환 JavaScript (새로 추가된 기능) ---
+        const TRANSITION_DURATION = 500; // CSS transition 시간과 동일 (0.5초)
+
+        /**
+         * 지정된 페이지 ID로 콘텐츠를 전환하고 부드러운 페이드 효과를 적용합니다.
+         * @param {string} targetPageId - 전환할 페이지의 HTML ID (예: 'page-main')
+         */
+        function navigateTo(targetPageId) {
+            const container = document.getElementById('page-container');
+            const newPage = document.getElementById(targetPageId);
+            const currentPage = container.querySelector('.page-content.active');
+            
+            // 현재 페이지와 새 페이지가 같다면 아무것도 하지 않습니다.
+            if (currentPage && currentPage.id === targetPageId) {
+                return;
+            }
+
+            // 1. 현재 활성화된 페이지를 페이드아웃하고 비활성화합니다.
+            if (currentPage) {
+                // 부드러운 페이드 아웃을 위해 'active' 클래스를 제거합니다.
+                currentPage.classList.remove('active');
+                
+                // CSS Transition 시간이 끝날 때까지 기다립니다.
+                setTimeout(() => {
+                    // 페이드 아웃이 완료되면 'position: relative'를 제거합니다.
+                    currentPage.style.position = 'absolute'; 
+
+                    // 2. 새 페이지를 페이드인합니다.
+                    if (newPage) {
+                        // 새 페이지를 표시하기 위해 'position: relative'를 먼저 적용합니다.
+                        // 이로써 컨테이너의 높이가 새 페이지에 맞춰지게 됩니다.
+                        newPage.style.position = 'relative';
+                        
+                        // 다음 틱에 'active' 클래스를 추가하여 페이드 인을 시작합니다.
+                        // 브라우저가 position 변경을 먼저 적용하도록 강제합니다.
+                        requestAnimationFrame(() => {
+                             newPage.classList.add('active');
+                        });
+                       
+                    }
+                }, TRANSITION_DURATION);
+            } else if (newPage) {
+                // 현재 페이지가 없을 경우 (초기 로딩 시 등) 바로 새 페이지를 활성화합니다.
+                newPage.style.position = 'relative';
+                newPage.classList.add('active');
+            }
+
+            // 드롭다운 메뉴가 열려 있다면 닫습니다.
+            dropdown.classList.remove('open');
+            if (closeTimeout) {
+                clearTimeout(closeTimeout);
+                closeTimeout = null;
+            }
         }
     </script>
 </body>
