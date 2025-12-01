@@ -30,7 +30,16 @@
             transform: translateY(0);
         }
 
-        /* --- 페이지 전환 스타일 --- */
+        /* --- 페이지 컨테이너 스타일 --- */
+        #page-container {
+            /* 높이 변화에 transition을 적용하여 부드럽게 만듭니다. */
+            transition: height 0.5s ease-in-out; 
+            position: relative;
+            overflow: hidden; /* 페이지가 겹치지 않도록 숨김 */
+            min-height: 500px;
+        }
+
+        /* --- 페이지 콘텐츠 스타일 --- */
         .page-content {
             /* 기본 상태: 절대 위치로 설정하여 문서 흐름에서 제외 */
             position: absolute;
@@ -46,8 +55,7 @@
         .page-content.active {
             opacity: 1;
             visibility: visible;
-            /* 활성화된 페이지는 상대 위치로 설정하여 부모 컨테이너의 높이를 결정 */
-            position: relative; 
+            /* 활성화된 상태에서도 absolute를 유지 (JS가 컨테이너 높이 관리) */
         }
 
         /* --- 모달 오버레이 스타일 (Fade-in/out을 위한 초기 설정) --- */
@@ -160,7 +168,8 @@
     </nav>
     
     <!-- 전체 페이지 콘텐츠 컨테이너 -->
-    <main id="page-container" class="mt-8 px-6 max-w-6xl mx-auto relative min-h-[500px]">
+    <!-- min-h-[500px]는 CSS로 이동했습니다. -->
+    <main id="page-container" class="mt-8 px-6 max-w-6xl mx-auto relative">
 
         <!-- 1. MAIN PAGE -->
         <div id="page-main" class="page-content py-8">
@@ -382,22 +391,38 @@
             }
 
             if (newPage) {
-                // [깜빡임 수정 로직]
-                // 1. 새로운 페이지를 relative로 설정하여 컨테이너 높이를 확보합니다.
-                newPage.style.position = 'relative';
+                // 1. 컨테이너 높이를 현재 페이지 높이로 고정하여 갑작스러운 높이 변화를 방지합니다.
+                if (currentPage) {
+                    // 현재 페이지의 실제 높이를 컨테이너에 적용하여 높이 유지 (점프 방지)
+                    container.style.height = `${currentPage.offsetHeight}px`;
+                    // 기존 페이지 fade-out 시작
+                    currentPage.classList.remove('active');
+                } else {
+                    // 첫 로딩 시에는 container 높이를 임시로 'auto'로 설정하여 새 페이지 높이를 측정할 수 있도록 준비
+                    container.style.height = 'auto'; 
+                }
                 
-                // 2. 새로운 페이지의 fade-in을 시작합니다.
+                // 2. 새로운 페이지의 fade-in 및 애니메이션 시작
                 newPage.classList.add('active');
 
-                if (currentPage) {
-                    // 3. 기존 페이지의 fade-out을 시작합니다.
-                    currentPage.classList.remove('active');
-                    
-                    // 4. transition이 완료된 후, 기존 페이지를 문서 흐름에서 완전히 제거합니다.
+                // 3. 잠시 후 새로운 페이지의 최종 높이를 측정하고, 컨테이너 높이를 업데이트하여 부드러운 전환을 유도합니다.
+                // NOTE: 애니메이션이 적용되면서 높이가 변하므로, 충분히 시간을 두고 높이를 측정합니다.
+                setTimeout(() => {
+                    // 새로운 페이지의 실제 콘텐츠 높이를 scrollHeight로 가져옵니다.
+                    const targetHeight = newPage.scrollHeight;
+                    // 컨테이너의 높이를 새로운 목표 높이로 설정 (CSS transition이 높이를 부드럽게 변경)
+                    container.style.height = `${targetHeight}px`;
+
+                    // 4. 높이 전환이 완료된 후 (안전하게 두 배의 시간을 기다림),
+                    // 다음 페이지 전환 시 유연한 높이 계산을 위해 height 속성을 제거합니다.
                     setTimeout(() => {
-                        currentPage.style.position = 'absolute'; 
-                    }, TRANSITION_DURATION);
-                }
+                        if (container.style.height !== 'auto') {
+                            container.style.height = 'auto';
+                        }
+                    }, TRANSITION_DURATION + 100); // 0.6초 후 height: auto로 돌아가 유연성 확보
+
+                }, 50); // active 클래스 적용 후 짧은 지연 시간 (50ms)
+
             }
 
             // 드롭다운 메뉴가 열려 있다면 닫습니다.
