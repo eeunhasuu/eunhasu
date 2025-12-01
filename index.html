@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EUNHASU</title>
-    <!-- Tailwind CSS CDN 로드 -->
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         /* 기본 스타일: 'Inter' 폰트 사용 및 부드러운 스크롤 적용 */
@@ -44,8 +43,8 @@
         }
 
         /* * --- 페이지 콘텐츠 스타일 ---
-         * 활성/비활성 상태에 따른 display: block/none 및 opacity/visibility 전환 유지
-         */
+          * 활성/비활성 상태에 따른 display: block/none 및 opacity/visibility 전환 유지
+          */
         .page-content {
             opacity: 0;
             visibility: hidden;
@@ -125,7 +124,7 @@
             pointer-events: none;
         }
 
-        /* --- 모달 애니메이션 스타일 유지 --- */
+        /* --- 모달 애니메이션 스타일 (Z-index 수정됨) --- */
         .modal-overlay {
             opacity: 0;
             pointer-events: none;
@@ -133,8 +132,8 @@
             display: flex;
             position: fixed;
             inset: 0;
-            background-color: rgba(17, 24, 39, 0.75); 
-            z-index: 50;
+            background-color: rgba(17, 24, 39, 0.75); /* 어두운 배경 */
+            z-index: 90; /* ⬅️ Z-index를 높여 모든 요소를 덮도록 수정 */
             align-items: center;
             justify-content: center;
             padding: 1rem;
@@ -166,37 +165,27 @@
 </head>
 <body>
 
-    <!-- 내비게이션 바 컴포넌트 -->
-    <!-- py-5, px-8 및 gap-12 유지 (넓은 간격 유지) -->
     <nav class="fixed w-full bg-white text-black px-8 py-5 flex items-center justify-between z-50 top-0">
         
-        <!-- 왼쪽 로고 (클릭 시 MAIN PAGE로 이동) -->
         <div class="text-2xl font-extrabold text-gray-800 cursor-pointer" onclick="navigateTo('page-main')">EUNHASU</div>
 
-        <!-- 중앙 메뉴 -->
         <div class="relative">
-            <!-- 메뉴 항목 간 여백 확대 (유지) -->
             <ul class="flex gap-12 text-lg font-medium">
                 
-                <!-- MAIN -->
                 <li class="link-item cursor-pointer hover:text-blue-600 transition duration-150 p-2 -m-2"
                     onclick="navigateTo('page-main')">MAIN</li>
 
-                <!-- DISCOGRAPHY - 드롭다운 영역 -->
                 <li id="discography-menu" class="relative" 
                     onmouseenter="handleMouseEnter()" 
                     onmouseleave="handleMouseLeave()">
                     
-                    <!-- 드롭다운 트리거 텍스트 -->
                     <div class="link-item cursor-pointer hover:text-blue-600 transition duration-150 p-2 -m-2">
                         DISCOGRAPHY
                     </div>
 
-                    <!-- 드롭다운 메뉴 콘텐츠 -->
                     <ul id="dropdown-content"
                         class="dropdown-menu absolute left-0 pt-2 z-20 w-48 bg-white text-black rounded-lg shadow-xl ring-1 ring-black ring-opacity-5 flex flex-col overflow-hidden">
                         
-                        <!-- 드롭다운 항목들: 상하 여백 확대 (유지) -->
                         <li class="px-5 py-3 text-sm hover:bg-blue-50 hover:text-blue-700 transition duration-150 cursor-pointer" onclick="navigateTo('page-producing')">PRODUCING</li>
                         <li class="px-5 py-3 text-sm hover:bg-blue-50 hover:text-blue-700 transition duration-150 cursor-pointer" onclick="navigateTo('page-arrangement')">ARRANGEMENT</li>
                         <li class="px-5 py-3 text-sm hover:bg-blue-50 hover:text-blue-700 transition duration-150 cursor-pointer" onclick="navigateTo('page-film-music')">VIDEO MUSIC</li>
@@ -204,63 +193,49 @@
                     </ul>
                 </li>
 
-                <!-- CONTACT Link -->
                 <li class="link-item cursor-pointer hover:text-blue-600 transition duration-150 p-2 -m-2"
                     onclick="navigateTo('page-contact')">CONTACT</li>
             </ul>
         </div>
     </nav>
     
-    <!-- 전체 페이지 콘텐츠 컨테이너 -->
-    <!-- pt-24 유지 (네비게이션 바 아래 상단 여백 확대 유지) -->
     <main id="page-container" class="px-6 max-w-6xl mx-auto relative pt-24">
 
-        <!-- 1. MAIN PAGE -->
         <div id="page-main" class="page-content pb-48">
             <h1 class="text-3xl font-bold text-gray-800 mb-4">MAIN PAGE</h1>
             <p class="text-gray-600">환영합니다! 이곳은 웹사이트의 메인 페이지입니다.</p>
         </div>
 
-        <!-- 2. PRODUCING PAGE -->
         <div id="page-producing" class="page-content pb-48">
-            <!-- mb-8 -> mb-12로 여백 확대 -->
             <h1 class="text-3xl font-bold text-gray-800 mb-12">PRODUCING</h1>
-            <!-- 3열 그리드 갤러리: gap-8 유지 (앨범 카드 간 간격 축소 유지) -->
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
-                <!-- PRODUCING Item 1: relative z-10 추가 -->
                 <div class="group cursor-pointer relative z-10 transform hover:scale-[1.02] transition duration-300" onclick="openModal('prod-1')">
                     <div class="aspect-square bg-gray-100 relative">
                         <img src="https://placehold.co/400x400/2563EB/ffffff?text=PROD+A" onerror="this.onerror=null;this.src='https://placehold.co/400x400/2563EB/ffffff?text=PROD+A';" alt="Project A Cover" class="w-full h-full object-cover transition duration-300 group-hover:opacity-95">
                     </div>
-                    <!-- 텍스트 영역: 두 줄 모두 보이도록 유지 -->
                     <div class="p-3 text-center">
                         <p class="text-xl font-bold text-gray-800 leading-tight">The First Star</p>
                         <p class="text-base text-gray-600 font-normal leading-tight mt-1">Artist Name A</p>
                     </div>
                 </div>
-                <!-- PRODUCING Item 2: relative z-10 추가 -->
                 <div class="group cursor-pointer relative z-10 transform hover:scale-[1.02] transition duration-300" onclick="openModal('prod-2')">
                     <div class="aspect-square bg-gray-100 relative">
                         <img src="https://placehold.co/400x400/10B981/ffffff?text=PROD+B" onerror="this.onerror=null;this.src='https://placehold.co/400x400/10B981/ffffff?text=PROD+B';" alt="Project B Cover" class="w-full h-full object-cover transition duration-300 group-hover:opacity-95">
                     </div>
-                    <!-- 텍스트 영역: 두 줄 모두 보이도록 유지 -->
                     <div class="p-3 text-center">
                         <p class="text-xl font-bold text-gray-800 leading-tight">City Lights</p>
                         <p class="text-base text-gray-600 font-normal leading-tight mt-1">Artist Name B</p>
                     </div>
                 </div>
-                <!-- PRODUCING Item 3: relative z-10 추가 -->
                 <div class="group cursor-pointer relative z-10 transform hover:scale-[1.02] transition duration-300" onclick="openModal('prod-3')">
                     <div class="aspect-square bg-gray-100 relative">
                         <img src="https://placehold.co/400x400/F59E0B/ffffff?text=PROD+C" onerror="this.onerror=null;this.src='https://placehold.co/400x400/F59E0B/ffffff?text=PROD+C';" alt="Project C Cover" class="w-full h-full object-cover transition duration-300 group-hover:opacity-95">
                     </div>
-                    <!-- 텍스트 영역: 두 줄 모두 보이도록 유지 -->
                     <div class="p-3 text-center">
                         <p class="text-xl font-bold text-gray-800 leading-tight">Winter Breeze</p>
                         <p class="text-base text-gray-600 font-normal leading-tight mt-1">Artist Name C</p>
                     </div>
                 </div>
-                <!-- PRODUCING Item 4: NEW -->
                 <div class="group cursor-pointer relative z-10 transform hover:scale-[1.02] transition duration-300" onclick="openModal('prod-4')">
                     <div class="aspect-square bg-gray-100 relative">
                         <img src="https://placehold.co/400x400/7C3AED/ffffff?text=PROD+D" onerror="this.onerror=null;this.src='https://placehold.co/400x400/7C3AED/ffffff?text=PROD+D';" alt="Project D Cover" class="w-full h-full object-cover transition duration-300 group-hover:opacity-95">
@@ -270,7 +245,6 @@
                         <p class="text-base text-gray-600 font-normal leading-tight mt-1">Artist Name D-1</p>
                     </div>
                 </div>
-                <!-- PRODUCING Item 5: NEW -->
                 <div class="group cursor-pointer relative z-10 transform hover:scale-[1.02] transition duration-300" onclick="openModal('prod-5')">
                     <div class="aspect-square bg-gray-100 relative">
                         <img src="https://placehold.co/400x400/F43F5E/ffffff?text=PROD+E" onerror="this.onerror=null;this.src='https://placehold.co/400x400/F43F5E/ffffff?text=PROD+E';" alt="Project E Cover" class="w-full h-full object-cover transition duration-300 group-hover:opacity-95">
@@ -280,7 +254,6 @@
                         <p class="text-base text-gray-600 font-normal leading-tight mt-1">Artist Name E-1</p>
                     </div>
                 </div>
-                <!-- PRODUCING Item 6: NEW -->
                 <div class="group cursor-pointer relative z-10 transform hover:scale-[1.02] transition duration-300" onclick="openModal('prod-6')">
                     <div class="aspect-square bg-gray-100 relative">
                         <img src="https://placehold.co/400x400/34D399/ffffff?text=PROD+F" onerror="this.onerror=null;this.src='https://placehold.co/400x400/34D399/ffffff?text=PROD+F';" alt="Project F Cover" class="w-full h-full object-cover transition duration-300 group-hover:opacity-95">
@@ -293,46 +266,36 @@
             </div>
         </div>
 
-        <!-- 3. ARRANGEMENT PAGE -->
         <div id="page-arrangement" class="page-content pb-48">
-            <!-- mb-8 -> mb-12로 여백 확대 -->
             <h1 class="text-3xl font-bold text-gray-800 mb-12">ARRANGEMENT</h1>
-            <!-- 3열 그리드 갤러리: gap-8 유지 (앨범 카드 간 간격 축소 유지) -->
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
-                <!-- ARRANGEMENT Item 1: relative z-10 추가 -->
                 <div class="group cursor-pointer relative z-10 transform hover:scale-[1.02] transition duration-300" onclick="openModal('arr-1')">
                     <div class="aspect-square bg-gray-100 relative">
                         <img src="https://placehold.co/400x400/9333EA/ffffff?text=ARR+A" onerror="this.onerror=null;this.src='https://placehold.co/400x400/9333EA/ffffff?text=ARR+A';" alt="Arrangement A Cover" class="w-full h-full object-cover transition duration-300 group-hover:opacity-95">
                     </div>
-                    <!-- 텍스트 영역: 두 줄 모두 보이도록 유지 -->
                     <div class="p-3 text-center">
                         <p class="text-xl font-bold text-gray-800 leading-tight">Classic Revisit</p>
                         <p class="text-base text-gray-600 font-normal leading-tight mt-1">Artist Name D</p>
                     </div>
                 </div>
-                <!-- ARRANGEMENT Item 2: relative z-10 추가 -->
                 <div class="group cursor-pointer relative z-10 transform hover:scale-[1.02] transition duration-300" onclick="openModal('arr-2')">
                     <div class="aspect-square bg-gray-100 relative">
                         <img src="https://placehold.co/400x400/DC2626/ffffff?text=ARR+B" onerror="this.onerror=null;this.src='https://placehold.co/400x400/DC2626/ffffff?text=ARR+B';" alt="Arrangement B Cover" class="w-full h-full object-cover transition duration-300 group-hover:opacity-95">
                     </div>
-                    <!-- 텍스트 영역: 두 줄 모두 보이도록 유지 -->
                     <div class="p-3 text-center">
                         <p class="text-xl font-bold text-gray-800 leading-tight">Acoustic Sunset</p>
                         <p class="text-base text-gray-600 font-normal leading-tight mt-1">Artist Name E</p>
                     </div>
                 </div>
-                <!-- ARRANGEMENT Item 3: relative z-10 추가 -->
                 <div class="group cursor-pointer relative z-10 transform hover:scale-[1.02] transition duration-300" onclick="openModal('arr-3')">
                     <div class="aspect-square bg-gray-100 relative">
                         <img src="https://placehold.co/400x400/3B82F6/ffffff?text=ARR+C" onerror="this.onerror=null;this.src='https://placehold.co/400x400/3B82F6/ffffff?text=ARR+C';" alt="Arrangement C Cover" class="w-full h-full object-cover transition duration-300 group-hover:opacity-95">
                     </div>
-                    <!-- 텍스트 영역: 두 줄 모두 보이도록 유지 -->
                     <div class="p-3 text-center">
                         <p class="text-xl font-bold text-gray-800 leading-tight">Pop Orchestra</p>
                         <p class="text-base text-gray-600 font-normal leading-tight mt-1">Artist Name F</p>
                     </div>
                 </div>
-                <!-- ARRANGEMENT Item 4: NEW -->
                 <div class="group cursor-pointer relative z-10 transform hover:scale-[1.02] transition duration-300" onclick="openModal('arr-4')">
                     <div class="aspect-square bg-gray-100 relative">
                         <img src="https://placehold.co/400x400/EC4899/ffffff?text=ARR+D" onerror="this.onerror=null;this.src='https://placehold.co/400x400/EC4899/ffffff?text=ARR+D';" alt="Arrangement D Cover" class="w-full h-full object-cover transition duration-300 group-hover:opacity-95">
@@ -342,7 +305,6 @@
                         <p class="text-base text-gray-600 font-normal leading-tight mt-1">Artist Name G-1</p>
                     </div>
                 </div>
-                <!-- ARRANGEMENT Item 5: NEW -->
                 <div class="group cursor-pointer relative z-10 transform hover:scale-[1.02] transition duration-300" onclick="openModal('arr-5')">
                     <div class="aspect-square bg-gray-100 relative">
                         <img src="https://placehold.co/400x400/10B981/ffffff?text=ARR+E" onerror="this.onerror=null;this.src='https://placehold.co/400x400/10B981/ffffff?text=ARR+E';" alt="Arrangement E Cover" class="w-full h-full object-cover transition duration-300 group-hover:opacity-95">
@@ -352,7 +314,6 @@
                         <p class="text-base text-gray-600 font-normal leading-tight mt-1">Artist Name H-1</p>
                     </div>
                 </div>
-                <!-- ARRANGEMENT Item 6: NEW -->
                 <div class="group cursor-pointer relative z-10 transform hover:scale-[1.02] transition duration-300" onclick="openModal('arr-6')">
                     <div class="aspect-square bg-gray-100 relative">
                         <img src="https://placehold.co/400x400/F97316/ffffff?text=ARR+F" onerror="this.onerror=null;this.src='https://placehold.co/400x400/F97316/ffffff?text=ARR+F';" alt="Arrangement F Cover" class="w-full h-full object-cover transition duration-300 group-hover:opacity-95">
@@ -365,46 +326,36 @@
             </div>
         </div>
 
-        <!-- 4. VIDEO MUSIC PAGE -->
         <div id="page-film-music" class="page-content pb-48">
-            <!-- mb-8 -> mb-12로 여백 확대 -->
             <h1 class="text-3xl font-bold text-gray-800 mb-12">VIDEO MUSIC</h1>
-            <!-- 3열 그리드 갤러리: gap-8 유지 (앨범 카드 간 간격 축소 유지) -->
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
-                <!-- VIDEO MUSIC Item 1: relative z-10 추가 -->
                 <div class="group cursor-pointer relative z-10 transform hover:scale-[1.02] transition duration-300" onclick="openModal('vid-1')">
                     <div class="aspect-square bg-gray-100 relative">
                         <img src="https://placehold.co/400x400/A855F7/ffffff?text=VIDEO+A" onerror="this.onerror=null;this.src='https://placehold.co/400x400/A855F7/ffffff?text=VIDEO+A';" alt="Video A Cover" class="w-full h-full object-cover transition duration-300 group-hover:opacity-95">
                     </div>
-                    <!-- 텍스트 영역: 두 줄 모두 보이도록 유지 -->
                     <div class="p-3 text-center">
                         <p class="text-xl font-bold text-gray-800 leading-tight">Documentary OST</p>
                         <p class="text-base text-gray-600 font-normal leading-tight mt-1">Client Name G</p>
                     </div>
                 </div>
-                <!-- VIDEO MUSIC Item 2: relative z-10 추가 -->
                 <div class="group cursor-pointer relative z-10 transform hover:scale-[1.02] transition duration-300" onclick="openModal('vid-2')">
                     <div class="aspect-square bg-gray-100 relative">
                         <img src="https://placehold.co/400x400/D97706/ffffff?text=VIDEO+B" onerror="this.onerror=null;this.src='https://placehold.co/400x400/D97706/ffffff?text=VIDEO+B';" alt="Video B Cover" class="w-full h-full object-cover transition duration-300 group-hover:opacity-95">
                     </div>
-                    <!-- 텍스트 영역: 두 줄 모두 보이도록 유지 -->
                     <div class="p-3 text-center">
                         <p class="text-xl font-bold text-gray-800 leading-tight">Game Trailer Score</p>
                         <p class="text-base text-gray-600 font-normal leading-tight mt-1">Client Name H</p>
                     </div>
                 </div>
-                <!-- VIDEO MUSIC Item 3: relative z-10 추가 -->
                 <div class="group cursor-pointer relative z-10 transform hover:scale-[1.02] transition duration-300" onclick="openModal('vid-3')">
                     <div class="aspect-square bg-gray-100 relative">
                         <img src="https://placehold.co/400x400/EF4444/ffffff?text=VIDEO+C" onerror="this.onerror=null;this.src='https://placehold.co/400x400/EF4444/ffffff?text=VIDEO+C';" alt="Video C Cover" class="w-full h-full object-cover transition duration-300 group-hover:opacity-95">
                     </div>
-                    <!-- 텍스트 영역: 두 줄 모두 보이도록 유지 -->
                     <div class="p-3 text-center">
                         <p class="text-xl font-bold text-gray-800 leading-tight">Commercial BGM</p>
                         <p class="text-base text-gray-600 font-normal leading-tight mt-1">Client Name I</p>
                     </div>
                 </div>
-                <!-- VIDEO MUSIC Item 4: NEW -->
                 <div class="group cursor-pointer relative z-10 transform hover:scale-[1.02] transition duration-300" onclick="openModal('vid-4')">
                     <div class="aspect-square bg-gray-100 relative">
                         <img src="https://placehold.co/400x400/F59E0B/ffffff?text=VIDEO+D" onerror="this.onerror=null;this.src='https://placehold.co/400x400/F59E0B/ffffff?text=VIDEO+D';" alt="Video D Cover" class="w-full h-full object-cover transition duration-300 group-hover:opacity-95">
@@ -414,7 +365,6 @@
                         <p class="text-base text-gray-600 font-normal leading-tight mt-1">Client Name J-1</p>
                     </div>
                 </div>
-                <!-- VIDEO MUSIC Item 5: NEW -->
                 <div class="group cursor-pointer relative z-10 transform hover:scale-[1.02] transition duration-300" onclick="openModal('vid-5')">
                     <div class="aspect-square bg-gray-100 relative">
                         <img src="https://placehold.co/400x400/6D28D9/ffffff?text=VIDEO+E" onerror="this.onerror=null;this.src='https://placehold.co/400x400/6D28D9/ffffff?text=VIDEO+E';" alt="Video E Cover" class="w-full h-full object-cover transition duration-300 group-hover:opacity-95">
@@ -424,7 +374,6 @@
                         <p class="text-base text-gray-600 font-normal leading-tight mt-1">Client Name K-1</p>
                     </div>
                 </div>
-                <!-- VIDEO MUSIC Item 6: NEW -->
                 <div class="group cursor-pointer relative z-10 transform hover:scale-[1.02] transition duration-300" onclick="openModal('vid-6')">
                     <div class="aspect-square bg-gray-100 relative">
                         <img src="https://placehold.co/400x400/38BDF8/ffffff?text=VIDEO+F" onerror="this.onerror=null;this.src='https://placehold.co/400x400/38BDF8/ffffff?text=VIDEO+F';" alt="Video F Cover" class="w-full h-full object-cover transition duration-300 group-hover:opacity-95">
@@ -437,46 +386,36 @@
             </div>
         </div>
 
-        <!-- 5. CONTEST PAGE -->
         <div id="page-contest" class="page-content pb-48">
-            <!-- mb-8 -> mb-12로 여백 확대 -->
             <h1 class="text-3xl font-bold text-gray-800 mb-12">CONTEST</h1>
-            <!-- 3열 그리드 갤러리: gap-8 유지 (앨범 카드 간 간격 축소 유지) -->
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
-                <!-- CONTEST Item 1: relative z-10 추가 -->
                 <div class="group cursor-pointer relative z-10 transform hover:scale-[1.02] transition duration-300" onclick="openModal('con-1')">
                     <div class="aspect-square bg-gray-100 relative">
                         <img src="https://placehold.co/400x400/14B8A6/ffffff?text=CONTEST+A" onerror="this.onerror=null;this.src='https://placehold.co/400x400/14B8A6/ffffff?text=CONTEST+A';" alt="Contest A Cover" class="w-full h-full object-cover transition duration-300 group-hover:opacity-95">
                     </div>
-                    <!-- 텍스트 영역: 두 줄 모두 보이도록 유지 -->
                     <div class="p-3 text-center">
                         <p class="text-xl font-bold text-gray-800 leading-tight">National Music Award</p>
                         <p class="text-base text-gray-600 font-normal leading-tight mt-1">Contest Host J</p>
                     </div>
                 </div>
-                <!-- CONTEST Item 2: relative z-10 추가 -->
                 <div class="group cursor-pointer relative z-10 transform hover:scale-[1.02] transition duration-300" onclick="openModal('con-2')">
                     <div class="aspect-square bg-gray-100 relative">
                         <img src="https://placehold.co/400x400/94A3B8/ffffff?text=CONTEST+B" onerror="this.onerror=null;this.src='https://placehold.co/400x400/94A3B8/ffffff?text=CONTEST+B';" alt="Contest B Cover" class="w-full h-full object-cover transition duration-300 group-hover:opacity-95">
                     </div>
-                    <!-- 텍스트 영역: 두 줄 모두 보이도록 유지 -->
                     <div class="p-3 text-center">
                         <p class="text-xl font-bold text-gray-800 leading-tight">New Artist Challenge</p>
                         <p class="text-base text-gray-600 font-normal leading-tight mt-1">Contest Host K</p>
                     </div>
                 </div>
-                <!-- CONTEST Item 3: relative z-10 추가 -->
                 <div class="group cursor-pointer relative z-10 transform hover:scale-[1.02] transition duration-300" onclick="openModal('con-3')">
                     <div class="aspect-square bg-gray-100 relative">
                         <img src="https://placehold.co/400x400/F472B6/ffffff?text=CONTEST+C" onerror="this.onerror=null;this.src='https://placehold.co/400x400/F472B6/ffffff?text=CONTEST+C';" alt="Contest C Cover" class="w-full h-full object-cover transition duration-300 group-hover:opacity-95">
                     </div>
-                    <!-- 텍스트 영역: 두 줄 모두 보이도록 유지 -->
                     <div class="p-3 text-center">
                         <p class="text-xl font-bold text-gray-800 leading-tight">Digital Single Contest</p>
                         <p class="text-base text-gray-600 font-normal leading-tight mt-1">Contest Host L</p>
                     </div>
                 </div>
-                <!-- CONTEST Item 4: NEW -->
                 <div class="group cursor-pointer relative z-10 transform hover:scale-[1.02] transition duration-300" onclick="openModal('con-4')">
                     <div class="aspect-square bg-gray-100 relative">
                         <img src="https://placehold.co/400x400/2DD4BF/ffffff?text=CONTEST+D" onerror="this.onerror=null;this.src='https://placehold.co/400x400/2DD4BF/ffffff?text=CONTEST+D';" alt="Contest D Cover" class="w-full h-full object-cover transition duration-300 group-hover:opacity-95">
@@ -486,7 +425,6 @@
                         <p class="text-base text-gray-600 font-normal leading-tight mt-1">Contest Host M</p>
                     </div>
                 </div>
-                <!-- CONTEST Item 5: NEW -->
                 <div class="group cursor-pointer relative z-10 transform hover:scale-[1.02] transition duration-300" onclick="openModal('con-5')">
                     <div class="aspect-square bg-gray-100 relative">
                         <img src="https://placehold.co/400x400/A78BFA/ffffff?text=CONTEST+E" onerror="this.onerror=null;this.src='https://placehold.co/400x400/A78BFA/ffffff?text=CONTEST+E';" alt="Contest E Cover" class="w-full h-full object-cover transition duration-300 group-hover:opacity-95">
@@ -496,7 +434,6 @@
                         <p class="text-base text-gray-600 font-normal leading-tight mt-1">Contest Host N</p>
                     </div>
                 </div>
-                <!-- CONTEST Item 6: NEW -->
                 <div class="group cursor-pointer relative z-10 transform hover:scale-[1.02] transition duration-300" onclick="openModal('con-6')">
                     <div class="aspect-square bg-gray-100 relative">
                         <img src="https://placehold.co/400x400/60A5FA/ffffff?text=CONTEST+F" onerror="this.onerror=null;this.src='https://placehold.co/400x400/60A5FA/ffffff?text=CONTEST+F';" alt="Contest F Cover" class="w-full h-full object-cover transition duration-300 group-hover:opacity-95">
@@ -508,298 +445,193 @@
                 </div>
             </div>
         </div>
-
-        <!-- 6. CONTACT PAGE - 미니멀 디자인 -->
+        
         <div id="page-contact" class="page-content pb-48">
-            <!-- mb-8 -> mb-12로 여백 확대 -->
-            <h1 class="text-3xl font-bold text-gray-800 mb-12">CONTACT</h1>
+            <h1 class="text-3xl font-bold text-gray-800 mb-6">CONTACT</h1>
+            <p class="text-lg text-gray-600 mb-8">작업 의뢰 또는 문의 사항은 아래 이메일로 연락 주시기 바랍니다.</p>
             
-            <div class="w-full">
-                <!-- 이메일 주소: 볼드체 제거, 폰트 크기 축소 (text-2xl -> text-xl) -->
-                <p id="email-address" 
-                   class="text-xl font-normal text-gray-800 mb-4 inline-block cursor-pointer hover:text-gray-600 transition duration-150"
-                   onclick="copyToClipboard('galaxyinyourspace@gmail.com')">
-                    galaxyinyourspace@gmail.com
-                </p>
-                
-                <!-- 심플한 버튼 그룹 -->
-                <div class="flex space-x-3 mb-6">
-                    <!-- 복사 버튼: 패딩 축소 (p-3 -> p-2), 아이콘 크기 축소 (20px -> 18px) -->
-                    <button onclick="copyToClipboard('galaxyinyourspace@gmail.com')" 
-                            title="이메일 주소 복사"
-                            class="p-2 text-gray-600 border border-gray-300 rounded-xl hover:bg-gray-100 active:bg-gray-200 transition duration-150">
-                        <!-- Copy SVG Icon -->
-                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            <div class="bg-gray-50 p-6 rounded-xl border border-gray-200 inline-block">
+                <p class="text-xl font-semibold text-gray-700 mb-3">Email Address</p>
+                <div class="flex items-center space-x-4">
+                    <span id="contact-email" class="text-2xl font-mono text-blue-700 select-all">eunhasu.music@example.com</span>
+                    <button class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg transition duration-150 shadow-md flex items-center"
+                        onclick="copyContact()">
+                        <svg class="w-5 h-5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1.428M15 4h-2m2 0h2m-2 0v2m0-2l-3-3m3 3V1h-2v3m0 0H7v11a2 2 0 002 2h7V4z"></path></svg>
+                        복사
                     </button>
-                    
-                    <!-- 메일 보내기 링크: 패딩 축소 (p-3 -> p-2), 아이콘 크기 축소 (20px -> 18px) -->
-                    <a href="mailto:galaxyinyourspace@gmail.com" 
-                       title="메일 보내기"
-                       class="p-2 text-gray-600 border border-gray-300 rounded-xl hover:bg-gray-100 active:bg-gray-200 transition duration-150 flex items-center justify-center">
-                        <!-- Send Mail SVG Icon -->
-                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-                    </a>
                 </div>
             </div>
         </div>
 
     </main>
+    
+    <footer class="fixed bottom-0 w-full bg-gray-900 text-white p-4 text-center z-40"> 
+        <div class="max-w-6xl mx-auto text-sm text-gray-400">
+            &copy; 2025 EUNHASU Portfolio. All rights reserved.
+        </div>
+    </footer>
+    
+    <div id="copy-message">이메일 주소가 복사되었습니다!</div>
 
-    <!-- 팝업 정보창 (모달) 구조 -->
-    <div id="item-modal" class="modal-overlay" onclick="closeModal()">
-        <!-- 모달 콘텐츠 박스에 애니메이션 클래스 추가 -->
-        <div class="modal-content-box" onclick="event.stopPropagation()">
-            <!-- 닫기 버튼 (X) -->
-            <button class="absolute top-4 right-4 text-gray-400 hover:text-gray-700 text-3xl font-light transition duration-150" onclick="closeModal()">
-                &times;
+    <div id="modal-overlay" class="modal-overlay" onclick="closeModal(event)">
+        <div id="modal-content-box" class="modal-content-box" onclick="event.stopPropagation()">
+            <button class="absolute top-4 right-4 text-gray-500 hover:text-gray-900 transition" onclick="closeModal()">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
             </button>
-            <div id="modal-content-area">
-                <!-- 동적으로 채워질 내용 -->
+
+            <div id="modal-body" class="pt-2">
+                <p class="text-lg text-gray-500">모달 내용이 로드되지 않았습니다.</p>
             </div>
         </div>
     </div>
 
-    <!-- 복사 성공 메시지 (커스텀 토스트 알림) -->
-    <div id="copy-message">이메일 주소가 복사되었습니다!</div>
 
-
-    <!-- 푸터 (Footer): 고정된 하단 푸터로 변경 -->
-    <footer class="fixed inset-x-0 bottom-0 z-50 py-6 bg-white">
-        <div class="max-w-6xl mx-auto px-6 text-center">
-            <!-- 소셜 아이콘 -->
-            <div class="flex justify-center space-x-8 mb-3">
-                
-                <!-- 유튜브 링크 -->
-                <a href="https://www.youtube.com/@EUNHASUU" target="_blank" title="YouTube Channel" 
-                   class="text-gray-600 hover:text-red-700 transition duration-300 transform hover:scale-110">
-                    <!-- YouTube SVG -->
-                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.328.226-3.665.418-3.957 1.879-.286 1.458-.293 2.977-.293 6.937 0 3.961.007 5.479.293 6.938.292 1.463.629 1.652 3.957 1.876 3.6-.245 11.626-.246 15.23 0 3.328-.225 3.665-.418 3.957-1.879.286-1.458.293-2.977.293-6.937 0-3.961-.007-5.479-.293-6.938-.292-1.463-.629-1.652-3.957-1.876z"/>
-                        <path fill="#ffffff" d="M9 16.5v-9l6 4.5z"/>
-                    </svg>
-                </a>
-                
-                <!-- 인스타그램 링크 -->
-                <a href="https://www.instagram.com/eeunhasuu/" target="_blank" title="Instagram Profile" 
-                   class="text-gray-600 hover:text-pink-600 transition duration-300 transform hover:scale-110">
-                    <!-- Instagram SVG -->
-                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <rect width="20" height="20" x="2" y="2" rx="5" ry="5"/>
-                        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
-                        <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/>
-                    </svg>
-                </a>
-            </div>
-            
-            <!-- 저작권 문구 -->
-            <p class="text-xs text-gray-400">&copy; 2024 EUNHASU. All rights reserved.</p>
-        </div>
-    </footer>
-
-
-    <script>
-        // --- 드롭다운 제어 JavaScript ---
-        let closeTimeout = null;
-        const dropdown = document.getElementById('dropdown-content');
-
-        function handleMouseEnter() {
-            if (closeTimeout) {
-                clearTimeout(closeTimeout);
-                closeTimeout = null;
-            }
-            dropdown.classList.add('open');
-        }
-
-        function handleMouseLeave() {
-            if (closeTimeout) return;
-
-            closeTimeout = setTimeout(() => {
-                dropdown.classList.remove('open');
-                closeTimeout = null;
-            }, 150); 
-        }
-
-        // --- 페이지 전환 JavaScript (스크롤 가능하도록 수정) ---
-        const TRANSITION_DURATION = 500; // CSS transition 시간과 동일 (0.5초)
-
-        function navigateTo(targetPageId) {
-            const container = document.getElementById('page-container');
-            const newPage = document.getElementById(targetPageId);
-            const currentPage = container.querySelector('.page-content.active');
-            
-            if (currentPage && currentPage.id === targetPageId) {
-                return;
-            }
-            
-            // 페이지 전환 전에 스크롤을 맨 위로 이동합니다. (부드러운 스크롤 적용)
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-
-            if (newPage) {
-                // 1. 기존 페이지 fade-out 시작
-                if (currentPage) {
-                    currentPage.classList.remove('active');
-                    
-                    // 트랜지션 시간(500ms) 후 display: none 처리하여 DOM 흐름에서 완전히 제거
-                    setTimeout(() => {
-                        currentPage.style.display = 'none';
-                    }, TRANSITION_DURATION);
-                }
-                
-                // 2. 새로운 페이지를 display: block으로 설정하여 DOM 흐름에 참여시킵니다.
-                // (이 시점에 opacity는 0이므로 보이지 않지만, 높이는 확보됨)
-                newPage.style.display = 'block';
-
-                // 3. 짧은 지연 시간(50ms) 후 active 클래스를 추가하여 fade-in 애니메이션 시작
-                setTimeout(() => {
-                    newPage.classList.add('active');
-                }, 50);
-            }
-
-            // 드롭다운 메뉴가 열려 있다면 닫습니다.
-            dropdown.classList.remove('open');
-            if (closeTimeout) {
-                clearTimeout(closeTimeout);
-                closeTimeout = null;
-            }
-        }
+<script>
+    // 페이지 데이터를 정의합니다. (모달에 표시될 내용)
+    const projectData = {
+        // PRODUCING 데이터 (prod-1 ~ prod-6)
+        'prod-1': { title: 'The First Star', artist: 'Artist Name A', year: '2024.03', description: '발매된 첫 싱글 앨범으로, 팝 발라드 장르의 곡입니다. 전체 프로듀싱 및 작곡에 참여했습니다.', link: 'https://youtu.be/example_prod1', image: 'https://placehold.co/400x400/2563EB/ffffff?text=PROD+A' },
+        'prod-2': { title: 'City Lights', artist: 'Artist Name B', year: '2023.11', description: '화려한 도시의 밤을 표현한 시티팝 장르 곡입니다. 작곡 및 믹싱에 참여했습니다.', link: 'https://youtu.be/example_prod2', image: 'https://placehold.co/400x400/10B981/ffffff?text=PROD+B' },
+        'prod-3': { title: 'Winter Breeze', artist: 'Artist Name C', year: '2023.01', description: '어쿠스틱 사운드를 강조한 포크 곡입니다. 전체 프로듀싱과 마스터링을 담당했습니다.', link: 'https://youtu.be/example_prod3', image: 'https://placehold.co/400x400/F59E0B/ffffff?text=PROD+C' },
+        'prod-4': { title: 'Midnight Cruise', artist: 'Artist Name D-1', year: '2022.08', description: '퓨처 베이스 스타일의 경쾌한 트랙입니다. 공동 작곡 및 편곡.', link: 'https://youtu.be/example_prod4', image: 'https://placehold.co/400x400/7C3AED/ffffff?text=PROD+D' },
+        'prod-5': { title: 'Summer Rain', artist: 'Artist Name E-1', year: '2022.07', description: '여름 감성을 담은 미디엄 템포 R&B 곡입니다. 전체 프로듀싱 및 보컬 디렉팅.', link: 'https://youtu.be/example_prod5', image: 'https://placehold.co/400x400/F43F5E/ffffff?text=PROD+E' },
+        'prod-6': { title: 'Echoes', artist: 'Artist Name F-1', year: '2022.04', description: '깊은 울림을 주는 오케스트라 힙합 장르입니다. 비트 프로듀싱 및 스트링 편곡.', link: 'https://youtu.be/example_prod6', image: 'https://placehold.co/400x400/34D399/ffffff?text=PROD+F' },
         
-        // 페이지 로드 후 'page-main'으로 전환하여 부드러운 페이드인 효과를 적용합니다.
-        window.onload = function() {
-            // 초기 로딩 시에는 기존 페이지가 없으므로 display: block과 active를 바로 적용
-            const initialPage = document.getElementById('page-main');
-            if (initialPage) {
-                initialPage.style.display = 'block';
-                initialPage.classList.add('active');
-            }
-        };
+        // ARRANGEMENT 데이터 (arr-1 ~ arr-6)
+        'arr-1': { title: 'Classic Revisit', artist: 'Artist Name D', year: '2024.02', description: '클래식 곡을 현대적인 EDM 스타일로 편곡했습니다. (EDM Arrangement)', link: 'https://youtu.be/example_arr1', image: 'https://placehold.co/400x400/9333EA/ffffff?text=ARR+A' },
+        'arr-2': { title: 'Acoustic Sunset', artist: 'Artist Name E', year: '2023.09', description: '기존 댄스곡을 잔잔한 어쿠스틱 버전으로 편곡했습니다. (Acoustic Arrangement)', link: 'https://youtu.be/example_arr2', image: 'https://placehold.co/400x400/DC2626/ffffff?text=ARR+B' },
+        'arr-3': { title: 'Pop Orchestra', artist: 'Artist Name F', year: '2023.05', description: '아이돌 그룹의 타이틀 곡을 웅장한 오케스트라 버전으로 편곡했습니다.', link: 'https://youtu.be/example_arr3', image: 'https://placehold.co/400x400/3B82F6/ffffff?text=ARR+C' },
+        'arr-4': { title: '8-bit Remix', artist: 'Artist Name G-1', year: '2023.02', description: '인디 밴드 곡을 레트로 아케이드 게임 스타일의 8비트 리믹스로 재탄생시켰습니다.', link: 'https://youtu.be/example_arr4', image: 'https://placehold.co/400x400/EC4899/ffffff?text=ARR+D' },
+        'arr-5': { title: 'Latin Jazz', artist: 'Artist Name H-1', year: '2022.11', description: '재즈 보컬 곡을 라틴 리듬이 가미된 보사노바 스타일로 편곡했습니다.', link: 'https://youtu.be/example_arr5', image: 'https://placehold.co/400x400/10B981/ffffff?text=ARR+E' },
+        'arr-6': { title: 'Future Garage', artist: 'Artist Name I-1', year: '2022.09', description: '발라드 곡을 UK 개러지 사운드를 활용한 퓨처 개러지 스타일로 편곡했습니다.', link: 'https://youtu.be/example_arr6', image: 'https://placehold.co/400x400/F97316/ffffff?text=ARR+F' },
 
-        // --- 모달 제어 JavaScript ---
-        const modal = document.getElementById('item-modal');
-        const modalContentArea = document.getElementById('modal-content-area');
+        // VIDEO MUSIC 데이터 (vid-1 ~ vid-6)
+        'vid-1': { title: 'Documentary OST', artist: 'Client Name G', year: '2024', description: '환경 다큐멘터리 "Green Earth"의 메인 스코어 및 BGM 제작. (Orchestral Score)', link: 'https://youtu.be/example_vid1', image: 'https://placehold.co/400x400/A855F7/ffffff?text=VIDEO+A' },
+        'vid-2': { title: 'Game Trailer Score', artist: 'Client Name H', year: '2023', description: '판타지 RPG 게임 "Aetheria"의 공식 출시 트레일러 음악 제작. (Epic Orchestral)', link: 'https://youtu.be/example_vid2', image: 'https://placehold.co/400x400/D97706/ffffff?text=VIDEO+B' },
+        'vid-3': { title: 'Commercial BGM', artist: 'Client Name I', year: '2023', description: '글로벌 IT 기업의 신제품 런칭 광고 배경 음악 제작. (Modern Synth Pop)', link: 'https://youtu.be/example_vid3', image: 'https://placehold.co/400x400/EF4444/ffffff?text=VIDEO+C' },
+        'vid-4': { title: 'Fashion Film Score', artist: 'Client Name J-1', year: '2022', description: '명품 브랜드의 패션 필름을 위한 독점 사운드트랙 제작. (Ambient Electronic)', link: 'https://youtu.be/example_vid4', image: 'https://placehold.co/400x400/F59E0B/ffffff?text=VIDEO+D' },
+        'vid-5': { title: 'Educational Content', artist: 'Client Name K-1', year: '2022', description: '어린이 대상 교육 콘텐츠의 배경 음악 및 효과음 전반 담당.', link: 'https://youtu.be/example_vid5', image: 'https://placehold.co/400x400/6D28D9/ffffff?text=VIDEO+E' },
+        'vid-6': { title: 'Indie Film Theme', artist: 'Client Name L-1', year: '2021', description: '단편 독립 영화의 메인 테마 및 씬별 BGM 작곡.', link: 'https://youtu.be/example_vid6', image: 'https://placehold.co/400x400/38BDF8/ffffff?text=VIDEO+F' },
+        
+        // CONTEST 데이터 (con-1 ~ con-6)
+        'con-1': { title: 'National Music Award', artist: 'Contest Host J', year: '2023', description: '국내 최대 규모 음악 공모전에서 3위 수상. 제출곡: "Dream High". (Original Song)', link: 'https://youtu.be/example_con1', image: 'https://placehold.co/400x400/14B8A6/ffffff?text=CONTEST+A' },
+        'con-2': { title: 'New Artist Challenge', artist: 'Contest Host K', year: '2022', description: '신인 작곡가 발굴 프로젝트에서 최우수상 수상. (Instrumental)', link: 'https://youtu.be/example_con2', image: 'https://placehold.co/400x400/94A3B8/ffffff?text=CONTEST+B' },
+        'con-3': { title: 'Digital Single Contest', artist: 'Contest Host L', year: '2021', description: '온라인 디지털 싱글 공모전 입상. 발매 기회 획득. (Pop)', link: 'https://youtu.be/example_con3', image: 'https://placehold.co/400x400/F472B6/ffffff?text=CONTEST+C' },
+        'con-4': { title: 'Soundtrack Challenge', artist: 'Contest Host M', year: '2021', description: '미개봉 영화 예고편 음악 제작 챌린지 우승.', link: 'https://youtu.be/example_con4', image: 'https://placehold.co/400x400/2DD4BF/ffffff?text=CONTEST+D' },
+        'con-5': { title: 'University Festival', artist: 'Contest Host N', year: '2020', description: '대학교 실용음악과 주최 창작곡 경연대회 금상 수상.', link: 'https://youtu.be/example_con5', image: 'https://placehold.co/400x400/A78BFA/ffffff?text=CONTEST+E' },
+        'con-6': { title: 'K-Pop Producers', artist: 'Contest Host O', year: '2020', description: 'K-Pop 프로듀서 경연 프로그램 Top 10 진출.', link: 'https://youtu.be/example_con6', image: 'https://placehold.co/400x400/60A5FA/ffffff?text=CONTEST+F' },
+    };
 
-        // 모달 데이터 (예시 데이터 - 6개 항목으로 확장)
-        const itemData = {
-            // PRODUCING (6 items)
-            'prod-1': { title: "The First Star", artist: "Artist Name A", date: "2024.01.15", category: "PRODUCING", description: "데뷔 싱글로, 신스팝과 오케스트라 요소를 융합하여 제작했습니다. 밝고 희망찬 분위기가 특징입니다.", imgUrl: "https://placehold.co/600x600/2563EB/ffffff?text=PROD+A" },
-            'prod-2': { title: "City Lights", artist: "Artist Name B", date: "2023.11.01", category: "PRODUCING", description: "도시의 야경에서 영감을 받은 일렉트로닉 트랙입니다. 리드미컬한 베이스 라인이 인상적입니다.", imgUrl: "https://placehold.co/600x600/10B981/ffffff?text=PROD+B" },
-            'prod-3': { title: "Winter Breeze", artist: "Artist Name C", date: "2023.05.20", category: "PRODUCING", description: "따뜻한 감성을 담은 어쿠스틱 팝입니다. 편안하게 들을 수 있는 곡입니다.", imgUrl: "https://placehold.co/600x600/F59E0B/ffffff?text=PROD+C" },
-            'prod-4': { title: "Midnight Cruise", artist: "Artist Name D-1", date: "2024.05.10", category: "PRODUCING", description: "깊은 밤, 도시를 가로지르는 듯한 드라이브 감성의 Lo-fi 힙합 트랙입니다.", imgUrl: "https://placehold.co/600x600/7C3AED/ffffff?text=PROD+D" },
-            'prod-5': { title: "Summer Rain", artist: "Artist Name E-1", date: "2023.08.19", category: "PRODUCING", description: "여름 장마철의 청량함과 습한 감성을 동시에 담은 R&B 발라드입니다.", imgUrl: "https://placehold.co/600x600/F43F5E/ffffff?text=PROD+E" },
-            'prod-6': { title: "Echoes", artist: "Artist Name F-1", date: "2023.03.05", category: "PRODUCING", description: "몽환적인 신디사이저와 코러스가 특징인 앰비언트 팝입니다.", imgUrl: "https://placehold.co/600x600/34D399/ffffff?text=PROD+F" },
+    let currentPageId = 'page-main'; // 현재 활성 페이지 ID 저장
 
-            // ARRANGEMENT (6 items)
-            'arr-1': { title: "Classic Revisit", artist: "Artist Name D", date: "2024.03.10", category: "ARRANGEMENT", description: "90년대 발라드를 재즈-펑크 스타일로 현대적으로 편곡하여 보컬리스트에게 제공한 곡입니다.", imgUrl: "https://placehold.co/600x600/9333EA/ffffff?text=ARR+A" },
-            'arr-2': { title: "Acoustic Sunset", artist: "Artist Name E", date: "2023.10.05", category: "ARRANGEMENT", description: "기존 댄스곡을 어쿠스틱 기타와 현악기로 구성하여 차분한 분위기로 전환한 편곡입니다.", imgUrl: "https://placehold.co/600x600/DC2626/ffffff?text=ARR+B" },
-            'arr-3': { title: "Pop Orchestra", artist: "Artist Name F", date: "2023.08.12", category: "ARRANGEMENT", description: "아이돌 그룹의 타이틀곡을 웅장한 오케스트라 버전으로 확장하여 연말 무대에 사용되었습니다.", imgUrl: "https://placehold.co/600x600/3B82F6/ffffff?text=ARR+C" },
-            'arr-4': { title: "8-bit Remix", artist: "Artist Name G-1", date: "2024.02.14", category: "ARRANGEMENT", description: "인디 록 밴드의 곡을 8비트 칩튠 스타일로 재해석하여 게임 OST에 사용되었습니다.", imgUrl: "https://placehold.co/600x600/EC4899/ffffff?text=ARR+D" },
-            'arr-5': { title: "Latin Jazz", artist: "Artist Name H-1", date: "2023.11.28", category: "ARRANGEMENT", description: "R&B 곡에 라틴 퍼커션과 브라스 섹션을 추가하여 열정적인 재즈 스타일로 편곡했습니다.", imgUrl: "https://placehold.co/600x600/10B981/ffffff?text=ARR+E" },
-            'arr-6': { title: "Future Garage", artist: "Artist Name I-1", date: "2023.07.01", category: "ARRANGEMENT", description: "발라드 곡을 UK Garage 리듬과 신디사이저 패드를 활용한 Future Garage 스타일로 편곡했습니다.", imgUrl: "https://placehold.co/600x600/F97316/ffffff?text=ARR+F" },
-            
-            // VIDEO MUSIC (6 items)
-            'vid-1': { title: "Documentary OST", artist: "Client Name G", date: "2024.04.22", category: "VIDEO MUSIC", description: "자연 다큐멘터리를 위해 작곡한 배경 음악입니다. 앰비언트 사운드와 자연 악기 위주로 구성되었습니다.", imgUrl: "https://placehold.co/600x600/A855F7/ffffff?text=VIDEO+A" },
-            'vid-2': { title: "Game Trailer Score", artist: "Client Name H", date: "2023.12.01", category: "VIDEO MUSIC", description: "신작 모바일 게임 트레일러의 메인 스코어입니다. 긴장감 넘치는 액션 테마입니다.", imgUrl: "https://placehold.co/600x600/D97706/ffffff?text=VIDEO+B" },
-            'vid-3': { title: "Commercial BGM", artist: "Client Name I", date: "2023.07.19", category: "VIDEO MUSIC", description: "글로벌 화장품 브랜드의 광고 배경음악입니다. 깔끔하고 미니멀한 스타일입니다.", imgUrl: "https://placehold.co/600x600/EF4444/ffffff?text=VIDEO+C" },
-            'vid-4': { title: "Fashion Film Score", artist: "Client Name J-1", date: "2024.03.15", category: "VIDEO MUSIC", description: "패션 브랜드의 런웨이 필름을 위한 배경음악입니다. 실험적인 사운드 디자인을 적용했습니다.", imgUrl: "https://placehold.co/600x600/F59E0B/ffffff?text=VIDEO+D" },
-            'vid-5': { title: "Educational Content", artist: "Client Name K-1", date: "2023.09.01", category: "VIDEO MUSIC", description: "어린이 교육 콘텐츠의 밝고 경쾌한 오프닝 음악입니다. 쉽고 재미있는 멜로디가 특징입니다.", imgUrl: "https://placehold.co/600x600/6D28D9/ffffff?text=VIDEO+E" },
-            'vid-6': { title: "Indie Film Theme", artist: "Client Name L-1", date: "2023.05.25", category: "VIDEO MUSIC", description: "독립 영화의 메인 테마곡입니다. 잔잔한 피아노와 현악기가 주를 이루는 감성적인 곡입니다.", imgUrl: "https://placehold.co/600x600/38BDF8/ffffff?text=VIDEO+F" },
-            
-            // CONTEST (6 items)
-            'con-1': { title: "National Music Award", artist: "Contest Host J", date: "2024.01.01", category: "CONTEST", description: "전국 음악 시상식에서 창작 부문 '최우수상'을 수상한 곡입니다. 심사위원들에게 극찬을 받았습니다.", imgUrl: "https://placehold.co/600x600/14B8A6/ffffff?text=CONTEST+A" },
-            'con-2': { title: "New Artist Challenge", artist: "Contest Host K", date: "2023.06.10", category: "CONTEST", description: "신인 아티스트 발굴 프로그램 본선 진출작입니다. 독특한 보컬 샘플링이 특징입니다.", imgUrl: "https://placehold.co/600x600/94A3B8/ffffff?text=CONTEST+B" },
-            'con-3': { title: "Digital Single Contest", artist: "Contest Host L", date: "2022.11.28", category: "CONTEST", description: "디지털 싱글 공모전 입선작입니다. 퓨처 베이스 장르를 시도했습니다.", imgUrl: "https://placehold.co/600x600/F472B6/ffffff?text=CONTEST+C" },
-            'con-4': { title: "Soundtrack Challenge", artist: "Contest Host M", date: "2024.05.01", category: "CONTEST", description: "단편 애니메이션의 사운드트랙을 제작하는 챌린지에서 '우승'을 차지한 작품입니다.", imgUrl: "https://placehold.co/600x600/2DD4BF/ffffff?text=CONTEST+D" },
-            'con-5': { title: "University Festival", artist: "Contest Host N", date: "2023.10.15", category: "CONTEST", description: "대학교 축제 주제가 공모전에서 '대상'을 수상한 곡입니다. 청춘의 에너지를 담았습니다.", imgUrl: "https://placehold.co/600x600/A78BFA/ffffff?text=CONTEST+E" },
-            'con-6': { title: "K-Pop Producers", artist: "Contest Host O", date: "2023.04.03", category: "CONTEST", description: "K-Pop 아이돌 데모 트랙 공모전에서 '선정'되어 실제 앨범에 수록되었습니다.", imgUrl: "https://placehold.co/600x600/60A5FA/ffffff?text=CONTEST+F" }
-        };
+    // 페이지 전환 함수
+    function navigateTo(pageId) {
+        if (currentPageId === pageId) return;
 
-        function openModal(itemId) {
-            const data = itemData[itemId];
-            if (!data) return;
+        const container = document.getElementById('page-container');
+        const activePage = document.querySelector('.page-content.active');
+        const nextPage = document.getElementById(pageId);
 
-            // 1. 모달 내용 채우기
-            modalContentArea.innerHTML = `
-                <div class="flex flex-col sm:flex-row gap-6 items-start">
-                    <!-- 이미지 영역 -->
-                    <div class="w-full sm:w-1/3 flex-shrink-0">
-                        <img src="${data.imgUrl}" onerror="this.onerror=null;this.src='https://placehold.co/600x600/cccccc/333333?text=Image+Load+Error';" alt="${data.title} Cover" class="w-full h-auto object-cover rounded-md">
+        if (activePage) {
+            // 현재 페이지 비활성화 (display: none)
+            activePage.classList.remove('active');
+            // 애니메이션을 위해 잠시 기다린 후 다음 페이지 활성화
+            setTimeout(() => {
+                if (nextPage) {
+                    nextPage.classList.add('active');
+                    currentPageId = pageId;
+                }
+            }, 50); // 전환 지연 시간
+        } else if (nextPage) {
+            // 초기 로딩 시 바로 활성화
+            nextPage.classList.add('active');
+            currentPageId = pageId;
+        }
+
+        // 페이지 전환 시 드롭다운 닫기
+        document.getElementById('dropdown-content').classList.remove('open');
+    }
+
+    // 드롭다운 메뉴 제어 함수
+    function handleMouseEnter() {
+        document.getElementById('dropdown-content').classList.add('open');
+    }
+
+    function handleMouseLeave() {
+        document.getElementById('dropdown-content').classList.remove('open');
+    }
+
+    // 모달 열기 함수 (수정됨: 데이터 로드 포함)
+    function openModal(id) {
+        const data = projectData[id];
+        const modalOverlay = document.getElementById('modal-overlay');
+        const modalBody = document.getElementById('modal-body');
+
+        if (!data) {
+            modalBody.innerHTML = `<h3 class="text-2xl font-bold text-gray-900 mb-2">Error</h3><p class="text-red-500">프로젝트 ID "${id}"에 대한 데이터를 찾을 수 없습니다.</p>`;
+        } else {
+            // 모달 콘텐츠 HTML 생성
+            modalBody.innerHTML = `
+                <div class="flex flex-col md:flex-row gap-6">
+                    <div class="md:w-1/3 flex-shrink-0">
+                        <img src="${data.image}" alt="${data.title} Cover" class="rounded-lg shadow-md w-full aspect-square object-cover">
                     </div>
-                    
-                    <!-- 텍스트 영역 -->
-                    <div class="w-full sm:w-2/3">
-                        <span class="inline-block text-xs font-semibold text-white bg-blue-500 px-3 py-1 rounded-full mb-2">${data.category}</span>
-                        <h2 class="text-2xl font-extrabold text-gray-900 mb-1">${data.title}</h2>
-                        <!-- 모달에서도 아티스트 이름 표시 -->
-                        <p class="text-lg text-gray-700 font-medium mb-2">${data.artist}</p>
-                        <p class="text-sm text-gray-500 mb-4">발매일: ${data.date}</p>
-                        <p class="text-gray-700 leading-relaxed border-t pt-4 mt-4">${data.description}</p>
+                    <div class="md:w-2/3">
+                        <h2 class="text-2xl font-extrabold text-gray-800 mb-2">${data.title}</h2>
+                        <p class="text-xl text-gray-600 mb-4">${data.artist} <span class="text-sm text-gray-400 ml-2">(${data.year})</span></p>
+                        
+                        <h3 class="text-lg font-semibold text-gray-700 mt-6 mb-2">상세 정보</h3>
+                        <p class="text-gray-600 mb-6">${data.description}</p>
+                        
+                        ${data.link ? `
+                            <a href="${data.link}" target="_blank" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition">
+                                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+                                작품 보기
+                            </a>
+                        ` : ''}
                     </div>
                 </div>
             `;
-
-            // 2. 모달 표시 (CSS show 클래스 추가)
-            modal.classList.add('show');
         }
 
-        function closeModal() {
-            // 모달 숨기기 (CSS show 클래스 제거)
-            modal.classList.remove('show');
-        }
-        
-        // --- 클립보드 복사 JavaScript ---
-        function copyToClipboard(text) {
-            // navigator.clipboard.writeText를 사용하여 클립보드에 복사 시도
-            if (navigator.clipboard && navigator.clipboard.writeText) {
-                navigator.clipboard.writeText(text).then(() => {
-                    showCopyMessage();
-                }).catch(err => {
-                    // 보안 문제 등으로 실패 시 document.execCommand('copy') 대체 방법 사용
-                    fallbackCopyTextToClipboard(text);
-                });
-            } else {
-                // 구형 브라우저 또는 환경에서 대체 방법 사용
-                fallbackCopyTextToClipboard(text);
-            }
-        }
+        // 모달 표시
+        modalOverlay.classList.add('show');
+        // 스크롤 방지
+        document.body.style.overflow = 'hidden';
+    }
 
-        // document.execCommand('copy') 대체 방법
-        function fallbackCopyTextToClipboard(text) {
-            const textArea = document.createElement("textarea");
-            textArea.value = text;
-            
-            // 화면 밖으로 이동시켜 사용자에게 보이지 않게 처리
-            textArea.style.position = "fixed";
-            textArea.style.left = "-9999px";
-            textArea.style.top = "-9999px";
-            
-            document.body.appendChild(textArea);
-            textArea.focus();
-            textArea.select();
+    // 모달 닫기 함수 (수정됨: 오버레이 외 클릭 방지 로직 추가)
+    function closeModal(event) {
+        // 오버레이 자체를 클릭했을 때만 닫히도록 조건 추가
+        if (event && event.target.id !== 'modal-overlay') return;
 
-            try {
-                // 복사 실행
-                const successful = document.execCommand('copy');
-                if (successful) {
-                    showCopyMessage();
-                } else {
-                    console.error('클립보드 복사 실패: execCommand');
-                }
-            } catch (err) {
-                console.error('클립보드 복사 실패:', err);
-            }
+        const modalOverlay = document.getElementById('modal-overlay');
+        modalOverlay.classList.remove('show');
+        // 스크롤 허용
+        document.body.style.overflow = '';
+    }
 
-            document.body.removeChild(textArea);
-        }
-
-        // 복사 성공 메시지 표시 함수
-        function showCopyMessage() {
-            const message = document.getElementById('copy-message');
-            message.style.opacity = '1';
-            
-            // 2초 후 메시지 숨기기
+    // 이메일 복사 함수
+    function copyContact() {
+        const email = document.getElementById('contact-email').textContent;
+        navigator.clipboard.writeText(email).then(() => {
+            const copyMessage = document.getElementById('copy-message');
+            copyMessage.style.opacity = '1';
             setTimeout(() => {
-                message.style.opacity = '0';
+                copyMessage.style.opacity = '0';
             }, 2000);
-        }
-    </script>
+        }).catch(err => {
+            console.error('Could not copy text: ', err);
+            alert('이메일 복사에 실패했습니다. 직접 복사해 주세요.');
+        });
+    }
+
+    // 초기 페이지 설정
+    document.addEventListener('DOMContentLoaded', () => {
+        navigateTo(currentPageId);
+    });
+
+</script>
+
 </body>
 </html>
