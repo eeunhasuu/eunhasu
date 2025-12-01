@@ -39,8 +39,8 @@
         #page-container {
             position: relative;
             min-height: 500px;
-            /* 상단 네비게이션 바 높이만큼 패딩을 주어 콘텐츠가 네비게이션 아래에 위치하도록 함 */
-            padding-top: 5rem; /* 약 80px, 네비게이션 바 높이 (4.5rem)보다 약간 더 줍니다. */
+            /* 상단 네비게이션 바 높이보다 더 넓게 패딩을 주어 충분한 여백 확보 (6rem) - 유지 */
+            padding-top: 6rem; /* 96px */
         }
 
         /* * --- 페이지 콘텐츠 스타일 ---
@@ -167,15 +167,16 @@
 <body>
 
     <!-- 내비게이션 바 컴포넌트 -->
-    <!-- Z-index를 z-50으로 높여 콘텐츠 겹침 현상을 방지 -->
-    <nav class="fixed w-full bg-white text-black px-6 py-4 flex items-center justify-between z-50 top-0">
+    <!-- py-5, px-8 및 gap-12 유지 (넓은 간격 유지) -->
+    <nav class="fixed w-full bg-white text-black px-8 py-5 flex items-center justify-between z-50 top-0">
         
         <!-- 왼쪽 로고 (클릭 시 MAIN PAGE로 이동) -->
         <div class="text-2xl font-extrabold text-gray-800 cursor-pointer" onclick="navigateTo('page-main')">EUNHASU</div>
 
         <!-- 중앙 메뉴 -->
         <div class="relative">
-            <ul class="flex gap-8 text-lg font-medium">
+            <!-- 메뉴 항목 간 여백 확대 (유지) -->
+            <ul class="flex gap-12 text-lg font-medium">
                 
                 <!-- MAIN -->
                 <li class="link-item cursor-pointer hover:text-blue-600 transition duration-150 p-2 -m-2"
@@ -193,13 +194,13 @@
 
                     <!-- 드롭다운 메뉴 콘텐츠 -->
                     <ul id="dropdown-content"
-                        class="dropdown-menu absolute left-0 pt-2 z-20 w-40 bg-white text-black rounded-lg shadow-xl ring-1 ring-black ring-opacity-5 flex flex-col overflow-hidden">
+                        class="dropdown-menu absolute left-0 pt-2 z-20 w-48 bg-white text-black rounded-lg shadow-xl ring-1 ring-black ring-opacity-5 flex flex-col overflow-hidden">
                         
-                        <!-- 드롭다운 항목들 (클릭 시 해당 페이지로 이동) -->
-                        <li class="px-4 py-2 text-sm hover:bg-blue-50 hover:text-blue-700 transition duration-150 cursor-pointer" onclick="navigateTo('page-producing')">PRODUCING</li>
-                        <li class="px-4 py-2 text-sm hover:bg-blue-50 hover:text-blue-700 transition duration-150 cursor-pointer" onclick="navigateTo('page-arrangement')">ARRANGEMENT</li>
-                        <li class="px-4 py-2 text-sm hover:bg-blue-50 hover:text-blue-700 transition duration-150 cursor-pointer" onclick="navigateTo('page-film-music')">VIDEO MUSIC</li>
-                        <li class="px-4 py-2 text-sm hover:bg-blue-50 hover:text-blue-700 transition duration-150 cursor-pointer" onclick="navigateTo('page-contest')">CONTEST</li>
+                        <!-- 드롭다운 항목들: 상하 여백 확대 (유지) -->
+                        <li class="px-5 py-3 text-sm hover:bg-blue-50 hover:text-blue-700 transition duration-150 cursor-pointer" onclick="navigateTo('page-producing')">PRODUCING</li>
+                        <li class="px-5 py-3 text-sm hover:bg-blue-50 hover:text-blue-700 transition duration-150 cursor-pointer" onclick="navigateTo('page-arrangement')">ARRANGEMENT</li>
+                        <li class="px-5 py-3 text-sm hover:bg-blue-50 hover:text-blue-700 transition duration-150 cursor-pointer" onclick="navigateTo('page-film-music')">VIDEO MUSIC</li>
+                        <li class="px-5 py-3 text-sm hover:bg-blue-50 hover:text-blue-700 transition duration-150 cursor-pointer" onclick="navigateTo('page-contest')">CONTEST</li>
                     </ul>
                 </li>
 
@@ -211,7 +212,8 @@
     </nav>
     
     <!-- 전체 페이지 콘텐츠 컨테이너 -->
-    <main id="page-container" class="px-6 max-w-6xl mx-auto relative pt-20">
+    <!-- pt-24 유지 (네비게이션 바 아래 상단 여백 확대 유지) -->
+    <main id="page-container" class="px-6 max-w-6xl mx-auto relative pt-24">
 
         <!-- 1. MAIN PAGE -->
         <div id="page-main" class="page-content pb-48">
@@ -219,10 +221,11 @@
             <p class="text-gray-600">환영합니다! 이곳은 웹사이트의 메인 페이지입니다.</p>
         </div>
 
-        <!-- 2. PRODUCING PAGE (6개 항목으로 확장) -->
+        <!-- 2. PRODUCING PAGE -->
         <div id="page-producing" class="page-content pb-48">
-            <h1 class="text-3xl font-bold text-gray-800 mb-8">PRODUCING</h1>
-            <!-- 3열 그리드 갤러리 -->
+            <!-- mb-8 -> mb-12로 여백 확대 -->
+            <h1 class="text-3xl font-bold text-gray-800 mb-12">PRODUCING</h1>
+            <!-- 3열 그리드 갤러리: gap-8 유지 (앨범 카드 간 간격 축소 유지) -->
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
                 <!-- PRODUCING Item 1: relative z-10 추가 -->
                 <div class="group cursor-pointer relative z-10 transform hover:scale-[1.02] transition duration-300" onclick="openModal('prod-1')">
@@ -290,10 +293,11 @@
             </div>
         </div>
 
-        <!-- 3. ARRANGEMENT PAGE (6개 항목으로 확장) -->
+        <!-- 3. ARRANGEMENT PAGE -->
         <div id="page-arrangement" class="page-content pb-48">
-            <h1 class="text-3xl font-bold text-gray-800 mb-8">ARRANGEMENT</h1>
-            <!-- 3열 그리드 갤러리 -->
+            <!-- mb-8 -> mb-12로 여백 확대 -->
+            <h1 class="text-3xl font-bold text-gray-800 mb-12">ARRANGEMENT</h1>
+            <!-- 3열 그리드 갤러리: gap-8 유지 (앨범 카드 간 간격 축소 유지) -->
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
                 <!-- ARRANGEMENT Item 1: relative z-10 추가 -->
                 <div class="group cursor-pointer relative z-10 transform hover:scale-[1.02] transition duration-300" onclick="openModal('arr-1')">
@@ -361,10 +365,11 @@
             </div>
         </div>
 
-        <!-- 4. VIDEO MUSIC PAGE (6개 항목으로 확장) -->
+        <!-- 4. VIDEO MUSIC PAGE -->
         <div id="page-film-music" class="page-content pb-48">
-            <h1 class="text-3xl font-bold text-gray-800 mb-8">VIDEO MUSIC</h1>
-            <!-- 3열 그리드 갤러리 -->
+            <!-- mb-8 -> mb-12로 여백 확대 -->
+            <h1 class="text-3xl font-bold text-gray-800 mb-12">VIDEO MUSIC</h1>
+            <!-- 3열 그리드 갤러리: gap-8 유지 (앨범 카드 간 간격 축소 유지) -->
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
                 <!-- VIDEO MUSIC Item 1: relative z-10 추가 -->
                 <div class="group cursor-pointer relative z-10 transform hover:scale-[1.02] transition duration-300" onclick="openModal('vid-1')">
@@ -432,10 +437,11 @@
             </div>
         </div>
 
-        <!-- 5. CONTEST PAGE (6개 항목으로 확장) -->
+        <!-- 5. CONTEST PAGE -->
         <div id="page-contest" class="page-content pb-48">
-            <h1 class="text-3xl font-bold text-gray-800 mb-8">CONTEST</h1>
-            <!-- 3열 그리드 갤러리 -->
+            <!-- mb-8 -> mb-12로 여백 확대 -->
+            <h1 class="text-3xl font-bold text-gray-800 mb-12">CONTEST</h1>
+            <!-- 3열 그리드 갤러리: gap-8 유지 (앨범 카드 간 간격 축소 유지) -->
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
                 <!-- CONTEST Item 1: relative z-10 추가 -->
                 <div class="group cursor-pointer relative z-10 transform hover:scale-[1.02] transition duration-300" onclick="openModal('con-1')">
@@ -505,8 +511,8 @@
 
         <!-- 6. CONTACT PAGE - 미니멀 디자인 -->
         <div id="page-contact" class="page-content pb-48">
-            <!-- 제목 수정: 이모티콘 및 'PAGE' 제거 -->
-            <h1 class="text-3xl font-bold text-gray-800 mb-8">CONTACT</h1>
+            <!-- mb-8 -> mb-12로 여백 확대 -->
+            <h1 class="text-3xl font-bold text-gray-800 mb-12">CONTACT</h1>
             
             <div class="w-full">
                 <!-- 이메일 주소: 볼드체 제거, 폰트 크기 축소 (text-2xl -> text-xl) -->
