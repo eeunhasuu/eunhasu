@@ -97,6 +97,23 @@
         .page-content.active .grid > div:nth-child(5) { animation-delay: 0.7s; }
         .page-content.active .grid > div:nth-child(6) { animation-delay: 0.8s; }
 
+        /* 복사 성공 메시지 스타일 */
+        #copy-message {
+            position: fixed;
+            bottom: 6rem;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 10px 20px;
+            background-color: #10b981; /* 에메랄드 500 */
+            color: white;
+            border-radius: 9999px; /* rounded-full */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+            z-index: 100;
+            pointer-events: none;
+        }
+
     </style>
 </head>
 <body>
@@ -148,14 +165,14 @@
     <main id="page-container" class="mt-8 px-6 max-w-6xl mx-auto relative">
 
         <!-- 1. MAIN PAGE -->
-        <!-- 수정: py-8 -> pt-8 pb-32 (아래 여백을 크게 확보) -->
+        <!-- 아래 여백을 pb-32로 설정 -->
         <div id="page-main" class="page-content pt-8 pb-32">
-            <h1 class="text-3xl font-bold text-gray-800 mb-4">🏠 MAIN PAGE</h1>
+            <h1 class="text-3xl font-bold text-gray-800 mb-4">MAIN PAGE</h1>
             <p class="text-gray-600">환영합니다! 이곳은 웹사이트의 메인 페이지입니다.</p>
         </div>
 
         <!-- 2. PRODUCING PAGE -->
-        <!-- 수정: py-8 -> pt-8 pb-32 (아래 여백을 크게 확보) -->
+        <!-- 아래 여백을 pb-32로 설정 -->
         <div id="page-producing" class="page-content pt-8 pb-32">
             <h1 class="text-3xl font-bold text-gray-800 mb-8">PRODUCING</h1>
             <!-- 3열 그리드 갤러리 -->
@@ -197,7 +214,7 @@
         </div>
 
         <!-- 3. ARRANGEMENT PAGE -->
-        <!-- 수정: py-8 -> pt-8 pb-32 (아래 여백을 크게 확보) -->
+        <!-- 아래 여백을 pb-32로 설정 -->
         <div id="page-arrangement" class="page-content pt-8 pb-32">
             <h1 class="text-3xl font-bold text-gray-800 mb-8">ARRANGEMENT</h1>
             <!-- 3열 그리드 갤러리 -->
@@ -239,7 +256,7 @@
         </div>
 
         <!-- 4. VIDEO MUSIC PAGE -->
-        <!-- 수정: py-8 -> pt-8 pb-32 (아래 여백을 크게 확보) -->
+        <!-- 아래 여백을 pb-32로 설정 -->
         <div id="page-film-music" class="page-content pt-8 pb-32">
             <h1 class="text-3xl font-bold text-gray-800 mb-8">VIDEO MUSIC</h1>
             <!-- 3열 그리드 갤러리 -->
@@ -281,7 +298,7 @@
         </div>
 
         <!-- 5. CONTEST PAGE -->
-        <!-- 수정: py-8 -> pt-8 pb-32 (아래 여백을 크게 확보) -->
+        <!-- 아래 여백을 pb-32로 설정 -->
         <div id="page-contest" class="page-content pt-8 pb-32">
             <h1 class="text-3xl font-bold text-gray-800 mb-8">CONTEST</h1>
             <!-- 3열 그리드 갤러리 -->
@@ -322,11 +339,39 @@
             </div>
         </div>
 
-        <!-- 6. CONTACT PAGE -->
-        <!-- 수정: py-8 -> pt-8 pb-32 (아래 여백을 크게 확보) -->
+        <!-- 6. CONTACT PAGE - 미니멀 디자인으로 변경 (V2) -->
+        <!-- 아래 여백을 pb-32로 설정 -->
         <div id="page-contact" class="page-content pt-8 pb-32">
-            <h1 class="text-3xl font-bold text-gray-800 mb-4">📧 CONTACT PAGE</h1>
-            <p class="text-gray-600">연락처 정보나 문의 양식을 여기에 넣어봅시다.</p>
+            <!-- 제목 수정: 이모티콘 및 'PAGE' 제거 -->
+            <h1 class="text-3xl font-bold text-gray-800 mb-8">CONTACT</h1>
+            
+            <div class="w-full">
+                <!-- 이메일 주소: 볼드체 제거, 폰트 크기 축소 (text-2xl -> text-xl) -->
+                <p id="email-address" 
+                   class="text-xl font-normal text-gray-800 mb-4 inline-block cursor-pointer hover:text-gray-600 transition duration-150"
+                   onclick="copyToClipboard('galaxyinyourspace@gmail.com')">
+                    galaxyinyourspace@gmail.com
+                </p>
+                
+                <!-- 심플한 버튼 그룹 -->
+                <div class="flex space-x-3 mb-6">
+                    <!-- 복사 버튼: 패딩 축소 (p-3 -> p-2), 아이콘 크기 축소 (20px -> 18px) -->
+                    <button onclick="copyToClipboard('galaxyinyourspace@gmail.com')" 
+                            title="이메일 주소 복사"
+                            class="p-2 text-gray-600 border border-gray-300 rounded-xl hover:bg-gray-100 active:bg-gray-200 transition duration-150">
+                        <!-- Copy SVG Icon -->
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                    </button>
+                    
+                    <!-- 메일 보내기 링크: 패딩 축소 (p-3 -> p-2), 아이콘 크기 축소 (20px -> 18px) -->
+                    <a href="mailto:galaxyinyourspace@gmail.com" 
+                       title="메일 보내기"
+                       class="p-2 text-gray-600 border border-gray-300 rounded-xl hover:bg-gray-100 active:bg-gray-200 transition duration-150 flex items-center justify-center">
+                        <!-- Send Mail SVG Icon -->
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                    </a>
+                </div>
+            </div>
         </div>
 
     </main>
@@ -344,6 +389,10 @@
             </div>
         </div>
     </div>
+
+    <!-- 복사 성공 메시지 (커스텀 토스트 알림) -->
+    <div id="copy-message">이메일 주소가 복사되었습니다!</div>
+
 
     <!-- 푸터 (Footer): 유튜브 및 인스타그램 링크 포함 -->
     <footer class="mt-20 py-8 border-t border-gray-100 bg-gray-50">
@@ -524,6 +573,62 @@
             setTimeout(() => {
                 modal.classList.add('hidden');
             }, 300); // CSS transition 시간(0.3s)과 일치
+        }
+        
+        // --- 클립보드 복사 JavaScript ---
+        function copyToClipboard(text) {
+            // navigator.clipboard.writeText를 사용하여 클립보드에 복사 시도
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(text).then(() => {
+                    showCopyMessage();
+                }).catch(err => {
+                    // 보안 문제 등으로 실패 시 document.execCommand('copy') 대체 방법 사용
+                    fallbackCopyTextToClipboard(text);
+                });
+            } else {
+                // 구형 브라우저 또는 환경에서 대체 방법 사용
+                fallbackCopyTextToClipboard(text);
+            }
+        }
+
+        // document.execCommand('copy') 대체 방법
+        function fallbackCopyTextToClipboard(text) {
+            const textArea = document.createElement("textarea");
+            textArea.value = text;
+            
+            // 화면 밖으로 이동시켜 사용자에게 보이지 않게 처리
+            textArea.style.position = "fixed";
+            textArea.style.left = "-9999px";
+            textArea.style.top = "-9999px";
+            
+            document.body.appendChild(textArea);
+            textArea.focus();
+            textArea.select();
+
+            try {
+                // 복사 실행
+                const successful = document.execCommand('copy');
+                if (successful) {
+                    showCopyMessage();
+                } else {
+                    console.error('클립보드 복사 실패: execCommand');
+                }
+            } catch (err) {
+                console.error('클립보드 복사 실패:', err);
+            }
+
+            document.body.removeChild(textArea);
+        }
+
+        // 복사 성공 메시지 표시 함수
+        function showCopyMessage() {
+            const message = document.getElementById('copy-message');
+            message.style.opacity = '1';
+            
+            // 2초 후 메시지 숨기기
+            setTimeout(() => {
+                message.style.opacity = '0';
+            }, 2000);
         }
     </script>
 </body>
