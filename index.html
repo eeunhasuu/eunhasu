@@ -20,11 +20,10 @@
             overflow-x: hidden; 
         }
 
-        /* --- 드롭다운 메뉴 스타일 (수정됨: 중앙 정렬 + 아래로 등장 애니메이션) --- */
+        /* --- 드롭다운 메뉴 스타일 (중앙 정렬 + 아래로 등장 애니메이션) --- */
         .dropdown-menu {
             opacity: 0;
             visibility: hidden;
-            /* 가로: 중앙(-50%), 세로: 위쪽(-10px)에서 시작 */
             transform: translate(-50%, -10px);
             transition: opacity 0.2s ease-out, transform 0.2s ease-out, visibility 0.2s;
         }
@@ -32,7 +31,6 @@
         .dropdown-menu.open {
             opacity: 1;
             visibility: visible;
-            /* 가로: 중앙(-50%) 유지, 세로: 원래 위치(0)로 이동 */
             transform: translate(-50%, 0);
         }
 
@@ -40,19 +38,15 @@
         #page-container {
             position: relative;
             min-height: 500px;
-            /* 상단 네비게이션 바 높이보다 더 넓게 패딩을 주어 충분한 여백 확보 (6rem) - 유지 */
             padding-top: 6rem; /* 96px */
         }
 
-        /* * --- 페이지 콘텐츠 스타일 ---
-           * 활성/비활성 상태에 따른 display: block/none 및 opacity/visibility 전환 유지
-           */
+        /* * --- 페이지 콘텐츠 스타일 --- */
         .page-content {
             opacity: 0;
             visibility: hidden;
             transition: opacity 0.5s ease-in-out, visibility 0.5s;
             display: none; 
-            /* 개별 페이지의 상단 패딩은 제거 (main 컨테이너에 일괄 적용됨) */
         }
 
         .page-content.active {
@@ -92,7 +86,7 @@
             animation: titleFadeIn 0.3s ease-out 0.2s forwards; 
         }
         
-        /* 갤러리 아이템에 순차적 애니메이션 적용 - 9개 항목 */
+        /* 갤러리 아이템에 순차적 애니메이션 적용 */
         .page-content.active .grid > div {
             opacity: 0; 
             animation: fadeInUp 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards; 
@@ -126,7 +120,7 @@
             pointer-events: none;
         }
 
-        /* --- 모달 애니메이션 스타일 (Z-index 수정됨) --- */
+        /* --- 모달 애니메이션 스타일 --- */
         .modal-overlay {
             opacity: 0;
             pointer-events: none;
@@ -135,7 +129,7 @@
             position: fixed;
             inset: 0;
             background-color: rgba(17, 24, 39, 0.75); /* 어두운 배경 */
-            z-index: 90; /* ⬅️ Z-index를 높여 모든 요소를 덮도록 수정 */
+            z-index: 90; 
             align-items: center;
             justify-content: center;
             padding: 1rem;
@@ -167,7 +161,6 @@
 </head>
 <body>
 
-    <!-- 수정됨: shadow-sm 제거 -->
     <nav class="fixed w-full bg-white text-black px-8 py-5 flex items-center justify-between z-50 top-0">
         
         <div class="text-2xl font-extrabold text-gray-800 cursor-pointer" onclick="navigateTo('page-main')">EUNHASU</div>
@@ -186,7 +179,6 @@
                         DISCOGRAPHY
                     </div>
 
-                    <!-- 드롭다운 메뉴: left-1/2 추가하여 부모의 중앙 기준점 설정 (CSS에서 transform으로 중앙 정렬 및 애니메이션 처리) -->
                     <ul id="dropdown-content"
                         class="dropdown-menu absolute left-1/2 top-full pt-2 z-20 w-48 bg-white text-black rounded-lg shadow-xl ring-1 ring-black ring-opacity-5 flex flex-col overflow-hidden mt-2">
                         
@@ -202,7 +194,7 @@
             </ul>
         </div>
         
-        <!-- Mobile Menu Button (Simple implementation) -->
+        <!-- Mobile Menu Button -->
         <div class="md:hidden">
              <button class="text-gray-800 focus:outline-none" onclick="toggleMobileMenu()">
                 <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
@@ -503,7 +495,6 @@
 
     </main>
     
-    <!-- 수정됨: border-t border-gray-100 제거 -->
     <footer class="fixed bottom-0 w-full bg-white text-gray-600 p-4 text-center z-50"> 
         <div class="max-w-6xl mx-auto text-sm text-gray-500">
             &copy; 2025 EUNHASU Portfolio. All rights reserved.
@@ -528,37 +519,37 @@
 <script>
     // 페이지 데이터를 정의합니다. (모달에 표시될 내용)
     const projectData = {
-        // PRODUCING 데이터
-        'prod-1': { title: 'The First Star', artist: 'Artist Name A', year: '2024.03', description: '발매된 첫 싱글 앨범으로, 팝 발라드 장르의 곡입니다. 전체 프로듀싱 및 작곡에 참여했습니다.', image: 'https://placehold.co/400x400/2563EB/ffffff?text=The+First+Star', role: 'Producer / Composer' },
-        'prod-2': { title: 'City Lights', artist: 'Artist Name B', year: '2023.11', description: '화려한 도시의 밤을 표현한 시티팝 장르 곡입니다. 작곡 및 믹싱에 참여했습니다.', image: 'https://placehold.co/400x400/10B981/ffffff?text=City+Lights', role: 'Composer / Mixing' },
-        'prod-3': { title: 'Winter Breeze', artist: 'Artist Name C', year: '2023.12', description: '겨울 감성을 담은 어쿠스틱 발라드입니다. 피아노 세션과 편곡을 담당했습니다.', image: 'https://placehold.co/400x400/F59E0B/ffffff?text=Winter+Breeze', role: 'Arranger / Piano' },
-        'prod-4': { title: 'Midnight Cruise', artist: 'Artist Name D', year: '2024.01', description: '드라이브할 때 듣기 좋은 신스웨이브 트랙입니다. 신디사이저 사운드 디자인에 중점을 두었습니다.', image: 'https://placehold.co/400x400/7C3AED/ffffff?text=Midnight', role: 'Producer' },
-        'prod-5': { title: 'Summer Rain', artist: 'Artist Name E', year: '2023.07', description: '청량한 여름 분위기의 댄스 팝입니다. 보컬 디렉팅 및 탑라인 메이킹에 참여했습니다.', image: 'https://placehold.co/400x400/F43F5E/ffffff?text=Summer+Rain', role: 'Topliner / Director' },
-        'prod-6': { title: 'Echoes', artist: 'Artist Name F', year: '2023.09', description: '몽환적인 분위기의 R&B 트랙입니다. 비트메이킹과 베이스 연주를 담당했습니다.', image: 'https://placehold.co/400x400/34D399/ffffff?text=Echoes', role: 'Beatmaker' },
+        // PRODUCING 데이터 (link 속성 추가됨)
+        'prod-1': { title: 'The First Star', artist: 'Artist Name A', year: '2024.03', description: '발매된 첫 싱글 앨범으로, 팝 발라드 장르의 곡입니다. 전체 프로듀싱 및 작곡에 참여했습니다.', image: 'https://placehold.co/400x400/2563EB/ffffff?text=The+First+Star', role: 'Producer / Composer', link: 'https://www.youtube.com' },
+        'prod-2': { title: 'City Lights', artist: 'Artist Name B', year: '2023.11', description: '화려한 도시의 밤을 표현한 시티팝 장르 곡입니다. 작곡 및 믹싱에 참여했습니다.', image: 'https://placehold.co/400x400/10B981/ffffff?text=City+Lights', role: 'Composer / Mixing', link: 'https://www.youtube.com' },
+        'prod-3': { title: 'Winter Breeze', artist: 'Artist Name C', year: '2023.12', description: '겨울 감성을 담은 어쿠스틱 발라드입니다. 피아노 세션과 편곡을 담당했습니다.', image: 'https://placehold.co/400x400/F59E0B/ffffff?text=Winter+Breeze', role: 'Arranger / Piano', link: 'https://www.youtube.com' },
+        'prod-4': { title: 'Midnight Cruise', artist: 'Artist Name D', year: '2024.01', description: '드라이브할 때 듣기 좋은 신스웨이브 트랙입니다. 신디사이저 사운드 디자인에 중점을 두었습니다.', image: 'https://placehold.co/400x400/7C3AED/ffffff?text=Midnight', role: 'Producer', link: 'https://www.youtube.com' },
+        'prod-5': { title: 'Summer Rain', artist: 'Artist Name E', year: '2023.07', description: '청량한 여름 분위기의 댄스 팝입니다. 보컬 디렉팅 및 탑라인 메이킹에 참여했습니다.', image: 'https://placehold.co/400x400/F43F5E/ffffff?text=Summer+Rain', role: 'Topliner / Director', link: 'https://www.youtube.com' },
+        'prod-6': { title: 'Echoes', artist: 'Artist Name F', year: '2023.09', description: '몽환적인 분위기의 R&B 트랙입니다. 비트메이킹과 베이스 연주를 담당했습니다.', image: 'https://placehold.co/400x400/34D399/ffffff?text=Echoes', role: 'Beatmaker', link: 'https://www.youtube.com' },
 
         // ARRANGEMENT 데이터
-        'arr-1': { title: 'Classic Revisit', artist: 'Artist Name G', year: '2024.02', description: '고전 클래식을 현대적인 팝 스타일로 재해석한 편곡 프로젝트입니다.', image: 'https://placehold.co/400x400/9333EA/ffffff?text=Classic', role: 'Arranger' },
-        'arr-2': { title: 'Acoustic Sunset', artist: 'Artist Name H', year: '2023.10', description: '원곡의 강렬한 락 사운드를 부드러운 어쿠스틱 기타 버전으로 편곡했습니다.', image: 'https://placehold.co/400x400/DC2626/ffffff?text=Acoustic', role: 'Arranger' },
-        'arr-3': { title: 'Pop Orchestra', artist: 'Artist Name I', year: '2023.12', description: '아이돌 댄스 곡을 오케스트라 버전으로 편곡하여 웅장함을 더했습니다.', image: 'https://placehold.co/400x400/3B82F6/ffffff?text=Pop+Orch', role: 'Orchestrator' },
-        'arr-4': { title: '8-bit Remix', artist: 'Artist Name J', year: '2024.01', description: '유명 가요를 레트로 게임 스타일의 8-bit 사운드로 리믹스했습니다.', image: 'https://placehold.co/400x400/EC4899/ffffff?text=8-bit', role: 'Remixer' },
-        'arr-5': { title: 'Latin Jazz', artist: 'Artist Name K', year: '2023.08', description: '재즈 스탠다드 넘버를 라틴 리듬으로 재편곡하여 색다른 느낌을 주었습니다.', image: 'https://placehold.co/400x400/10B981/ffffff?text=Latin', role: 'Arranger' },
-        'arr-6': { title: 'Future Garage', artist: 'Artist Name L', year: '2023.11', description: '발라드 곡을 Future Garage 스타일의 전자음악으로 과감하게 변신시켰습니다.', image: 'https://placehold.co/400x400/F97316/ffffff?text=Future', role: 'Remixer' },
+        'arr-1': { title: 'Classic Revisit', artist: 'Artist Name G', year: '2024.02', description: '고전 클래식을 현대적인 팝 스타일로 재해석한 편곡 프로젝트입니다.', image: 'https://placehold.co/400x400/9333EA/ffffff?text=Classic', role: 'Arranger', link: 'https://www.youtube.com' },
+        'arr-2': { title: 'Acoustic Sunset', artist: 'Artist Name H', year: '2023.10', description: '원곡의 강렬한 락 사운드를 부드러운 어쿠스틱 기타 버전으로 편곡했습니다.', image: 'https://placehold.co/400x400/DC2626/ffffff?text=Acoustic', role: 'Arranger', link: 'https://www.youtube.com' },
+        'arr-3': { title: 'Pop Orchestra', artist: 'Artist Name I', year: '2023.12', description: '아이돌 댄스 곡을 오케스트라 버전으로 편곡하여 웅장함을 더했습니다.', image: 'https://placehold.co/400x400/3B82F6/ffffff?text=Pop+Orch', role: 'Orchestrator', link: 'https://www.youtube.com' },
+        'arr-4': { title: '8-bit Remix', artist: 'Artist Name J', year: '2024.01', description: '유명 가요를 레트로 게임 스타일의 8-bit 사운드로 리믹스했습니다.', image: 'https://placehold.co/400x400/EC4899/ffffff?text=8-bit', role: 'Remixer', link: 'https://www.youtube.com' },
+        'arr-5': { title: 'Latin Jazz', artist: 'Artist Name K', year: '2023.08', description: '재즈 스탠다드 넘버를 라틴 리듬으로 재편곡하여 색다른 느낌을 주었습니다.', image: 'https://placehold.co/400x400/10B981/ffffff?text=Latin', role: 'Arranger', link: 'https://www.youtube.com' },
+        'arr-6': { title: 'Future Garage', artist: 'Artist Name L', year: '2023.11', description: '발라드 곡을 Future Garage 스타일의 전자음악으로 과감하게 변신시켰습니다.', image: 'https://placehold.co/400x400/F97316/ffffff?text=Future', role: 'Remixer', link: 'https://www.youtube.com' },
 
         // VIDEO MUSIC 데이터
-        'vid-1': { title: 'Documentary OST', artist: 'Client Name M', year: '2024.01', description: '자연 다큐멘터리의 배경음악으로 사용된 앰비언트 트랙입니다.', image: 'https://placehold.co/400x400/A855F7/ffffff?text=Docu', role: 'Composer' },
-        'vid-2': { title: 'Game Trailer Score', artist: 'Client Name N', year: '2023.12', description: '모바일 액션 RPG 게임의 런칭 트레일러 음악을 제작했습니다. 긴박감 넘치는 오케스트레이션이 특징입니다.', image: 'https://placehold.co/400x400/D97706/ffffff?text=Game', role: 'Sound Director' },
-        'vid-3': { title: 'Commercial BGM', artist: 'Client Name O', year: '2023.10', description: '화장품 브랜드 TV 광고에 사용된 세련되고 미니멀한 배경음악입니다.', image: 'https://placehold.co/400x400/EF4444/ffffff?text=BGM', role: 'Composer' },
-        'vid-4': { title: 'Fashion Film Score', artist: 'Client Name P', year: '2023.11', description: '의류 브랜드 룩북 영상에 삽입된 힙한 비트의 음악입니다.', image: 'https://placehold.co/400x400/F59E0B/ffffff?text=Fashion', role: 'Beatmaker' },
-        'vid-5': { title: 'Educational Content', artist: 'Client Name Q', year: '2023.09', description: '어린이 교육용 애니메이션에 들어가는 효과음과 배경음악을 작업했습니다.', image: 'https://placehold.co/400x400/6D28D9/ffffff?text=Edu', role: 'Sound Designer' },
-        'vid-6': { title: 'Indie Film Theme', artist: 'Client Name R', year: '2024.02', description: '독립 단편 영화의 엔딩 크레딧 곡을 작곡했습니다. 피아노와 첼로 선율이 돋보입니다.', image: 'https://placehold.co/400x400/38BDF8/ffffff?text=Indie', role: 'Composer' },
+        'vid-1': { title: 'Documentary OST', artist: 'Client Name M', year: '2024.01', description: '자연 다큐멘터리의 배경음악으로 사용된 앰비언트 트랙입니다.', image: 'https://placehold.co/400x400/A855F7/ffffff?text=Docu', role: 'Composer', link: 'https://www.youtube.com' },
+        'vid-2': { title: 'Game Trailer Score', artist: 'Client Name N', year: '2023.12', description: '모바일 액션 RPG 게임의 런칭 트레일러 음악을 제작했습니다. 긴박감 넘치는 오케스트레이션이 특징입니다.', image: 'https://placehold.co/400x400/D97706/ffffff?text=Game', role: 'Sound Director', link: 'https://www.youtube.com' },
+        'vid-3': { title: 'Commercial BGM', artist: 'Client Name O', year: '2023.10', description: '화장품 브랜드 TV 광고에 사용된 세련되고 미니멀한 배경음악입니다.', image: 'https://placehold.co/400x400/EF4444/ffffff?text=BGM', role: 'Composer', link: 'https://www.youtube.com' },
+        'vid-4': { title: 'Fashion Film Score', artist: 'Client Name P', year: '2023.11', description: '의류 브랜드 룩북 영상에 삽입된 힙한 비트의 음악입니다.', image: 'https://placehold.co/400x400/F59E0B/ffffff?text=Fashion', role: 'Beatmaker', link: 'https://www.youtube.com' },
+        'vid-5': { title: 'Educational Content', artist: 'Client Name Q', year: '2023.09', description: '어린이 교육용 애니메이션에 들어가는 효과음과 배경음악을 작업했습니다.', image: 'https://placehold.co/400x400/6D28D9/ffffff?text=Edu', role: 'Sound Designer', link: 'https://www.youtube.com' },
+        'vid-6': { title: 'Indie Film Theme', artist: 'Client Name R', year: '2024.02', description: '독립 단편 영화의 엔딩 크레딧 곡을 작곡했습니다. 피아노와 첼로 선율이 돋보입니다.', image: 'https://placehold.co/400x400/38BDF8/ffffff?text=Indie', role: 'Composer', link: 'https://www.youtube.com' },
 
         // CONTEST 데이터
-        'con-1': { title: 'National Music Award', artist: 'Contest Host S', year: '2023.05', description: '전국 대학생 음악 경연대회에서 대상을 수상한 곡입니다.', image: 'https://placehold.co/400x400/14B8A6/ffffff?text=Award', role: 'Grand Prize' },
-        'con-2': { title: 'New Artist Challenge', artist: 'Contest Host T', year: '2023.08', description: '신인 작곡가 발굴 프로젝트에서 입선하여 음원 발매 기회를 얻었습니다.', image: 'https://placehold.co/400x400/94A3B8/ffffff?text=Challenge', role: 'Finalist' },
-        'con-3': { title: 'Digital Single Contest', artist: 'Contest Host U', year: '2023.11', description: '온라인 작곡 공모전에서 우수상을 수상했습니다.', image: 'https://placehold.co/400x400/F472B6/ffffff?text=Single', role: 'Excellence Award' },
-        'con-4': { title: 'Soundtrack Challenge', artist: 'Contest Host V', year: '2023.06', description: '영화 예고편 음악 다시 만들기 챌린지에서 인기상을 받았습니다.', image: 'https://placehold.co/400x400/2DD4BF/ffffff?text=Soundtrack', role: 'Popularity Award' },
-        'con-5': { title: 'University Festival', artist: 'Contest Host W', year: '2022.09', description: '대학교 가요제에서 창작곡 부문 금상을 수상했습니다.', image: 'https://placehold.co/400x400/A78BFA/ffffff?text=Festival', role: 'Gold Prize' },
-        'con-6': { title: 'K-Pop Producers', artist: 'Contest Host X', year: '2023.12', description: '아이돌 리믹스 콘테스트에서 심사위원 특별상을 받았습니다.', image: 'https://placehold.co/400x400/60A5FA/ffffff?text=K-Pop', role: 'Special Award' }
+        'con-1': { title: 'National Music Award', artist: 'Contest Host S', year: '2023.05', description: '전국 대학생 음악 경연대회에서 대상을 수상한 곡입니다.', image: 'https://placehold.co/400x400/14B8A6/ffffff?text=Award', role: 'Grand Prize', link: 'https://www.youtube.com' },
+        'con-2': { title: 'New Artist Challenge', artist: 'Contest Host T', year: '2023.08', description: '신인 작곡가 발굴 프로젝트에서 입선하여 음원 발매 기회를 얻었습니다.', image: 'https://placehold.co/400x400/94A3B8/ffffff?text=Challenge', role: 'Finalist', link: 'https://www.youtube.com' },
+        'con-3': { title: 'Digital Single Contest', artist: 'Contest Host U', year: '2023.11', description: '온라인 작곡 공모전에서 우수상을 수상했습니다.', image: 'https://placehold.co/400x400/F472B6/ffffff?text=Single', role: 'Excellence Award', link: 'https://www.youtube.com' },
+        'con-4': { title: 'Soundtrack Challenge', artist: 'Contest Host V', year: '2023.06', description: '영화 예고편 음악 다시 만들기 챌린지에서 인기상을 받았습니다.', image: 'https://placehold.co/400x400/2DD4BF/ffffff?text=Soundtrack', role: 'Popularity Award', link: 'https://www.youtube.com' },
+        'con-5': { title: 'University Festival', artist: 'Contest Host W', year: '2022.09', description: '대학교 가요제에서 창작곡 부문 금상을 수상했습니다.', image: 'https://placehold.co/400x400/A78BFA/ffffff?text=Festival', role: 'Gold Prize', link: 'https://www.youtube.com' },
+        'con-6': { title: 'K-Pop Producers', artist: 'Contest Host X', year: '2023.12', description: '아이돌 리믹스 콘테스트에서 심사위원 특별상을 받았습니다.', image: 'https://placehold.co/400x400/60A5FA/ffffff?text=K-Pop', role: 'Special Award', link: 'https://www.youtube.com' }
     };
 
     // --- Navigation Logic ---
@@ -600,29 +591,37 @@
         const modalBody = document.getElementById('modal-body');
         modalBody.innerHTML = `
             <div class="flex flex-col items-center">
-                <div class="w-full aspect-square bg-gray-100 rounded-lg overflow-hidden mb-6 shadow-md">
+                <!-- 이미지 사이즈 축소: w-60 (약 240px) -->
+                <div class="w-60 aspect-square bg-gray-100 rounded-lg overflow-hidden mb-6 shadow-md">
                     <img src="${data.image}" alt="${data.title}" class="w-full h-full object-cover">
                 </div>
-                <h2 class="text-2xl font-bold text-gray-900 mb-1">${data.title}</h2>
-                <p class="text-lg text-blue-600 font-medium mb-4">${data.artist}</p>
                 
-                <div class="w-full text-left space-y-3 bg-gray-50 p-4 rounded-lg">
-                    <div class="flex justify-between border-b pb-2 border-gray-200">
-                        <span class="text-gray-500 font-medium">Role</span>
-                        <span class="text-gray-800">${data.role}</span>
-                    </div>
-                    <div class="flex justify-between border-b pb-2 border-gray-200">
-                        <span class="text-gray-500 font-medium">Year</span>
-                        <span class="text-gray-800">${data.year}</span>
-                    </div>
-                    <div>
-                        <span class="text-gray-500 font-medium block mb-1">Description</span>
-                        <p class="text-gray-700 leading-relaxed text-sm">${data.description}</p>
+                <h2 class="text-2xl font-bold text-gray-900 mb-1">${data.title}</h2>
+                <p class="text-lg text-blue-600 font-medium mb-8">${data.artist}</p>
+                
+                <!-- 라벨 제거 및 자연스러운 배치 -->
+                <div class="w-full text-left space-y-3 px-2">
+                    <p class="text-gray-800">
+                        <span class="font-bold text-gray-900 mr-2">Release Date</span> 
+                        ${data.year}
+                    </p>
+                    
+                    <!-- Role 라벨 제거, 내용만 표시 -->
+                    <p class="text-gray-900 font-medium text-lg">
+                        ${data.role}
+                    </p>
+                    
+                    <!-- Description 라벨 제거 -->
+                    <div class="pt-1">
+                        <p class="text-gray-700 leading-relaxed text-sm">
+                            ${data.description}
+                        </p>
                     </div>
                 </div>
                 
-                <button class="mt-6 w-full py-3 bg-black text-white rounded-lg hover:bg-gray-800 transition font-medium" onclick="alert('데모 링크로 이동합니다 (준비중)');">
-                    Listen Demo
+                <!-- 버튼 클릭 시 유튜브 링크 이동 -->
+                <button class="mt-10 w-full py-3 bg-black text-white rounded-lg hover:bg-gray-800 transition font-medium" onclick="window.open('${data.link}', '_blank')">
+                    Listen
                 </button>
             </div>
         `;
