@@ -216,7 +216,8 @@
 
                 <li id="discography-menu" class="relative" 
                     onmouseenter="handleMouseEnter()" 
-                    onmouseleave="handleMouseLeave()">
+                    onmouseleave="handleMouseLeave()"
+                    onclick="handleMouseEnter()"> <!-- 터치 디바이스 호환성 추가 -->
                     
                     <div class="link-item cursor-pointer hover:text-blue-600 transition duration-150 p-2 -m-2">
                         DISCOGRAPHY
@@ -225,10 +226,10 @@
                     <ul id="dropdown-content"
                         class="dropdown-menu absolute left-1/2 top-full pt-2 z-20 w-48 bg-white text-black rounded-lg shadow-xl ring-1 ring-black ring-opacity-5 flex flex-col overflow-hidden mt-2">
                         
-                        <li class="px-5 py-3 text-sm hover:bg-blue-50 hover:text-blue-700 transition duration-150 cursor-pointer text-center" onclick="navigateTo('page-producing')">PRODUCING</li>
-                        <li class="px-5 py-3 text-sm hover:bg-blue-50 hover:text-blue-700 transition duration-150 cursor-pointer text-center" onclick="navigateTo('page-arrangement')">ARRANGEMENT</li>
-                        <li class="px-5 py-3 text-sm hover:bg-blue-50 hover:text-blue-700 transition duration-150 cursor-pointer text-center" onclick="navigateTo('page-film-music')">VIDEO MUSIC</li>
-                        <li class="px-5 py-3 text-sm hover:bg-blue-50 hover:text-blue-700 transition duration-150 cursor-pointer text-center" onclick="navigateTo('page-contest')">CONTEST</li>
+                        <li class="px-5 py-3 text-sm hover:bg-blue-50 hover:text-blue-700 transition duration-150 cursor-pointer text-center" onclick="event.stopPropagation(); navigateTo('page-producing')">PRODUCING</li>
+                        <li class="px-5 py-3 text-sm hover:bg-blue-50 hover:text-blue-700 transition duration-150 cursor-pointer text-center" onclick="event.stopPropagation(); navigateTo('page-arrangement')">ARRANGEMENT</li>
+                        <li class="px-5 py-3 text-sm hover:bg-blue-50 hover:text-blue-700 transition duration-150 cursor-pointer text-center" onclick="event.stopPropagation(); navigateTo('page-film-music')">VIDEO MUSIC</li>
+                        <li class="px-5 py-3 text-sm hover:bg-blue-50 hover:text-blue-700 transition duration-150 cursor-pointer text-center" onclick="event.stopPropagation(); navigateTo('page-contest')">CONTEST</li>
                     </ul>
                 </li>
 
@@ -244,16 +245,31 @@
         </div>
     </nav>
     
-    <div id="mobile-menu" class="fixed inset-0 bg-white z-40 transform translate-x-full transition-transform duration-300 md:hidden pt-24 px-6">
+    <!-- 수정된 모바일 메뉴: DISCOGRAPHY 아코디언 기능 추가 -->
+    <div id="mobile-menu" class="fixed inset-0 bg-white z-40 transform translate-x-full transition-transform duration-300 md:hidden pt-24 px-6 overflow-y-auto">
          <ul class="flex flex-col gap-6 text-xl font-bold text-gray-800">
-            <li onclick="navigateTo('page-main'); toggleMobileMenu()">MAIN</li>
-            <li class="text-blue-600">DISCOGRAPHY</li>
-            <li class="pl-4 text-base text-gray-600" onclick="navigateTo('page-producing'); toggleMobileMenu()">- PRODUCING</li>
-            <li class="pl-4 text-base text-gray-600" onclick="navigateTo('page-arrangement'); toggleMobileMenu()">- ARRANGEMENT</li>
-            <li class="pl-4 text-base text-gray-600" onclick="navigateTo('page-film-music'); toggleMobileMenu()">- VIDEO MUSIC</li>
-            <li class="pl-4 text-base text-gray-600" onclick="navigateTo('page-contest'); toggleMobileMenu()">- CONTEST</li>
-            <li onclick="navigateTo('page-contact'); toggleMobileMenu()">CONTACT</li>
+            <li class="cursor-pointer hover:text-blue-600 transition" onclick="navigateTo('page-main'); toggleMobileMenu()">MAIN</li>
+            
+            <!-- DISCOGRAPHY 아코디언 -->
+            <li>
+                <div class="flex justify-between items-center cursor-pointer hover:text-blue-600 transition group" onclick="toggleMobileSubmenu()">
+                    <span class="text-blue-600">DISCOGRAPHY</span>
+                    <svg id="mobile-submenu-arrow" class="w-5 h-5 text-gray-400 transform transition-transform duration-300 group-hover:text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </div>
+                <!-- 하위 메뉴 (초기 상태 hidden) -->
+                <ul id="mobile-discography-submenu" class="hidden flex-col gap-4 mt-4 pl-4 border-l-2 border-gray-100 ml-1">
+                    <li class="text-base text-gray-600 cursor-pointer hover:text-blue-600 transition" onclick="navigateTo('page-producing'); toggleMobileMenu()">PRODUCING</li>
+                    <li class="text-base text-gray-600 cursor-pointer hover:text-blue-600 transition" onclick="navigateTo('page-arrangement'); toggleMobileMenu()">ARRANGEMENT</li>
+                    <li class="text-base text-gray-600 cursor-pointer hover:text-blue-600 transition" onclick="navigateTo('page-film-music'); toggleMobileMenu()">VIDEO MUSIC</li>
+                    <li class="text-base text-gray-600 cursor-pointer hover:text-blue-600 transition" onclick="navigateTo('page-contest'); toggleMobileMenu()">CONTEST</li>
+                </ul>
+            </li>
+
+            <li class="cursor-pointer hover:text-blue-600 transition" onclick="navigateTo('page-contact'); toggleMobileMenu()">CONTACT</li>
          </ul>
+         
          <button class="absolute top-6 right-6" onclick="toggleMobileMenu()">
             <svg class="w-8 h-8 text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
          </button>
@@ -810,6 +826,22 @@
     // --- Mobile Menu Logic ---
     function toggleMobileMenu() {
         document.getElementById('mobile-menu').classList.toggle('translate-x-full');
+    }
+
+    // 모바일 하위 메뉴 토글 (아코디언)
+    function toggleMobileSubmenu() {
+        const submenu = document.getElementById('mobile-discography-submenu');
+        const arrow = document.getElementById('mobile-submenu-arrow');
+        
+        if (submenu.classList.contains('hidden')) {
+            submenu.classList.remove('hidden');
+            submenu.classList.add('flex');
+            arrow.classList.add('rotate-180'); // 화살표 회전
+        } else {
+            submenu.classList.add('hidden');
+            submenu.classList.remove('flex');
+            arrow.classList.remove('rotate-180'); // 화살표 복구
+        }
     }
 
     // Initialize
