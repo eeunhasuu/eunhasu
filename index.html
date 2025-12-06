@@ -257,11 +257,10 @@
          </button>
     </div>
     
-    <!-- flex-grow를 사용하여 footer가 바닥에 붙도록 처리 -->
     <main id="page-container" class="flex-grow px-6 max-w-6xl mx-auto w-full relative">
 
         <div id="page-main" class="page-content active">
-            <!-- Intro Section: min-h-screen으로 한 화면 차지 -->
+            <!-- Intro Section -->
             <div class="flex flex-col items-center justify-center min-h-screen text-center space-y-6 intro-content pt-20">
                 <h1 class="text-5xl md:text-7xl font-extrabold text-gray-900 tracking-tight intro-text">EUNHASU</h1>
                 <p class="text-xl md:text-2xl text-gray-500 font-light intro-text">Music Producer & Sound Designer</p>
@@ -277,7 +276,7 @@
                 </div>
             </div>
 
-            <!-- DAW & GEAR Section: min-h-screen으로 간격 확보 및 중앙 정렬 -->
+            <!-- DAW & GEAR Section -->
             <div id="section-daw" class="scroll-animate flex flex-col justify-center min-h-screen w-full">
                 <div class="text-center mb-16">
                     <h2 class="text-3xl font-bold text-gray-800">MAIN DAW</h2>
@@ -305,7 +304,7 @@
                 </div>
             </div>
 
-            <!-- LATEST WORKS Preview Section: min-h-screen으로 간격 확보 -->
+            <!-- LATEST WORKS Preview Section -->
             <div id="section-works" class="scroll-animate flex flex-col justify-center min-h-screen w-full">
                 <div class="text-center mb-16">
                     <h2 class="text-3xl font-bold text-gray-800">LATEST WORKS</h2>
@@ -336,63 +335,63 @@
             </div>
         </div>
 
-        <!-- Other Pages (Padding top 6rem restored via .page-content) -->
+        <!-- Other Pages -->
         <div id="page-producing" class="page-content pb-24">
             <h1 class="text-3xl font-bold text-gray-800 mb-12 border-b pb-4">PRODUCING</h1>
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
-                <!-- Items populated below -->
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
+                <!-- rounded-lg removed from divs below -->
                 <div class="group cursor-pointer relative z-10 transform hover:scale-[1.02] transition duration-300" onclick="openModal('prod-1')">
-                    <div class="aspect-square bg-gray-100 relative overflow-hidden rounded-lg shadow-sm">
+                    <div class="aspect-square bg-gray-100 relative overflow-hidden shadow-sm">
                         <img src="https://placehold.co/400x400/2563EB/ffffff?text=The+First+Star" onerror="this.onerror=null;this.src='https://placehold.co/400x400/2563EB/ffffff?text=PROD+A';" alt="Project A Cover" class="w-full h-full object-cover transition duration-300 group-hover:opacity-95">
                     </div>
                     <div class="p-3 text-center">
-                        <p class="text-xl font-bold text-gray-800 leading-tight">The First Star</p>
-                        <p class="text-base text-gray-600 font-normal leading-tight mt-1">Artist Name A</p>
+                        <p class="text-lg font-bold text-gray-800 leading-tight">The First Star</p>
+                        <p class="text-sm text-gray-600 font-normal leading-tight mt-1">Artist Name A</p>
                     </div>
                 </div>
                 <div class="group cursor-pointer relative z-10 transform hover:scale-[1.02] transition duration-300" onclick="openModal('prod-2')">
-                    <div class="aspect-square bg-gray-100 relative overflow-hidden rounded-lg shadow-sm">
+                    <div class="aspect-square bg-gray-100 relative overflow-hidden shadow-sm">
                         <img src="https://placehold.co/400x400/10B981/ffffff?text=City+Lights" onerror="this.onerror=null;this.src='https://placehold.co/400x400/10B981/ffffff?text=PROD+B';" alt="Project B Cover" class="w-full h-full object-cover transition duration-300 group-hover:opacity-95">
                     </div>
                     <div class="p-3 text-center">
-                        <p class="text-xl font-bold text-gray-800 leading-tight">City Lights</p>
-                        <p class="text-base text-gray-600 font-normal leading-tight mt-1">Artist Name B</p>
+                        <p class="text-lg font-bold text-gray-800 leading-tight">City Lights</p>
+                        <p class="text-sm text-gray-600 font-normal leading-tight mt-1">Artist Name B</p>
                     </div>
                 </div>
                 <div class="group cursor-pointer relative z-10 transform hover:scale-[1.02] transition duration-300" onclick="openModal('prod-3')">
-                    <div class="aspect-square bg-gray-100 relative overflow-hidden rounded-lg shadow-sm">
+                    <div class="aspect-square bg-gray-100 relative overflow-hidden shadow-sm">
                         <img src="https://placehold.co/400x400/F59E0B/ffffff?text=Winter+Breeze" onerror="this.onerror=null;this.src='https://placehold.co/400x400/F59E0B/ffffff?text=PROD+C';" alt="Project C Cover" class="w-full h-full object-cover transition duration-300 group-hover:opacity-95">
                     </div>
                     <div class="p-3 text-center">
-                        <p class="text-xl font-bold text-gray-800 leading-tight">Winter Breeze</p>
-                        <p class="text-base text-gray-600 font-normal leading-tight mt-1">Artist Name C</p>
+                        <p class="text-lg font-bold text-gray-800 leading-tight">Winter Breeze</p>
+                        <p class="text-sm text-gray-600 font-normal leading-tight mt-1">Artist Name C</p>
                     </div>
                 </div>
                 <div class="group cursor-pointer relative z-10 transform hover:scale-[1.02] transition duration-300" onclick="openModal('prod-4')">
-                    <div class="aspect-square bg-gray-100 relative overflow-hidden rounded-lg shadow-sm">
+                    <div class="aspect-square bg-gray-100 relative overflow-hidden shadow-sm">
                         <img src="https://placehold.co/400x400/7C3AED/ffffff?text=Midnight" onerror="this.onerror=null;this.src='https://placehold.co/400x400/7C3AED/ffffff?text=PROD+D';" alt="Project D Cover" class="w-full h-full object-cover transition duration-300 group-hover:opacity-95">
                     </div>
                     <div class="p-3 text-center">
-                        <p class="text-xl font-bold text-gray-800 leading-tight">Midnight Cruise</p>
-                        <p class="text-base text-gray-600 font-normal leading-tight mt-1">Artist Name D</p>
+                        <p class="text-lg font-bold text-gray-800 leading-tight">Midnight Cruise</p>
+                        <p class="text-sm text-gray-600 font-normal leading-tight mt-1">Artist Name D</p>
                     </div>
                 </div>
                 <div class="group cursor-pointer relative z-10 transform hover:scale-[1.02] transition duration-300" onclick="openModal('prod-5')">
-                    <div class="aspect-square bg-gray-100 relative overflow-hidden rounded-lg shadow-sm">
+                    <div class="aspect-square bg-gray-100 relative overflow-hidden shadow-sm">
                         <img src="https://placehold.co/400x400/F43F5E/ffffff?text=Summer+Rain" onerror="this.onerror=null;this.src='https://placehold.co/400x400/F43F5E/ffffff?text=PROD+E';" alt="Project E Cover" class="w-full h-full object-cover transition duration-300 group-hover:opacity-95">
                     </div>
                     <div class="p-3 text-center">
-                        <p class="text-xl font-bold text-gray-800 leading-tight">Summer Rain</p>
-                        <p class="text-base text-gray-600 font-normal leading-tight mt-1">Artist Name E</p>
+                        <p class="text-lg font-bold text-gray-800 leading-tight">Summer Rain</p>
+                        <p class="text-sm text-gray-600 font-normal leading-tight mt-1">Artist Name E</p>
                     </div>
                 </div>
                 <div class="group cursor-pointer relative z-10 transform hover:scale-[1.02] transition duration-300" onclick="openModal('prod-6')">
-                    <div class="aspect-square bg-gray-100 relative overflow-hidden rounded-lg shadow-sm">
+                    <div class="aspect-square bg-gray-100 relative overflow-hidden shadow-sm">
                         <img src="https://placehold.co/400x400/34D399/ffffff?text=Echoes" onerror="this.onerror=null;this.src='https://placehold.co/400x400/34D399/ffffff?text=PROD+F';" alt="Project F Cover" class="w-full h-full object-cover transition duration-300 group-hover:opacity-95">
                     </div>
                     <div class="p-3 text-center">
-                        <p class="text-xl font-bold text-gray-800 leading-tight">Echoes</p>
-                        <p class="text-base text-gray-600 font-normal leading-tight mt-1">Artist Name F</p>
+                        <p class="text-lg font-bold text-gray-800 leading-tight">Echoes</p>
+                        <p class="text-sm text-gray-600 font-normal leading-tight mt-1">Artist Name F</p>
                     </div>
                 </div>
             </div>
@@ -400,61 +399,59 @@
 
         <div id="page-arrangement" class="page-content pb-24">
             <h1 class="text-3xl font-bold text-gray-800 mb-12 border-b pb-4">ARRANGEMENT</h1>
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
-                <!-- Content same as previous -->
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
                 <div class="group cursor-pointer relative z-10 transform hover:scale-[1.02] transition duration-300" onclick="openModal('arr-1')">
-                    <div class="aspect-square bg-gray-100 relative overflow-hidden rounded-lg shadow-sm">
+                    <div class="aspect-square bg-gray-100 relative overflow-hidden shadow-sm">
                         <img src="https://placehold.co/400x400/9333EA/ffffff?text=Classic" alt="Arrangement A Cover" class="w-full h-full object-cover transition duration-300 group-hover:opacity-95">
                     </div>
                     <div class="p-3 text-center">
-                        <p class="text-xl font-bold text-gray-800 leading-tight">Classic Revisit</p>
-                        <p class="text-base text-gray-600 font-normal leading-tight mt-1">Artist Name G</p>
+                        <p class="text-lg font-bold text-gray-800 leading-tight">Classic Revisit</p>
+                        <p class="text-sm text-gray-600 font-normal leading-tight mt-1">Artist Name G</p>
                     </div>
                 </div>
-                <!-- ... other items ... -->
                  <div class="group cursor-pointer relative z-10 transform hover:scale-[1.02] transition duration-300" onclick="openModal('arr-2')">
-                    <div class="aspect-square bg-gray-100 relative overflow-hidden rounded-lg shadow-sm">
+                    <div class="aspect-square bg-gray-100 relative overflow-hidden shadow-sm">
                         <img src="https://placehold.co/400x400/DC2626/ffffff?text=Acoustic" onerror="this.onerror=null;this.src='https://placehold.co/400x400/DC2626/ffffff?text=ARR+B';" alt="Arrangement B Cover" class="w-full h-full object-cover transition duration-300 group-hover:opacity-95">
                     </div>
                     <div class="p-3 text-center">
-                        <p class="text-xl font-bold text-gray-800 leading-tight">Acoustic Sunset</p>
-                        <p class="text-base text-gray-600 font-normal leading-tight mt-1">Artist Name H</p>
+                        <p class="text-lg font-bold text-gray-800 leading-tight">Acoustic Sunset</p>
+                        <p class="text-sm text-gray-600 font-normal leading-tight mt-1">Artist Name H</p>
                     </div>
                 </div>
                 <div class="group cursor-pointer relative z-10 transform hover:scale-[1.02] transition duration-300" onclick="openModal('arr-3')">
-                    <div class="aspect-square bg-gray-100 relative overflow-hidden rounded-lg shadow-sm">
+                    <div class="aspect-square bg-gray-100 relative overflow-hidden shadow-sm">
                         <img src="https://placehold.co/400x400/3B82F6/ffffff?text=Pop+Orch" onerror="this.onerror=null;this.src='https://placehold.co/400x400/3B82F6/ffffff?text=ARR+C';" alt="Arrangement C Cover" class="w-full h-full object-cover transition duration-300 group-hover:opacity-95">
                     </div>
                     <div class="p-3 text-center">
-                        <p class="text-xl font-bold text-gray-800 leading-tight">Pop Orchestra</p>
-                        <p class="text-base text-gray-600 font-normal leading-tight mt-1">Artist Name I</p>
+                        <p class="text-lg font-bold text-gray-800 leading-tight">Pop Orchestra</p>
+                        <p class="text-sm text-gray-600 font-normal leading-tight mt-1">Artist Name I</p>
                     </div>
                 </div>
                 <div class="group cursor-pointer relative z-10 transform hover:scale-[1.02] transition duration-300" onclick="openModal('arr-4')">
-                    <div class="aspect-square bg-gray-100 relative overflow-hidden rounded-lg shadow-sm">
+                    <div class="aspect-square bg-gray-100 relative overflow-hidden shadow-sm">
                         <img src="https://placehold.co/400x400/EC4899/ffffff?text=8-bit" onerror="this.onerror=null;this.src='https://placehold.co/400x400/EC4899/ffffff?text=ARR+D';" alt="Arrangement D Cover" class="w-full h-full object-cover transition duration-300 group-hover:opacity-95">
                     </div>
                     <div class="p-3 text-center">
-                        <p class="text-xl font-bold text-gray-800 leading-tight">8-bit Remix</p>
-                        <p class="text-base text-gray-600 font-normal leading-tight mt-1">Artist Name J</p>
+                        <p class="text-lg font-bold text-gray-800 leading-tight">8-bit Remix</p>
+                        <p class="text-sm text-gray-600 font-normal leading-tight mt-1">Artist Name J</p>
                     </div>
                 </div>
                 <div class="group cursor-pointer relative z-10 transform hover:scale-[1.02] transition duration-300" onclick="openModal('arr-5')">
-                    <div class="aspect-square bg-gray-100 relative overflow-hidden rounded-lg shadow-sm">
+                    <div class="aspect-square bg-gray-100 relative overflow-hidden shadow-sm">
                         <img src="https://placehold.co/400x400/10B981/ffffff?text=Latin" onerror="this.onerror=null;this.src='https://placehold.co/400x400/10B981/ffffff?text=ARR+E';" alt="Arrangement E Cover" class="w-full h-full object-cover transition duration-300 group-hover:opacity-95">
                     </div>
                     <div class="p-3 text-center">
-                        <p class="text-xl font-bold text-gray-800 leading-tight">Latin Jazz</p>
-                        <p class="text-base text-gray-600 font-normal leading-tight mt-1">Artist Name K</p>
+                        <p class="text-lg font-bold text-gray-800 leading-tight">Latin Jazz</p>
+                        <p class="text-sm text-gray-600 font-normal leading-tight mt-1">Artist Name K</p>
                     </div>
                 </div>
                 <div class="group cursor-pointer relative z-10 transform hover:scale-[1.02] transition duration-300" onclick="openModal('arr-6')">
-                    <div class="aspect-square bg-gray-100 relative overflow-hidden rounded-lg shadow-sm">
+                    <div class="aspect-square bg-gray-100 relative overflow-hidden shadow-sm">
                         <img src="https://placehold.co/400x400/F97316/ffffff?text=Future" onerror="this.onerror=null;this.src='https://placehold.co/400x400/F97316/ffffff?text=ARR+F';" alt="Arrangement F Cover" class="w-full h-full object-cover transition duration-300 group-hover:opacity-95">
                     </div>
                     <div class="p-3 text-center">
-                        <p class="text-xl font-bold text-gray-800 leading-tight">Future Garage</p>
-                        <p class="text-base text-gray-600 font-normal leading-tight mt-1">Artist Name L</p>
+                        <p class="text-lg font-bold text-gray-800 leading-tight">Future Garage</p>
+                        <p class="text-sm text-gray-600 font-normal leading-tight mt-1">Artist Name L</p>
                     </div>
                 </div>
             </div>
@@ -462,59 +459,59 @@
         
         <div id="page-film-music" class="page-content pb-24">
              <h1 class="text-3xl font-bold text-gray-800 mb-12 border-b pb-4">VIDEO MUSIC</h1>
-             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+             <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
                 <div class="group cursor-pointer relative z-10 transform hover:scale-[1.02] transition duration-300" onclick="openModal('vid-1')">
-                    <div class="aspect-square bg-gray-100 relative overflow-hidden rounded-lg shadow-sm">
+                    <div class="aspect-square bg-gray-100 relative overflow-hidden shadow-sm">
                         <img src="https://placehold.co/400x400/A855F7/ffffff?text=Docu" onerror="this.onerror=null;this.src='https://placehold.co/400x400/A855F7/ffffff?text=VIDEO+A';" alt="Video A Cover" class="w-full h-full object-cover transition duration-300 group-hover:opacity-95">
                     </div>
                     <div class="p-3 text-center">
-                        <p class="text-xl font-bold text-gray-800 leading-tight">Documentary OST</p>
-                        <p class="text-base text-gray-600 font-normal leading-tight mt-1">Client Name M</p>
+                        <p class="text-lg font-bold text-gray-800 leading-tight">Documentary OST</p>
+                        <p class="text-sm text-gray-600 font-normal leading-tight mt-1">Client Name M</p>
                     </div>
                 </div>
                 <div class="group cursor-pointer relative z-10 transform hover:scale-[1.02] transition duration-300" onclick="openModal('vid-2')">
-                    <div class="aspect-square bg-gray-100 relative overflow-hidden rounded-lg shadow-sm">
+                    <div class="aspect-square bg-gray-100 relative overflow-hidden shadow-sm">
                         <img src="https://placehold.co/400x400/D97706/ffffff?text=Game" onerror="this.onerror=null;this.src='https://placehold.co/400x400/D97706/ffffff?text=VIDEO+B';" alt="Video B Cover" class="w-full h-full object-cover transition duration-300 group-hover:opacity-95">
                     </div>
                     <div class="p-3 text-center">
-                        <p class="text-xl font-bold text-gray-800 leading-tight">Game Trailer Score</p>
-                        <p class="text-base text-gray-600 font-normal leading-tight mt-1">Client Name N</p>
+                        <p class="text-lg font-bold text-gray-800 leading-tight">Game Trailer Score</p>
+                        <p class="text-sm text-gray-600 font-normal leading-tight mt-1">Client Name N</p>
                     </div>
                 </div>
                 <div class="group cursor-pointer relative z-10 transform hover:scale-[1.02] transition duration-300" onclick="openModal('vid-3')">
-                    <div class="aspect-square bg-gray-100 relative overflow-hidden rounded-lg shadow-sm">
+                    <div class="aspect-square bg-gray-100 relative overflow-hidden shadow-sm">
                         <img src="https://placehold.co/400x400/EF4444/ffffff?text=BGM" onerror="this.onerror=null;this.src='https://placehold.co/400x400/EF4444/ffffff?text=VIDEO+C';" alt="Video C Cover" class="w-full h-full object-cover transition duration-300 group-hover:opacity-95">
                     </div>
                     <div class="p-3 text-center">
-                        <p class="text-xl font-bold text-gray-800 leading-tight">Commercial BGM</p>
-                        <p class="text-base text-gray-600 font-normal leading-tight mt-1">Client Name O</p>
+                        <p class="text-lg font-bold text-gray-800 leading-tight">Commercial BGM</p>
+                        <p class="text-sm text-gray-600 font-normal leading-tight mt-1">Client Name O</p>
                     </div>
                 </div>
                 <div class="group cursor-pointer relative z-10 transform hover:scale-[1.02] transition duration-300" onclick="openModal('vid-4')">
-                    <div class="aspect-square bg-gray-100 relative overflow-hidden rounded-lg shadow-sm">
+                    <div class="aspect-square bg-gray-100 relative overflow-hidden shadow-sm">
                         <img src="https://placehold.co/400x400/F59E0B/ffffff?text=Fashion" onerror="this.onerror=null;this.src='https://placehold.co/400x400/F59E0B/ffffff?text=VIDEO+D';" alt="Video D Cover" class="w-full h-full object-cover transition duration-300 group-hover:opacity-95">
                     </div>
                     <div class="p-3 text-center">
-                        <p class="text-xl font-bold text-gray-800 leading-tight">Fashion Film Score</p>
-                        <p class="text-base text-gray-600 font-normal leading-tight mt-1">Client Name P</p>
+                        <p class="text-lg font-bold text-gray-800 leading-tight">Fashion Film Score</p>
+                        <p class="text-sm text-gray-600 font-normal leading-tight mt-1">Client Name P</p>
                     </div>
                 </div>
                 <div class="group cursor-pointer relative z-10 transform hover:scale-[1.02] transition duration-300" onclick="openModal('vid-5')">
-                    <div class="aspect-square bg-gray-100 relative overflow-hidden rounded-lg shadow-sm">
+                    <div class="aspect-square bg-gray-100 relative overflow-hidden shadow-sm">
                         <img src="https://placehold.co/400x400/6D28D9/ffffff?text=Edu" onerror="this.onerror=null;this.src='https://placehold.co/400x400/6D28D9/ffffff?text=VIDEO+E';" alt="Video E Cover" class="w-full h-full object-cover transition duration-300 group-hover:opacity-95">
                     </div>
                     <div class="p-3 text-center">
-                        <p class="text-xl font-bold text-gray-800 leading-tight">Educational Content</p>
-                        <p class="text-base text-gray-600 font-normal leading-tight mt-1">Client Name Q</p>
+                        <p class="text-lg font-bold text-gray-800 leading-tight">Educational Content</p>
+                        <p class="text-sm text-gray-600 font-normal leading-tight mt-1">Client Name Q</p>
                     </div>
                 </div>
                 <div class="group cursor-pointer relative z-10 transform hover:scale-[1.02] transition duration-300" onclick="openModal('vid-6')">
-                    <div class="aspect-square bg-gray-100 relative overflow-hidden rounded-lg shadow-sm">
+                    <div class="aspect-square bg-gray-100 relative overflow-hidden shadow-sm">
                         <img src="https://placehold.co/400x400/38BDF8/ffffff?text=Indie" onerror="this.onerror=null;this.src='https://placehold.co/400x400/38BDF8/ffffff?text=VIDEO+F';" alt="Video F Cover" class="w-full h-full object-cover transition duration-300 group-hover:opacity-95">
                     </div>
                     <div class="p-3 text-center">
-                        <p class="text-xl font-bold text-gray-800 leading-tight">Indie Film Theme</p>
-                        <p class="text-base text-gray-600 font-normal leading-tight mt-1">Client Name R</p>
+                        <p class="text-lg font-bold text-gray-800 leading-tight">Indie Film Theme</p>
+                        <p class="text-sm text-gray-600 font-normal leading-tight mt-1">Client Name R</p>
                     </div>
                 </div>
             </div>
@@ -522,59 +519,59 @@
 
         <div id="page-contest" class="page-content pb-24">
              <h1 class="text-3xl font-bold text-gray-800 mb-12 border-b pb-4">CONTEST</h1>
-             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+             <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
                 <div class="group cursor-pointer relative z-10 transform hover:scale-[1.02] transition duration-300" onclick="openModal('con-1')">
-                    <div class="aspect-square bg-gray-100 relative overflow-hidden rounded-lg shadow-sm">
+                    <div class="aspect-square bg-gray-100 relative overflow-hidden shadow-sm">
                         <img src="https://placehold.co/400x400/14B8A6/ffffff?text=Award" onerror="this.onerror=null;this.src='https://placehold.co/400x400/14B8A6/ffffff?text=CONTEST+A';" alt="Contest A Cover" class="w-full h-full object-cover transition duration-300 group-hover:opacity-95">
                     </div>
                     <div class="p-3 text-center">
-                        <p class="text-xl font-bold text-gray-800 leading-tight">National Music Award</p>
-                        <p class="text-base text-gray-600 font-normal leading-tight mt-1">Contest Host S</p>
+                        <p class="text-lg font-bold text-gray-800 leading-tight">National Music Award</p>
+                        <p class="text-sm text-gray-600 font-normal leading-tight mt-1">Contest Host S</p>
                     </div>
                 </div>
                 <div class="group cursor-pointer relative z-10 transform hover:scale-[1.02] transition duration-300" onclick="openModal('con-2')">
-                    <div class="aspect-square bg-gray-100 relative overflow-hidden rounded-lg shadow-sm">
+                    <div class="aspect-square bg-gray-100 relative overflow-hidden shadow-sm">
                         <img src="https://placehold.co/400x400/94A3B8/ffffff?text=Challenge" onerror="this.onerror=null;this.src='https://placehold.co/400x400/94A3B8/ffffff?text=CONTEST+B';" alt="Contest B Cover" class="w-full h-full object-cover transition duration-300 group-hover:opacity-95">
                     </div>
                     <div class="p-3 text-center">
-                        <p class="text-xl font-bold text-gray-800 leading-tight">New Artist Challenge</p>
-                        <p class="text-base text-gray-600 font-normal leading-tight mt-1">Contest Host T</p>
+                        <p class="text-lg font-bold text-gray-800 leading-tight">New Artist Challenge</p>
+                        <p class="text-sm text-gray-600 font-normal leading-tight mt-1">Contest Host T</p>
                     </div>
                 </div>
                 <div class="group cursor-pointer relative z-10 transform hover:scale-[1.02] transition duration-300" onclick="openModal('con-3')">
-                    <div class="aspect-square bg-gray-100 relative overflow-hidden rounded-lg shadow-sm">
+                    <div class="aspect-square bg-gray-100 relative overflow-hidden shadow-sm">
                         <img src="https://placehold.co/400x400/F472B6/ffffff?text=Single" onerror="this.onerror=null;this.src='https://placehold.co/400x400/F472B6/ffffff?text=CONTEST+C';" alt="Contest C Cover" class="w-full h-full object-cover transition duration-300 group-hover:opacity-95">
                     </div>
                     <div class="p-3 text-center">
-                        <p class="text-xl font-bold text-gray-800 leading-tight">Digital Single Contest</p>
-                        <p class="text-base text-gray-600 font-normal leading-tight mt-1">Contest Host U</p>
+                        <p class="text-lg font-bold text-gray-800 leading-tight">Digital Single Contest</p>
+                        <p class="text-sm text-gray-600 font-normal leading-tight mt-1">Contest Host U</p>
                     </div>
                 </div>
                 <div class="group cursor-pointer relative z-10 transform hover:scale-[1.02] transition duration-300" onclick="openModal('con-4')">
-                    <div class="aspect-square bg-gray-100 relative overflow-hidden rounded-lg shadow-sm">
+                    <div class="aspect-square bg-gray-100 relative overflow-hidden shadow-sm">
                         <img src="https://placehold.co/400x400/2DD4BF/ffffff?text=Soundtrack" onerror="this.onerror=null;this.src='https://placehold.co/400x400/2DD4BF/ffffff?text=CONTEST+D';" alt="Contest D Cover" class="w-full h-full object-cover transition duration-300 group-hover:opacity-95">
                     </div>
                     <div class="p-3 text-center">
-                        <p class="text-xl font-bold text-gray-800 leading-tight">Soundtrack Challenge</p>
-                        <p class="text-base text-gray-600 font-normal leading-tight mt-1">Contest Host V</p>
+                        <p class="text-lg font-bold text-gray-800 leading-tight">Soundtrack Challenge</p>
+                        <p class="text-sm text-gray-600 font-normal leading-tight mt-1">Contest Host V</p>
                     </div>
                 </div>
                 <div class="group cursor-pointer relative z-10 transform hover:scale-[1.02] transition duration-300" onclick="openModal('con-5')">
-                    <div class="aspect-square bg-gray-100 relative overflow-hidden rounded-lg shadow-sm">
+                    <div class="aspect-square bg-gray-100 relative overflow-hidden shadow-sm">
                         <img src="https://placehold.co/400x400/A78BFA/ffffff?text=Festival" onerror="this.onerror=null;this.src='https://placehold.co/400x400/A78BFA/ffffff?text=CONTEST+E';" alt="Contest E Cover" class="w-full h-full object-cover transition duration-300 group-hover:opacity-95">
                     </div>
                     <div class="p-3 text-center">
-                        <p class="text-xl font-bold text-gray-800 leading-tight">University Festival</p>
-                        <p class="text-base text-gray-600 font-normal leading-tight mt-1">Contest Host W</p>
+                        <p class="text-lg font-bold text-gray-800 leading-tight">University Festival</p>
+                        <p class="text-sm text-gray-600 font-normal leading-tight mt-1">Contest Host W</p>
                     </div>
                 </div>
                 <div class="group cursor-pointer relative z-10 transform hover:scale-[1.02] transition duration-300" onclick="openModal('con-6')">
-                    <div class="aspect-square bg-gray-100 relative overflow-hidden rounded-lg shadow-sm">
+                    <div class="aspect-square bg-gray-100 relative overflow-hidden shadow-sm">
                         <img src="https://placehold.co/400x400/60A5FA/ffffff?text=K-Pop" onerror="this.onerror=null;this.src='https://placehold.co/400x400/60A5FA/ffffff?text=CONTEST+F';" alt="Contest F Cover" class="w-full h-full object-cover transition duration-300 group-hover:opacity-95">
                     </div>
                     <div class="p-3 text-center">
-                        <p class="text-xl font-bold text-gray-800 leading-tight">K-Pop Producers</p>
-                        <p class="text-base text-gray-600 font-normal leading-tight mt-1">Contest Host X</p>
+                        <p class="text-lg font-bold text-gray-800 leading-tight">K-Pop Producers</p>
+                        <p class="text-sm text-gray-600 font-normal leading-tight mt-1">Contest Host X</p>
                     </div>
                 </div>
             </div>
@@ -600,7 +597,6 @@
 
     </main>
     
-    <!-- fixed 속성 제거, relative로 변경됨 (flex-grow 구조로 인해 맨 아래 위치) -->
     <footer class="w-full bg-white text-gray-600 p-4 text-center z-50"> 
         <div class="max-w-6xl mx-auto text-sm text-gray-500">
             &copy; 2025 EUNHASU Portfolio. All rights reserved.
