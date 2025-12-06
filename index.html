@@ -85,6 +85,34 @@
             opacity: 0; 
             animation: titleFadeIn 0.3s ease-out 0.2s forwards; 
         }
+
+        /* --- 추가된 애니메이션: Main & Contact 페이지 요소 --- */
+        
+        /* Main 페이지: 구분선 */
+        #page-main.active .w-24 {
+            opacity: 0;
+            /* 투명도만 변화하는 titleFadeIn 혹은 위로 올라오는 fadeInUp 선택 가능 (여기선 titleFadeIn 사용) */
+            animation: titleFadeIn 0.5s ease-out 0.3s forwards;
+        }
+        
+        /* Main 페이지: VIEW PORTFOLIO 버튼 */
+        #page-main.active button {
+            opacity: 0;
+            animation: fadeInUp 0.6s ease-out 0.4s forwards;
+        }
+
+        /* Contact 페이지: 이메일 텍스트 */
+        #page-contact.active #contact-email {
+            display: inline-block; /* transform 애니메이션을 위해 block 속성 필요 */
+            opacity: 0;
+            animation: fadeInUp 0.6s ease-out 0.3s forwards;
+        }
+
+        /* Contact 페이지: 버튼 그룹 (주소 복사, 메일 보내기) */
+        #page-contact.active .flex.gap-4 {
+            opacity: 0;
+            animation: fadeInUp 0.6s ease-out 0.4s forwards;
+        }
         
         /* 갤러리 아이템에 순차적 애니메이션 적용 */
         .page-content.active .grid > div {
