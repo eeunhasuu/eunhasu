@@ -43,8 +43,8 @@
         }
 
         /* * --- 페이지 콘텐츠 스타일 ---
-          * 활성/비활성 상태에 따른 display: block/none 및 opacity/visibility 전환 유지
-          */
+           * 활성/비활성 상태에 따른 display: block/none 및 opacity/visibility 전환 유지
+           */
         .page-content {
             opacity: 0;
             visibility: hidden;
@@ -60,8 +60,8 @@
         }
 
         /* =========================================================================
-         * 갤러리 아이템 애니메이션 & Modal Styles
-         * ========================================================================= */
+           * 갤러리 아이템 애니메이션 & Modal Styles
+           * ========================================================================= */
         
         @keyframes fadeInUp {
             from {
@@ -86,7 +86,7 @@
         }
         
         .page-content.active p:not(.text-sm) {
-            opacity: 0;
+            opacity: 0; 
             animation: titleFadeIn 0.3s ease-out 0.2s forwards; 
         }
         
@@ -165,11 +165,11 @@
 </head>
 <body>
 
-    <nav class="fixed w-full bg-white text-black px-8 py-5 flex items-center justify-between z-50 top-0">
+    <nav class="fixed w-full bg-white text-black px-8 py-5 flex items-center justify-between z-50 top-0 shadow-sm">
         
         <div class="text-2xl font-extrabold text-gray-800 cursor-pointer" onclick="navigateTo('page-main')">EUNHASU</div>
 
-        <div class="relative">
+        <div class="relative hidden md:block">
             <ul class="flex gap-12 text-lg font-medium">
                 
                 <li class="link-item cursor-pointer hover:text-blue-600 transition duration-150 p-2 -m-2"
@@ -184,12 +184,12 @@
                     </div>
 
                     <ul id="dropdown-content"
-                        class="dropdown-menu absolute left-0 pt-2 z-20 w-48 bg-white text-black rounded-lg shadow-xl ring-1 ring-black ring-opacity-5 flex flex-col overflow-hidden">
+                        class="dropdown-menu absolute left-1/2 -translate-x-1/2 pt-2 z-20 w-48 bg-white text-black rounded-lg shadow-xl ring-1 ring-black ring-opacity-5 flex flex-col overflow-hidden mt-2">
                         
-                        <li class="px-5 py-3 text-sm hover:bg-blue-50 hover:text-blue-700 transition duration-150 cursor-pointer" onclick="navigateTo('page-producing')">PRODUCING</li>
-                        <li class="px-5 py-3 text-sm hover:bg-blue-50 hover:text-blue-700 transition duration-150 cursor-pointer" onclick="navigateTo('page-arrangement')">ARRANGEMENT</li>
-                        <li class="px-5 py-3 text-sm hover:bg-blue-50 hover:text-blue-700 transition duration-150 cursor-pointer" onclick="navigateTo('page-film-music')">VIDEO MUSIC</li>
-                        <li class="px-5 py-3 text-sm hover:bg-blue-50 hover:text-blue-700 transition duration-150 cursor-pointer" onclick="navigateTo('page-contest')">CONTEST</li>
+                        <li class="px-5 py-3 text-sm hover:bg-blue-50 hover:text-blue-700 transition duration-150 cursor-pointer text-center" onclick="navigateTo('page-producing')">PRODUCING</li>
+                        <li class="px-5 py-3 text-sm hover:bg-blue-50 hover:text-blue-700 transition duration-150 cursor-pointer text-center" onclick="navigateTo('page-arrangement')">ARRANGEMENT</li>
+                        <li class="px-5 py-3 text-sm hover:bg-blue-50 hover:text-blue-700 transition duration-150 cursor-pointer text-center" onclick="navigateTo('page-film-music')">VIDEO MUSIC</li>
+                        <li class="px-5 py-3 text-sm hover:bg-blue-50 hover:text-blue-700 transition duration-150 cursor-pointer text-center" onclick="navigateTo('page-contest')">CONTEST</li>
                     </ul>
                 </li>
 
@@ -197,21 +197,54 @@
                     onclick="navigateTo('page-contact')">CONTACT</li>
             </ul>
         </div>
+        
+        <!-- Mobile Menu Button (Simple implementation) -->
+        <div class="md:hidden">
+             <button class="text-gray-800 focus:outline-none" onclick="toggleMobileMenu()">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+             </button>
+        </div>
     </nav>
+    
+    <!-- Mobile Menu Overlay -->
+    <div id="mobile-menu" class="fixed inset-0 bg-white z-40 transform translate-x-full transition-transform duration-300 md:hidden pt-24 px-6">
+         <ul class="flex flex-col gap-6 text-xl font-bold text-gray-800">
+            <li onclick="navigateTo('page-main'); toggleMobileMenu()">MAIN</li>
+            <li class="text-blue-600">DISCOGRAPHY</li>
+            <li class="pl-4 text-base text-gray-600" onclick="navigateTo('page-producing'); toggleMobileMenu()">- PRODUCING</li>
+            <li class="pl-4 text-base text-gray-600" onclick="navigateTo('page-arrangement'); toggleMobileMenu()">- ARRANGEMENT</li>
+            <li class="pl-4 text-base text-gray-600" onclick="navigateTo('page-film-music'); toggleMobileMenu()">- VIDEO MUSIC</li>
+            <li class="pl-4 text-base text-gray-600" onclick="navigateTo('page-contest'); toggleMobileMenu()">- CONTEST</li>
+            <li onclick="navigateTo('page-contact'); toggleMobileMenu()">CONTACT</li>
+         </ul>
+         <button class="absolute top-6 right-6" onclick="toggleMobileMenu()">
+            <svg class="w-8 h-8 text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+         </button>
+    </div>
     
     <main id="page-container" class="px-6 max-w-6xl mx-auto relative pt-24">
 
-        <div id="page-main" class="page-content pb-48">
-            <h1 class="text-3xl font-bold text-gray-800 mb-4">MAIN PAGE</h1>
-            <p class="text-gray-600">환영합니다! 이곳은 웹사이트의 메인 페이지입니다.</p>
+        <div id="page-main" class="page-content pb-48 active">
+            <div class="flex flex-col items-center justify-center min-h-[60vh] text-center space-y-6">
+                <h1 class="text-5xl md:text-7xl font-extrabold text-gray-900 tracking-tight">EUNHASU</h1>
+                <p class="text-xl md:text-2xl text-gray-500 font-light">Music Producer & Sound Designer</p>
+                <div class="w-24 h-1 bg-blue-500 mt-6 mb-6"></div>
+                <p class="text-gray-600 max-w-lg leading-relaxed">
+                    감성적인 멜로디와 트렌디한 사운드로 이야기를 만들어갑니다.<br>
+                    다양한 장르를 넘나드는 프로듀싱 포트폴리오를 확인해보세요.
+                </p>
+                <button onclick="navigateTo('page-producing')" class="mt-8 px-8 py-3 bg-gray-900 text-white rounded-full hover:bg-gray-800 transition shadow-lg text-sm font-semibold tracking-wide">
+                    VIEW PORTFOLIO
+                </button>
+            </div>
         </div>
 
         <div id="page-producing" class="page-content pb-48">
-            <h1 class="text-3xl font-bold text-gray-800 mb-12">PRODUCING</h1>
+            <h1 class="text-3xl font-bold text-gray-800 mb-12 border-b pb-4">PRODUCING</h1>
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
                 <div class="group cursor-pointer relative z-10 transform hover:scale-[1.02] transition duration-300" onclick="openModal('prod-1')">
-                    <div class="aspect-square bg-gray-100 relative">
-                        <img src="https://placehold.co/400x400/2563EB/ffffff?text=PROD+A" onerror="this.onerror=null;this.src='https://placehold.co/400x400/2563EB/ffffff?text=PROD+A';" alt="Project A Cover" class="w-full h-full object-cover transition duration-300 group-hover:opacity-95">
+                    <div class="aspect-square bg-gray-100 relative overflow-hidden rounded-lg shadow-sm">
+                        <img src="https://placehold.co/400x400/2563EB/ffffff?text=The+First+Star" onerror="this.onerror=null;this.src='https://placehold.co/400x400/2563EB/ffffff?text=PROD+A';" alt="Project A Cover" class="w-full h-full object-cover transition duration-300 group-hover:opacity-95">
                     </div>
                     <div class="p-3 text-center">
                         <p class="text-xl font-bold text-gray-800 leading-tight">The First Star</p>
@@ -219,8 +252,8 @@
                     </div>
                 </div>
                 <div class="group cursor-pointer relative z-10 transform hover:scale-[1.02] transition duration-300" onclick="openModal('prod-2')">
-                    <div class="aspect-square bg-gray-100 relative">
-                        <img src="https://placehold.co/400x400/10B981/ffffff?text=PROD+B" onerror="this.onerror=null;this.src='https://placehold.co/400x400/10B981/ffffff?text=PROD+B';" alt="Project B Cover" class="w-full h-full object-cover transition duration-300 group-hover:opacity-95">
+                    <div class="aspect-square bg-gray-100 relative overflow-hidden rounded-lg shadow-sm">
+                        <img src="https://placehold.co/400x400/10B981/ffffff?text=City+Lights" onerror="this.onerror=null;this.src='https://placehold.co/400x400/10B981/ffffff?text=PROD+B';" alt="Project B Cover" class="w-full h-full object-cover transition duration-300 group-hover:opacity-95">
                     </div>
                     <div class="p-3 text-center">
                         <p class="text-xl font-bold text-gray-800 leading-tight">City Lights</p>
@@ -228,8 +261,8 @@
                     </div>
                 </div>
                 <div class="group cursor-pointer relative z-10 transform hover:scale-[1.02] transition duration-300" onclick="openModal('prod-3')">
-                    <div class="aspect-square bg-gray-100 relative">
-                        <img src="https://placehold.co/400x400/F59E0B/ffffff?text=PROD+C" onerror="this.onerror=null;this.src='https://placehold.co/400x400/F59E0B/ffffff?text=PROD+C';" alt="Project C Cover" class="w-full h-full object-cover transition duration-300 group-hover:opacity-95">
+                    <div class="aspect-square bg-gray-100 relative overflow-hidden rounded-lg shadow-sm">
+                        <img src="https://placehold.co/400x400/F59E0B/ffffff?text=Winter+Breeze" onerror="this.onerror=null;this.src='https://placehold.co/400x400/F59E0B/ffffff?text=PROD+C';" alt="Project C Cover" class="w-full h-full object-cover transition duration-300 group-hover:opacity-95">
                     </div>
                     <div class="p-3 text-center">
                         <p class="text-xl font-bold text-gray-800 leading-tight">Winter Breeze</p>
@@ -237,210 +270,210 @@
                     </div>
                 </div>
                 <div class="group cursor-pointer relative z-10 transform hover:scale-[1.02] transition duration-300" onclick="openModal('prod-4')">
-                    <div class="aspect-square bg-gray-100 relative">
-                        <img src="https://placehold.co/400x400/7C3AED/ffffff?text=PROD+D" onerror="this.onerror=null;this.src='https://placehold.co/400x400/7C3AED/ffffff?text=PROD+D';" alt="Project D Cover" class="w-full h-full object-cover transition duration-300 group-hover:opacity-95">
+                    <div class="aspect-square bg-gray-100 relative overflow-hidden rounded-lg shadow-sm">
+                        <img src="https://placehold.co/400x400/7C3AED/ffffff?text=Midnight" onerror="this.onerror=null;this.src='https://placehold.co/400x400/7C3AED/ffffff?text=PROD+D';" alt="Project D Cover" class="w-full h-full object-cover transition duration-300 group-hover:opacity-95">
                     </div>
                     <div class="p-3 text-center">
                         <p class="text-xl font-bold text-gray-800 leading-tight">Midnight Cruise</p>
-                        <p class="text-base text-gray-600 font-normal leading-tight mt-1">Artist Name D-1</p>
+                        <p class="text-base text-gray-600 font-normal leading-tight mt-1">Artist Name D</p>
                     </div>
                 </div>
                 <div class="group cursor-pointer relative z-10 transform hover:scale-[1.02] transition duration-300" onclick="openModal('prod-5')">
-                    <div class="aspect-square bg-gray-100 relative">
-                        <img src="https://placehold.co/400x400/F43F5E/ffffff?text=PROD+E" onerror="this.onerror=null;this.src='https://placehold.co/400x400/F43F5E/ffffff?text=PROD+E';" alt="Project E Cover" class="w-full h-full object-cover transition duration-300 group-hover:opacity-95">
+                    <div class="aspect-square bg-gray-100 relative overflow-hidden rounded-lg shadow-sm">
+                        <img src="https://placehold.co/400x400/F43F5E/ffffff?text=Summer+Rain" onerror="this.onerror=null;this.src='https://placehold.co/400x400/F43F5E/ffffff?text=PROD+E';" alt="Project E Cover" class="w-full h-full object-cover transition duration-300 group-hover:opacity-95">
                     </div>
                     <div class="p-3 text-center">
                         <p class="text-xl font-bold text-gray-800 leading-tight">Summer Rain</p>
-                        <p class="text-base text-gray-600 font-normal leading-tight mt-1">Artist Name E-1</p>
+                        <p class="text-base text-gray-600 font-normal leading-tight mt-1">Artist Name E</p>
                     </div>
                 </div>
                 <div class="group cursor-pointer relative z-10 transform hover:scale-[1.02] transition duration-300" onclick="openModal('prod-6')">
-                    <div class="aspect-square bg-gray-100 relative">
-                        <img src="https://placehold.co/400x400/34D399/ffffff?text=PROD+F" onerror="this.onerror=null;this.src='https://placehold.co/400x400/34D399/ffffff?text=PROD+F';" alt="Project F Cover" class="w-full h-full object-cover transition duration-300 group-hover:opacity-95">
+                    <div class="aspect-square bg-gray-100 relative overflow-hidden rounded-lg shadow-sm">
+                        <img src="https://placehold.co/400x400/34D399/ffffff?text=Echoes" onerror="this.onerror=null;this.src='https://placehold.co/400x400/34D399/ffffff?text=PROD+F';" alt="Project F Cover" class="w-full h-full object-cover transition duration-300 group-hover:opacity-95">
                     </div>
                     <div class="p-3 text-center">
                         <p class="text-xl font-bold text-gray-800 leading-tight">Echoes</p>
-                        <p class="text-base text-gray-600 font-normal leading-tight mt-1">Artist Name F-1</p>
+                        <p class="text-base text-gray-600 font-normal leading-tight mt-1">Artist Name F</p>
                     </div>
                 </div>
             </div>
         </div>
 
         <div id="page-arrangement" class="page-content pb-48">
-            <h1 class="text-3xl font-bold text-gray-800 mb-12">ARRANGEMENT</h1>
+            <h1 class="text-3xl font-bold text-gray-800 mb-12 border-b pb-4">ARRANGEMENT</h1>
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
                 <div class="group cursor-pointer relative z-10 transform hover:scale-[1.02] transition duration-300" onclick="openModal('arr-1')">
-                    <div class="aspect-square bg-gray-100 relative">
-                        <img src="https://placehold.co/400x400/9333EA/ffffff?text=ARR+A" onerror="this.onerror=null;this.src='https://placehold.co/400x400/9333EA/ffffff?text=ARR+A';" alt="Arrangement A Cover" class="w-full h-full object-cover transition duration-300 group-hover:opacity-95">
+                    <div class="aspect-square bg-gray-100 relative overflow-hidden rounded-lg shadow-sm">
+                        <img src="https://placehold.co/400x400/9333EA/ffffff?text=Classic" onerror="this.onerror=null;this.src='https://placehold.co/400x400/9333EA/ffffff?text=ARR+A';" alt="Arrangement A Cover" class="w-full h-full object-cover transition duration-300 group-hover:opacity-95">
                     </div>
                     <div class="p-3 text-center">
                         <p class="text-xl font-bold text-gray-800 leading-tight">Classic Revisit</p>
-                        <p class="text-base text-gray-600 font-normal leading-tight mt-1">Artist Name D</p>
+                        <p class="text-base text-gray-600 font-normal leading-tight mt-1">Artist Name G</p>
                     </div>
                 </div>
                 <div class="group cursor-pointer relative z-10 transform hover:scale-[1.02] transition duration-300" onclick="openModal('arr-2')">
-                    <div class="aspect-square bg-gray-100 relative">
-                        <img src="https://placehold.co/400x400/DC2626/ffffff?text=ARR+B" onerror="this.onerror=null;this.src='https://placehold.co/400x400/DC2626/ffffff?text=ARR+B';" alt="Arrangement B Cover" class="w-full h-full object-cover transition duration-300 group-hover:opacity-95">
+                    <div class="aspect-square bg-gray-100 relative overflow-hidden rounded-lg shadow-sm">
+                        <img src="https://placehold.co/400x400/DC2626/ffffff?text=Acoustic" onerror="this.onerror=null;this.src='https://placehold.co/400x400/DC2626/ffffff?text=ARR+B';" alt="Arrangement B Cover" class="w-full h-full object-cover transition duration-300 group-hover:opacity-95">
                     </div>
                     <div class="p-3 text-center">
                         <p class="text-xl font-bold text-gray-800 leading-tight">Acoustic Sunset</p>
-                        <p class="text-base text-gray-600 font-normal leading-tight mt-1">Artist Name E</p>
+                        <p class="text-base text-gray-600 font-normal leading-tight mt-1">Artist Name H</p>
                     </div>
                 </div>
                 <div class="group cursor-pointer relative z-10 transform hover:scale-[1.02] transition duration-300" onclick="openModal('arr-3')">
-                    <div class="aspect-square bg-gray-100 relative">
-                        <img src="https://placehold.co/400x400/3B82F6/ffffff?text=ARR+C" onerror="this.onerror=null;this.src='https://placehold.co/400x400/3B82F6/ffffff?text=ARR+C';" alt="Arrangement C Cover" class="w-full h-full object-cover transition duration-300 group-hover:opacity-95">
+                    <div class="aspect-square bg-gray-100 relative overflow-hidden rounded-lg shadow-sm">
+                        <img src="https://placehold.co/400x400/3B82F6/ffffff?text=Pop+Orch" onerror="this.onerror=null;this.src='https://placehold.co/400x400/3B82F6/ffffff?text=ARR+C';" alt="Arrangement C Cover" class="w-full h-full object-cover transition duration-300 group-hover:opacity-95">
                     </div>
                     <div class="p-3 text-center">
                         <p class="text-xl font-bold text-gray-800 leading-tight">Pop Orchestra</p>
-                        <p class="text-base text-gray-600 font-normal leading-tight mt-1">Artist Name F</p>
+                        <p class="text-base text-gray-600 font-normal leading-tight mt-1">Artist Name I</p>
                     </div>
                 </div>
                 <div class="group cursor-pointer relative z-10 transform hover:scale-[1.02] transition duration-300" onclick="openModal('arr-4')">
-                    <div class="aspect-square bg-gray-100 relative">
-                        <img src="https://placehold.co/400x400/EC4899/ffffff?text=ARR+D" onerror="this.onerror=null;this.src='https://placehold.co/400x400/EC4899/ffffff?text=ARR+D';" alt="Arrangement D Cover" class="w-full h-full object-cover transition duration-300 group-hover:opacity-95">
+                    <div class="aspect-square bg-gray-100 relative overflow-hidden rounded-lg shadow-sm">
+                        <img src="https://placehold.co/400x400/EC4899/ffffff?text=8-bit" onerror="this.onerror=null;this.src='https://placehold.co/400x400/EC4899/ffffff?text=ARR+D';" alt="Arrangement D Cover" class="w-full h-full object-cover transition duration-300 group-hover:opacity-95">
                     </div>
                     <div class="p-3 text-center">
                         <p class="text-xl font-bold text-gray-800 leading-tight">8-bit Remix</p>
-                        <p class="text-base text-gray-600 font-normal leading-tight mt-1">Artist Name G-1</p>
+                        <p class="text-base text-gray-600 font-normal leading-tight mt-1">Artist Name J</p>
                     </div>
                 </div>
                 <div class="group cursor-pointer relative z-10 transform hover:scale-[1.02] transition duration-300" onclick="openModal('arr-5')">
-                    <div class="aspect-square bg-gray-100 relative">
-                        <img src="https://placehold.co/400x400/10B981/ffffff?text=ARR+E" onerror="this.onerror=null;this.src='https://placehold.co/400x400/10B981/ffffff?text=ARR+E';" alt="Arrangement E Cover" class="w-full h-full object-cover transition duration-300 group-hover:opacity-95">
+                    <div class="aspect-square bg-gray-100 relative overflow-hidden rounded-lg shadow-sm">
+                        <img src="https://placehold.co/400x400/10B981/ffffff?text=Latin" onerror="this.onerror=null;this.src='https://placehold.co/400x400/10B981/ffffff?text=ARR+E';" alt="Arrangement E Cover" class="w-full h-full object-cover transition duration-300 group-hover:opacity-95">
                     </div>
                     <div class="p-3 text-center">
                         <p class="text-xl font-bold text-gray-800 leading-tight">Latin Jazz</p>
-                        <p class="text-base text-gray-600 font-normal leading-tight mt-1">Artist Name H-1</p>
+                        <p class="text-base text-gray-600 font-normal leading-tight mt-1">Artist Name K</p>
                     </div>
                 </div>
                 <div class="group cursor-pointer relative z-10 transform hover:scale-[1.02] transition duration-300" onclick="openModal('arr-6')">
-                    <div class="aspect-square bg-gray-100 relative">
-                        <img src="https://placehold.co/400x400/F97316/ffffff?text=ARR+F" onerror="this.onerror=null;this.src='https://placehold.co/400x400/F97316/ffffff?text=ARR+F';" alt="Arrangement F Cover" class="w-full h-full object-cover transition duration-300 group-hover:opacity-95">
+                    <div class="aspect-square bg-gray-100 relative overflow-hidden rounded-lg shadow-sm">
+                        <img src="https://placehold.co/400x400/F97316/ffffff?text=Future" onerror="this.onerror=null;this.src='https://placehold.co/400x400/F97316/ffffff?text=ARR+F';" alt="Arrangement F Cover" class="w-full h-full object-cover transition duration-300 group-hover:opacity-95">
                     </div>
                     <div class="p-3 text-center">
                         <p class="text-xl font-bold text-gray-800 leading-tight">Future Garage</p>
-                        <p class="text-base text-gray-600 font-normal leading-tight mt-1">Artist Name I-1</p>
+                        <p class="text-base text-gray-600 font-normal leading-tight mt-1">Artist Name L</p>
                     </div>
                 </div>
             </div>
         </div>
 
         <div id="page-film-music" class="page-content pb-48">
-            <h1 class="text-3xl font-bold text-gray-800 mb-12">VIDEO MUSIC</h1>
+            <h1 class="text-3xl font-bold text-gray-800 mb-12 border-b pb-4">VIDEO MUSIC</h1>
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
                 <div class="group cursor-pointer relative z-10 transform hover:scale-[1.02] transition duration-300" onclick="openModal('vid-1')">
-                    <div class="aspect-square bg-gray-100 relative">
-                        <img src="https://placehold.co/400x400/A855F7/ffffff?text=VIDEO+A" onerror="this.onerror=null;this.src='https://placehold.co/400x400/A855F7/ffffff?text=VIDEO+A';" alt="Video A Cover" class="w-full h-full object-cover transition duration-300 group-hover:opacity-95">
+                    <div class="aspect-square bg-gray-100 relative overflow-hidden rounded-lg shadow-sm">
+                        <img src="https://placehold.co/400x400/A855F7/ffffff?text=Docu" onerror="this.onerror=null;this.src='https://placehold.co/400x400/A855F7/ffffff?text=VIDEO+A';" alt="Video A Cover" class="w-full h-full object-cover transition duration-300 group-hover:opacity-95">
                     </div>
                     <div class="p-3 text-center">
                         <p class="text-xl font-bold text-gray-800 leading-tight">Documentary OST</p>
-                        <p class="text-base text-gray-600 font-normal leading-tight mt-1">Client Name G</p>
+                        <p class="text-base text-gray-600 font-normal leading-tight mt-1">Client Name M</p>
                     </div>
                 </div>
                 <div class="group cursor-pointer relative z-10 transform hover:scale-[1.02] transition duration-300" onclick="openModal('vid-2')">
-                    <div class="aspect-square bg-gray-100 relative">
-                        <img src="https://placehold.co/400x400/D97706/ffffff?text=VIDEO+B" onerror="this.onerror=null;this.src='https://placehold.co/400x400/D97706/ffffff?text=VIDEO+B';" alt="Video B Cover" class="w-full h-full object-cover transition duration-300 group-hover:opacity-95">
+                    <div class="aspect-square bg-gray-100 relative overflow-hidden rounded-lg shadow-sm">
+                        <img src="https://placehold.co/400x400/D97706/ffffff?text=Game" onerror="this.onerror=null;this.src='https://placehold.co/400x400/D97706/ffffff?text=VIDEO+B';" alt="Video B Cover" class="w-full h-full object-cover transition duration-300 group-hover:opacity-95">
                     </div>
                     <div class="p-3 text-center">
                         <p class="text-xl font-bold text-gray-800 leading-tight">Game Trailer Score</p>
-                        <p class="text-base text-gray-600 font-normal leading-tight mt-1">Client Name H</p>
+                        <p class="text-base text-gray-600 font-normal leading-tight mt-1">Client Name N</p>
                     </div>
                 </div>
                 <div class="group cursor-pointer relative z-10 transform hover:scale-[1.02] transition duration-300" onclick="openModal('vid-3')">
-                    <div class="aspect-square bg-gray-100 relative">
-                        <img src="https://placehold.co/400x400/EF4444/ffffff?text=VIDEO+C" onerror="this.onerror=null;this.src='https://placehold.co/400x400/EF4444/ffffff?text=VIDEO+C';" alt="Video C Cover" class="w-full h-full object-cover transition duration-300 group-hover:opacity-95">
+                    <div class="aspect-square bg-gray-100 relative overflow-hidden rounded-lg shadow-sm">
+                        <img src="https://placehold.co/400x400/EF4444/ffffff?text=BGM" onerror="this.onerror=null;this.src='https://placehold.co/400x400/EF4444/ffffff?text=VIDEO+C';" alt="Video C Cover" class="w-full h-full object-cover transition duration-300 group-hover:opacity-95">
                     </div>
                     <div class="p-3 text-center">
                         <p class="text-xl font-bold text-gray-800 leading-tight">Commercial BGM</p>
-                        <p class="text-base text-gray-600 font-normal leading-tight mt-1">Client Name I</p>
+                        <p class="text-base text-gray-600 font-normal leading-tight mt-1">Client Name O</p>
                     </div>
                 </div>
                 <div class="group cursor-pointer relative z-10 transform hover:scale-[1.02] transition duration-300" onclick="openModal('vid-4')">
-                    <div class="aspect-square bg-gray-100 relative">
-                        <img src="https://placehold.co/400x400/F59E0B/ffffff?text=VIDEO+D" onerror="this.onerror=null;this.src='https://placehold.co/400x400/F59E0B/ffffff?text=VIDEO+D';" alt="Video D Cover" class="w-full h-full object-cover transition duration-300 group-hover:opacity-95">
+                    <div class="aspect-square bg-gray-100 relative overflow-hidden rounded-lg shadow-sm">
+                        <img src="https://placehold.co/400x400/F59E0B/ffffff?text=Fashion" onerror="this.onerror=null;this.src='https://placehold.co/400x400/F59E0B/ffffff?text=VIDEO+D';" alt="Video D Cover" class="w-full h-full object-cover transition duration-300 group-hover:opacity-95">
                     </div>
                     <div class="p-3 text-center">
                         <p class="text-xl font-bold text-gray-800 leading-tight">Fashion Film Score</p>
-                        <p class="text-base text-gray-600 font-normal leading-tight mt-1">Client Name J-1</p>
+                        <p class="text-base text-gray-600 font-normal leading-tight mt-1">Client Name P</p>
                     </div>
                 </div>
                 <div class="group cursor-pointer relative z-10 transform hover:scale-[1.02] transition duration-300" onclick="openModal('vid-5')">
-                    <div class="aspect-square bg-gray-100 relative">
-                        <img src="https://placehold.co/400x400/6D28D9/ffffff?text=VIDEO+E" onerror="this.onerror=null;this.src='https://placehold.co/400x400/6D28D9/ffffff?text=VIDEO+E';" alt="Video E Cover" class="w-full h-full object-cover transition duration-300 group-hover:opacity-95">
+                    <div class="aspect-square bg-gray-100 relative overflow-hidden rounded-lg shadow-sm">
+                        <img src="https://placehold.co/400x400/6D28D9/ffffff?text=Edu" onerror="this.onerror=null;this.src='https://placehold.co/400x400/6D28D9/ffffff?text=VIDEO+E';" alt="Video E Cover" class="w-full h-full object-cover transition duration-300 group-hover:opacity-95">
                     </div>
                     <div class="p-3 text-center">
                         <p class="text-xl font-bold text-gray-800 leading-tight">Educational Content</p>
-                        <p class="text-base text-gray-600 font-normal leading-tight mt-1">Client Name K-1</p>
+                        <p class="text-base text-gray-600 font-normal leading-tight mt-1">Client Name Q</p>
                     </div>
                 </div>
                 <div class="group cursor-pointer relative z-10 transform hover:scale-[1.02] transition duration-300" onclick="openModal('vid-6')">
-                    <div class="aspect-square bg-gray-100 relative">
-                        <img src="https://placehold.co/400x400/38BDF8/ffffff?text=VIDEO+F" onerror="this.onerror=null;this.src='https://placehold.co/400x400/38BDF8/ffffff?text=VIDEO+F';" alt="Video F Cover" class="w-full h-full object-cover transition duration-300 group-hover:opacity-95">
+                    <div class="aspect-square bg-gray-100 relative overflow-hidden rounded-lg shadow-sm">
+                        <img src="https://placehold.co/400x400/38BDF8/ffffff?text=Indie" onerror="this.onerror=null;this.src='https://placehold.co/400x400/38BDF8/ffffff?text=VIDEO+F';" alt="Video F Cover" class="w-full h-full object-cover transition duration-300 group-hover:opacity-95">
                     </div>
                     <div class="p-3 text-center">
                         <p class="text-xl font-bold text-gray-800 leading-tight">Indie Film Theme</p>
-                        <p class="text-base text-gray-600 font-normal leading-tight mt-1">Client Name L-1</p>
+                        <p class="text-base text-gray-600 font-normal leading-tight mt-1">Client Name R</p>
                     </div>
                 </div>
             </div>
         </div>
 
         <div id="page-contest" class="page-content pb-48">
-            <h1 class="text-3xl font-bold text-gray-800 mb-12">CONTEST</h1>
+            <h1 class="text-3xl font-bold text-gray-800 mb-12 border-b pb-4">CONTEST</h1>
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
                 <div class="group cursor-pointer relative z-10 transform hover:scale-[1.02] transition duration-300" onclick="openModal('con-1')">
-                    <div class="aspect-square bg-gray-100 relative">
-                        <img src="https://placehold.co/400x400/14B8A6/ffffff?text=CONTEST+A" onerror="this.onerror=null;this.src='https://placehold.co/400x400/14B8A6/ffffff?text=CONTEST+A';" alt="Contest A Cover" class="w-full h-full object-cover transition duration-300 group-hover:opacity-95">
+                    <div class="aspect-square bg-gray-100 relative overflow-hidden rounded-lg shadow-sm">
+                        <img src="https://placehold.co/400x400/14B8A6/ffffff?text=Award" onerror="this.onerror=null;this.src='https://placehold.co/400x400/14B8A6/ffffff?text=CONTEST+A';" alt="Contest A Cover" class="w-full h-full object-cover transition duration-300 group-hover:opacity-95">
                     </div>
                     <div class="p-3 text-center">
                         <p class="text-xl font-bold text-gray-800 leading-tight">National Music Award</p>
-                        <p class="text-base text-gray-600 font-normal leading-tight mt-1">Contest Host J</p>
+                        <p class="text-base text-gray-600 font-normal leading-tight mt-1">Contest Host S</p>
                     </div>
                 </div>
                 <div class="group cursor-pointer relative z-10 transform hover:scale-[1.02] transition duration-300" onclick="openModal('con-2')">
-                    <div class="aspect-square bg-gray-100 relative">
-                        <img src="https://placehold.co/400x400/94A3B8/ffffff?text=CONTEST+B" onerror="this.onerror=null;this.src='https://placehold.co/400x400/94A3B8/ffffff?text=CONTEST+B';" alt="Contest B Cover" class="w-full h-full object-cover transition duration-300 group-hover:opacity-95">
+                    <div class="aspect-square bg-gray-100 relative overflow-hidden rounded-lg shadow-sm">
+                        <img src="https://placehold.co/400x400/94A3B8/ffffff?text=Challenge" onerror="this.onerror=null;this.src='https://placehold.co/400x400/94A3B8/ffffff?text=CONTEST+B';" alt="Contest B Cover" class="w-full h-full object-cover transition duration-300 group-hover:opacity-95">
                     </div>
                     <div class="p-3 text-center">
                         <p class="text-xl font-bold text-gray-800 leading-tight">New Artist Challenge</p>
-                        <p class="text-base text-gray-600 font-normal leading-tight mt-1">Contest Host K</p>
+                        <p class="text-base text-gray-600 font-normal leading-tight mt-1">Contest Host T</p>
                     </div>
                 </div>
                 <div class="group cursor-pointer relative z-10 transform hover:scale-[1.02] transition duration-300" onclick="openModal('con-3')">
-                    <div class="aspect-square bg-gray-100 relative">
-                        <img src="https://placehold.co/400x400/F472B6/ffffff?text=CONTEST+C" onerror="this.onerror=null;this.src='https://placehold.co/400x400/F472B6/ffffff?text=CONTEST+C';" alt="Contest C Cover" class="w-full h-full object-cover transition duration-300 group-hover:opacity-95">
+                    <div class="aspect-square bg-gray-100 relative overflow-hidden rounded-lg shadow-sm">
+                        <img src="https://placehold.co/400x400/F472B6/ffffff?text=Single" onerror="this.onerror=null;this.src='https://placehold.co/400x400/F472B6/ffffff?text=CONTEST+C';" alt="Contest C Cover" class="w-full h-full object-cover transition duration-300 group-hover:opacity-95">
                     </div>
                     <div class="p-3 text-center">
                         <p class="text-xl font-bold text-gray-800 leading-tight">Digital Single Contest</p>
-                        <p class="text-base text-gray-600 font-normal leading-tight mt-1">Contest Host L</p>
+                        <p class="text-base text-gray-600 font-normal leading-tight mt-1">Contest Host U</p>
                     </div>
                 </div>
                 <div class="group cursor-pointer relative z-10 transform hover:scale-[1.02] transition duration-300" onclick="openModal('con-4')">
-                    <div class="aspect-square bg-gray-100 relative">
-                        <img src="https://placehold.co/400x400/2DD4BF/ffffff?text=CONTEST+D" onerror="this.onerror=null;this.src='https://placehold.co/400x400/2DD4BF/ffffff?text=CONTEST+D';" alt="Contest D Cover" class="w-full h-full object-cover transition duration-300 group-hover:opacity-95">
+                    <div class="aspect-square bg-gray-100 relative overflow-hidden rounded-lg shadow-sm">
+                        <img src="https://placehold.co/400x400/2DD4BF/ffffff?text=Soundtrack" onerror="this.onerror=null;this.src='https://placehold.co/400x400/2DD4BF/ffffff?text=CONTEST+D';" alt="Contest D Cover" class="w-full h-full object-cover transition duration-300 group-hover:opacity-95">
                     </div>
                     <div class="p-3 text-center">
                         <p class="text-xl font-bold text-gray-800 leading-tight">Soundtrack Challenge</p>
-                        <p class="text-base text-gray-600 font-normal leading-tight mt-1">Contest Host M</p>
+                        <p class="text-base text-gray-600 font-normal leading-tight mt-1">Contest Host V</p>
                     </div>
                 </div>
                 <div class="group cursor-pointer relative z-10 transform hover:scale-[1.02] transition duration-300" onclick="openModal('con-5')">
-                    <div class="aspect-square bg-gray-100 relative">
-                        <img src="https://placehold.co/400x400/A78BFA/ffffff?text=CONTEST+E" onerror="this.onerror=null;this.src='https://placehold.co/400x400/A78BFA/ffffff?text=CONTEST+E';" alt="Contest E Cover" class="w-full h-full object-cover transition duration-300 group-hover:opacity-95">
+                    <div class="aspect-square bg-gray-100 relative overflow-hidden rounded-lg shadow-sm">
+                        <img src="https://placehold.co/400x400/A78BFA/ffffff?text=Festival" onerror="this.onerror=null;this.src='https://placehold.co/400x400/A78BFA/ffffff?text=CONTEST+E';" alt="Contest E Cover" class="w-full h-full object-cover transition duration-300 group-hover:opacity-95">
                     </div>
                     <div class="p-3 text-center">
                         <p class="text-xl font-bold text-gray-800 leading-tight">University Festival</p>
-                        <p class="text-base text-gray-600 font-normal leading-tight mt-1">Contest Host N</p>
+                        <p class="text-base text-gray-600 font-normal leading-tight mt-1">Contest Host W</p>
                     </div>
                 </div>
                 <div class="group cursor-pointer relative z-10 transform hover:scale-[1.02] transition duration-300" onclick="openModal('con-6')">
-                    <div class="aspect-square bg-gray-100 relative">
-                        <img src="https://placehold.co/400x400/60A5FA/ffffff?text=CONTEST+F" onerror="this.onerror=null;this.src='https://placehold.co/400x400/60A5FA/ffffff?text=CONTEST+F';" alt="Contest F Cover" class="w-full h-full object-cover transition duration-300 group-hover:opacity-95">
+                    <div class="aspect-square bg-gray-100 relative overflow-hidden rounded-lg shadow-sm">
+                        <img src="https://placehold.co/400x400/60A5FA/ffffff?text=K-Pop" onerror="this.onerror=null;this.src='https://placehold.co/400x400/60A5FA/ffffff?text=CONTEST+F';" alt="Contest F Cover" class="w-full h-full object-cover transition duration-300 group-hover:opacity-95">
                     </div>
                     <div class="p-3 text-center">
                         <p class="text-xl font-bold text-gray-800 leading-tight">K-Pop Producers</p>
-                        <p class="text-base text-gray-600 font-normal leading-tight mt-1">Contest Host O</p>
+                        <p class="text-base text-gray-600 font-normal leading-tight mt-1">Contest Host X</p>
                     </div>
                 </div>
             </div>
@@ -448,24 +481,25 @@
         
         <div id="page-contact" class="page-content pb-48">
             <h1 class="text-3xl font-bold text-gray-800 mb-6">CONTACT</h1>
-            <p class="text-lg text-gray-600 mb-8">작업 의뢰 또는 문의 사항은 아래 이메일로 연락 주시기 바랍니다.</p>
+            <p class="text-lg text-gray-600 mb-12">작업 의뢰 또는 문의 사항은 아래 이메일로 연락 주시기 바랍니다.</p>
             
-            <div class="bg-gray-50 p-6 rounded-xl border border-gray-200 inline-block">
-                <p class="text-xl font-semibold text-gray-700 mb-3">Email Address</p>
-                <div class="flex items-center space-x-4">
-                    <span id="contact-email" class="text-2xl font-mono text-blue-700 select-all">eunhasu.music@example.com</span>
-                    <button class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg transition duration-150 shadow-md flex items-center"
-                        onclick="copyContact()">
-                        <svg class="w-5 h-5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1.428M15 4h-2m2 0h2m-2 0v2m0-2l-3-3m3 3V1h-2v3m0 0H7v11a2 2 0 002 2h7V4z"></path></svg>
-                        복사
+            <div class="flex flex-col items-start">
+                <span id="contact-email" class="text-3xl sm:text-4xl font-bold text-gray-900 mb-6 select-all break-all tracking-tight">galaxyinyourspace@gmail.com</span>
+                
+                <div class="flex gap-4">
+                    <button onclick="copyContact()" class="px-5 py-2 border border-gray-300 rounded-lg hover:bg-gray-100 hover:border-gray-400 text-gray-700 transition duration-200 text-sm font-medium">
+                        주소 복사
                     </button>
+                    <a href="mailto:galaxyinyourspace@gmail.com" class="px-5 py-2 bg-black text-white rounded-lg hover:bg-gray-800 transition duration-200 text-sm font-medium flex items-center">
+                        메일 보내기
+                    </a>
                 </div>
             </div>
         </div>
 
     </main>
     
-    <footer class="fixed bottom-0 w-full bg-gray-900 text-white p-4 text-center z-40"> 
+    <footer class="fixed bottom-0 w-full bg-gray-900 text-white p-4 text-center z-50"> 
         <div class="max-w-6xl mx-auto text-sm text-gray-400">
             &copy; 2025 EUNHASU Portfolio. All rights reserved.
         </div>
@@ -475,12 +509,12 @@
 
     <div id="modal-overlay" class="modal-overlay" onclick="closeModal(event)">
         <div id="modal-content-box" class="modal-content-box" onclick="event.stopPropagation()">
-            <button class="absolute top-4 right-4 text-gray-500 hover:text-gray-900 transition" onclick="closeModal()">
+            <button class="absolute top-4 right-4 text-gray-400 hover:text-gray-800 transition p-1 rounded-full hover:bg-gray-100" onclick="closeModal()">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
             </button>
 
             <div id="modal-body" class="pt-2">
-                <p class="text-lg text-gray-500">모달 내용이 로드되지 않았습니다.</p>
+                <!-- Javascript will populate this -->
             </div>
         </div>
     </div>
@@ -489,149 +523,179 @@
 <script>
     // 페이지 데이터를 정의합니다. (모달에 표시될 내용)
     const projectData = {
-        // PRODUCING 데이터 (prod-1 ~ prod-6)
-        'prod-1': { title: 'The First Star', artist: 'Artist Name A', year: '2024.03', description: '발매된 첫 싱글 앨범으로, 팝 발라드 장르의 곡입니다. 전체 프로듀싱 및 작곡에 참여했습니다.', link: 'https://youtu.be/example_prod1', image: 'https://placehold.co/400x400/2563EB/ffffff?text=PROD+A' },
-        'prod-2': { title: 'City Lights', artist: 'Artist Name B', year: '2023.11', description: '화려한 도시의 밤을 표현한 시티팝 장르 곡입니다. 작곡 및 믹싱에 참여했습니다.', link: 'https://youtu.be/example_prod2', image: 'https://placehold.co/400x400/10B981/ffffff?text=PROD+B' },
-        'prod-3': { title: 'Winter Breeze', artist: 'Artist Name C', year: '2023.01', description: '어쿠스틱 사운드를 강조한 포크 곡입니다. 전체 프로듀싱과 마스터링을 담당했습니다.', link: 'https://youtu.be/example_prod3', image: 'https://placehold.co/400x400/F59E0B/ffffff?text=PROD+C' },
-        'prod-4': { title: 'Midnight Cruise', artist: 'Artist Name D-1', year: '2022.08', description: '퓨처 베이스 스타일의 경쾌한 트랙입니다. 공동 작곡 및 편곡.', link: 'https://youtu.be/example_prod4', image: 'https://placehold.co/400x400/7C3AED/ffffff?text=PROD+D' },
-        'prod-5': { title: 'Summer Rain', artist: 'Artist Name E-1', year: '2022.07', description: '여름 감성을 담은 미디엄 템포 R&B 곡입니다. 전체 프로듀싱 및 보컬 디렉팅.', link: 'https://youtu.be/example_prod5', image: 'https://placehold.co/400x400/F43F5E/ffffff?text=PROD+E' },
-        'prod-6': { title: 'Echoes', artist: 'Artist Name F-1', year: '2022.04', description: '깊은 울림을 주는 오케스트라 힙합 장르입니다. 비트 프로듀싱 및 스트링 편곡.', link: 'https://youtu.be/example_prod6', image: 'https://placehold.co/400x400/34D399/ffffff?text=PROD+F' },
-        
-        // ARRANGEMENT 데이터 (arr-1 ~ arr-6)
-        'arr-1': { title: 'Classic Revisit', artist: 'Artist Name D', year: '2024.02', description: '클래식 곡을 현대적인 EDM 스타일로 편곡했습니다. (EDM Arrangement)', link: 'https://youtu.be/example_arr1', image: 'https://placehold.co/400x400/9333EA/ffffff?text=ARR+A' },
-        'arr-2': { title: 'Acoustic Sunset', artist: 'Artist Name E', year: '2023.09', description: '기존 댄스곡을 잔잔한 어쿠스틱 버전으로 편곡했습니다. (Acoustic Arrangement)', link: 'https://youtu.be/example_arr2', image: 'https://placehold.co/400x400/DC2626/ffffff?text=ARR+B' },
-        'arr-3': { title: 'Pop Orchestra', artist: 'Artist Name F', year: '2023.05', description: '아이돌 그룹의 타이틀 곡을 웅장한 오케스트라 버전으로 편곡했습니다.', link: 'https://youtu.be/example_arr3', image: 'https://placehold.co/400x400/3B82F6/ffffff?text=ARR+C' },
-        'arr-4': { title: '8-bit Remix', artist: 'Artist Name G-1', year: '2023.02', description: '인디 밴드 곡을 레트로 아케이드 게임 스타일의 8비트 리믹스로 재탄생시켰습니다.', link: 'https://youtu.be/example_arr4', image: 'https://placehold.co/400x400/EC4899/ffffff?text=ARR+D' },
-        'arr-5': { title: 'Latin Jazz', artist: 'Artist Name H-1', year: '2022.11', description: '재즈 보컬 곡을 라틴 리듬이 가미된 보사노바 스타일로 편곡했습니다.', link: 'https://youtu.be/example_arr5', image: 'https://placehold.co/400x400/10B981/ffffff?text=ARR+E' },
-        'arr-6': { title: 'Future Garage', artist: 'Artist Name I-1', year: '2022.09', description: '발라드 곡을 UK 개러지 사운드를 활용한 퓨처 개러지 스타일로 편곡했습니다.', link: 'https://youtu.be/example_arr6', image: 'https://placehold.co/400x400/F97316/ffffff?text=ARR+F' },
+        // PRODUCING 데이터
+        'prod-1': { title: 'The First Star', artist: 'Artist Name A', year: '2024.03', description: '발매된 첫 싱글 앨범으로, 팝 발라드 장르의 곡입니다. 전체 프로듀싱 및 작곡에 참여했습니다.', image: 'https://placehold.co/400x400/2563EB/ffffff?text=The+First+Star', role: 'Producer / Composer' },
+        'prod-2': { title: 'City Lights', artist: 'Artist Name B', year: '2023.11', description: '화려한 도시의 밤을 표현한 시티팝 장르 곡입니다. 작곡 및 믹싱에 참여했습니다.', image: 'https://placehold.co/400x400/10B981/ffffff?text=City+Lights', role: 'Composer / Mixing' },
+        'prod-3': { title: 'Winter Breeze', artist: 'Artist Name C', year: '2023.12', description: '겨울 감성을 담은 어쿠스틱 발라드입니다. 피아노 세션과 편곡을 담당했습니다.', image: 'https://placehold.co/400x400/F59E0B/ffffff?text=Winter+Breeze', role: 'Arranger / Piano' },
+        'prod-4': { title: 'Midnight Cruise', artist: 'Artist Name D', year: '2024.01', description: '드라이브할 때 듣기 좋은 신스웨이브 트랙입니다. 신디사이저 사운드 디자인에 중점을 두었습니다.', image: 'https://placehold.co/400x400/7C3AED/ffffff?text=Midnight', role: 'Producer' },
+        'prod-5': { title: 'Summer Rain', artist: 'Artist Name E', year: '2023.07', description: '청량한 여름 분위기의 댄스 팝입니다. 보컬 디렉팅 및 탑라인 메이킹에 참여했습니다.', image: 'https://placehold.co/400x400/F43F5E/ffffff?text=Summer+Rain', role: 'Topliner / Director' },
+        'prod-6': { title: 'Echoes', artist: 'Artist Name F', year: '2023.09', description: '몽환적인 분위기의 R&B 트랙입니다. 비트메이킹과 베이스 연주를 담당했습니다.', image: 'https://placehold.co/400x400/34D399/ffffff?text=Echoes', role: 'Beatmaker' },
 
-        // VIDEO MUSIC 데이터 (vid-1 ~ vid-6)
-        'vid-1': { title: 'Documentary OST', artist: 'Client Name G', year: '2024', description: '환경 다큐멘터리 "Green Earth"의 메인 스코어 및 BGM 제작. (Orchestral Score)', link: 'https://youtu.be/example_vid1', image: 'https://placehold.co/400x400/A855F7/ffffff?text=VIDEO+A' },
-        'vid-2': { title: 'Game Trailer Score', artist: 'Client Name H', year: '2023', description: '판타지 RPG 게임 "Aetheria"의 공식 출시 트레일러 음악 제작. (Epic Orchestral)', link: 'https://youtu.be/example_vid2', image: 'https://placehold.co/400x400/D97706/ffffff?text=VIDEO+B' },
-        'vid-3': { title: 'Commercial BGM', artist: 'Client Name I', year: '2023', description: '글로벌 IT 기업의 신제품 런칭 광고 배경 음악 제작. (Modern Synth Pop)', link: 'https://youtu.be/example_vid3', image: 'https://placehold.co/400x400/EF4444/ffffff?text=VIDEO+C' },
-        'vid-4': { title: 'Fashion Film Score', artist: 'Client Name J-1', year: '2022', description: '명품 브랜드의 패션 필름을 위한 독점 사운드트랙 제작. (Ambient Electronic)', link: 'https://youtu.be/example_vid4', image: 'https://placehold.co/400x400/F59E0B/ffffff?text=VIDEO+D' },
-        'vid-5': { title: 'Educational Content', artist: 'Client Name K-1', year: '2022', description: '어린이 대상 교육 콘텐츠의 배경 음악 및 효과음 전반 담당.', link: 'https://youtu.be/example_vid5', image: 'https://placehold.co/400x400/6D28D9/ffffff?text=VIDEO+E' },
-        'vid-6': { title: 'Indie Film Theme', artist: 'Client Name L-1', year: '2021', description: '단편 독립 영화의 메인 테마 및 씬별 BGM 작곡.', link: 'https://youtu.be/example_vid6', image: 'https://placehold.co/400x400/38BDF8/ffffff?text=VIDEO+F' },
-        
-        // CONTEST 데이터 (con-1 ~ con-6)
-        'con-1': { title: 'National Music Award', artist: 'Contest Host J', year: '2023', description: '국내 최대 규모 음악 공모전에서 3위 수상. 제출곡: "Dream High". (Original Song)', link: 'https://youtu.be/example_con1', image: 'https://placehold.co/400x400/14B8A6/ffffff?text=CONTEST+A' },
-        'con-2': { title: 'New Artist Challenge', artist: 'Contest Host K', year: '2022', description: '신인 작곡가 발굴 프로젝트에서 최우수상 수상. (Instrumental)', link: 'https://youtu.be/example_con2', image: 'https://placehold.co/400x400/94A3B8/ffffff?text=CONTEST+B' },
-        'con-3': { title: 'Digital Single Contest', artist: 'Contest Host L', year: '2021', description: '온라인 디지털 싱글 공모전 입상. 발매 기회 획득. (Pop)', link: 'https://youtu.be/example_con3', image: 'https://placehold.co/400x400/F472B6/ffffff?text=CONTEST+C' },
-        'con-4': { title: 'Soundtrack Challenge', artist: 'Contest Host M', year: '2021', description: '미개봉 영화 예고편 음악 제작 챌린지 우승.', link: 'https://youtu.be/example_con4', image: 'https://placehold.co/400x400/2DD4BF/ffffff?text=CONTEST+D' },
-        'con-5': { title: 'University Festival', artist: 'Contest Host N', year: '2020', description: '대학교 실용음악과 주최 창작곡 경연대회 금상 수상.', link: 'https://youtu.be/example_con5', image: 'https://placehold.co/400x400/A78BFA/ffffff?text=CONTEST+E' },
-        'con-6': { title: 'K-Pop Producers', artist: 'Contest Host O', year: '2020', description: 'K-Pop 프로듀서 경연 프로그램 Top 10 진출.', link: 'https://youtu.be/example_con6', image: 'https://placehold.co/400x400/60A5FA/ffffff?text=CONTEST+F' },
+        // ARRANGEMENT 데이터
+        'arr-1': { title: 'Classic Revisit', artist: 'Artist Name G', year: '2024.02', description: '고전 클래식을 현대적인 팝 스타일로 재해석한 편곡 프로젝트입니다.', image: 'https://placehold.co/400x400/9333EA/ffffff?text=Classic', role: 'Arranger' },
+        'arr-2': { title: 'Acoustic Sunset', artist: 'Artist Name H', year: '2023.10', description: '원곡의 강렬한 락 사운드를 부드러운 어쿠스틱 기타 버전으로 편곡했습니다.', image: 'https://placehold.co/400x400/DC2626/ffffff?text=Acoustic', role: 'Arranger' },
+        'arr-3': { title: 'Pop Orchestra', artist: 'Artist Name I', year: '2023.12', description: '아이돌 댄스 곡을 오케스트라 버전으로 편곡하여 웅장함을 더했습니다.', image: 'https://placehold.co/400x400/3B82F6/ffffff?text=Pop+Orch', role: 'Orchestrator' },
+        'arr-4': { title: '8-bit Remix', artist: 'Artist Name J', year: '2024.01', description: '유명 가요를 레트로 게임 스타일의 8-bit 사운드로 리믹스했습니다.', image: 'https://placehold.co/400x400/EC4899/ffffff?text=8-bit', role: 'Remixer' },
+        'arr-5': { title: 'Latin Jazz', artist: 'Artist Name K', year: '2023.08', description: '재즈 스탠다드 넘버를 라틴 리듬으로 재편곡하여 색다른 느낌을 주었습니다.', image: 'https://placehold.co/400x400/10B981/ffffff?text=Latin', role: 'Arranger' },
+        'arr-6': { title: 'Future Garage', artist: 'Artist Name L', year: '2023.11', description: '발라드 곡을 Future Garage 스타일의 전자음악으로 과감하게 변신시켰습니다.', image: 'https://placehold.co/400x400/F97316/ffffff?text=Future', role: 'Remixer' },
+
+        // VIDEO MUSIC 데이터
+        'vid-1': { title: 'Documentary OST', artist: 'Client Name M', year: '2024.01', description: '자연 다큐멘터리의 배경음악으로 사용된 앰비언트 트랙입니다.', image: 'https://placehold.co/400x400/A855F7/ffffff?text=Docu', role: 'Composer' },
+        'vid-2': { title: 'Game Trailer Score', artist: 'Client Name N', year: '2023.12', description: '모바일 액션 RPG 게임의 런칭 트레일러 음악을 제작했습니다. 긴박감 넘치는 오케스트레이션이 특징입니다.', image: 'https://placehold.co/400x400/D97706/ffffff?text=Game', role: 'Sound Director' },
+        'vid-3': { title: 'Commercial BGM', artist: 'Client Name O', year: '2023.10', description: '화장품 브랜드 TV 광고에 사용된 세련되고 미니멀한 배경음악입니다.', image: 'https://placehold.co/400x400/EF4444/ffffff?text=BGM', role: 'Composer' },
+        'vid-4': { title: 'Fashion Film Score', artist: 'Client Name P', year: '2023.11', description: '의류 브랜드 룩북 영상에 삽입된 힙한 비트의 음악입니다.', image: 'https://placehold.co/400x400/F59E0B/ffffff?text=Fashion', role: 'Beatmaker' },
+        'vid-5': { title: 'Educational Content', artist: 'Client Name Q', year: '2023.09', description: '어린이 교육용 애니메이션에 들어가는 효과음과 배경음악을 작업했습니다.', image: 'https://placehold.co/400x400/6D28D9/ffffff?text=Edu', role: 'Sound Designer' },
+        'vid-6': { title: 'Indie Film Theme', artist: 'Client Name R', year: '2024.02', description: '독립 단편 영화의 엔딩 크레딧 곡을 작곡했습니다. 피아노와 첼로 선율이 돋보입니다.', image: 'https://placehold.co/400x400/38BDF8/ffffff?text=Indie', role: 'Composer' },
+
+        // CONTEST 데이터
+        'con-1': { title: 'National Music Award', artist: 'Contest Host S', year: '2023.05', description: '전국 대학생 음악 경연대회에서 대상을 수상한 곡입니다.', image: 'https://placehold.co/400x400/14B8A6/ffffff?text=Award', role: 'Grand Prize' },
+        'con-2': { title: 'New Artist Challenge', artist: 'Contest Host T', year: '2023.08', description: '신인 작곡가 발굴 프로젝트에서 입선하여 음원 발매 기회를 얻었습니다.', image: 'https://placehold.co/400x400/94A3B8/ffffff?text=Challenge', role: 'Finalist' },
+        'con-3': { title: 'Digital Single Contest', artist: 'Contest Host U', year: '2023.11', description: '온라인 작곡 공모전에서 우수상을 수상했습니다.', image: 'https://placehold.co/400x400/F472B6/ffffff?text=Single', role: 'Excellence Award' },
+        'con-4': { title: 'Soundtrack Challenge', artist: 'Contest Host V', year: '2023.06', description: '영화 예고편 음악 다시 만들기 챌린지에서 인기상을 받았습니다.', image: 'https://placehold.co/400x400/2DD4BF/ffffff?text=Soundtrack', role: 'Popularity Award' },
+        'con-5': { title: 'University Festival', artist: 'Contest Host W', year: '2022.09', description: '대학교 가요제에서 창작곡 부문 금상을 수상했습니다.', image: 'https://placehold.co/400x400/A78BFA/ffffff?text=Festival', role: 'Gold Prize' },
+        'con-6': { title: 'K-Pop Producers', artist: 'Contest Host X', year: '2023.12', description: '아이돌 리믹스 콘테스트에서 심사위원 특별상을 받았습니다.', image: 'https://placehold.co/400x400/60A5FA/ffffff?text=K-Pop', role: 'Special Award' }
     };
 
-    let currentPageId = 'page-main'; // 현재 활성 페이지 ID 저장
-
-    // 페이지 전환 함수
+    // --- Navigation Logic ---
     function navigateTo(pageId) {
-        if (currentPageId === pageId) return;
+        // 모든 페이지 숨기기
+        const pages = document.querySelectorAll('.page-content');
+        pages.forEach(page => {
+            page.classList.remove('active');
+        });
 
-        const container = document.getElementById('page-container');
-        const activePage = document.querySelector('.page-content.active');
-        const nextPage = document.getElementById(pageId);
-
-        if (activePage) {
-            // 현재 페이지 비활성화 (display: none)
-            activePage.classList.remove('active');
-            // 애니메이션을 위해 잠시 기다린 후 다음 페이지 활성화
-            setTimeout(() => {
-                if (nextPage) {
-                    nextPage.classList.add('active');
-                    currentPageId = pageId;
-                }
-            }, 50); // 전환 지연 시간
-        } else if (nextPage) {
-            // 초기 로딩 시 바로 활성화
-            nextPage.classList.add('active');
-            currentPageId = pageId;
+        // 선택한 페이지 보여주기
+        const targetPage = document.getElementById(pageId);
+        if (targetPage) {
+            targetPage.classList.add('active');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
-
-        // 페이지 전환 시 드롭다운 닫기
-        document.getElementById('dropdown-content').classList.remove('open');
     }
 
-    // 드롭다운 메뉴 제어 함수
+    // --- Dropdown Menu Logic ---
+    let timeoutId;
     function handleMouseEnter() {
-        document.getElementById('dropdown-content').classList.add('open');
+        clearTimeout(timeoutId);
+        const dropdown = document.getElementById('dropdown-content');
+        dropdown.classList.add('open');
     }
 
     function handleMouseLeave() {
-        document.getElementById('dropdown-content').classList.remove('open');
+        const dropdown = document.getElementById('dropdown-content');
+        timeoutId = setTimeout(() => {
+            dropdown.classList.remove('open');
+        }, 100); // 약간의 지연 시간을 주어 마우스 이동 시 끊김 방지
     }
 
-    // 모달 열기 함수 (수정됨: 데이터 로드 포함)
-    function openModal(id) {
-        const data = projectData[id];
-        const modalOverlay = document.getElementById('modal-overlay');
-        const modalBody = document.getElementById('modal-body');
+    // --- Modal Logic ---
+    function openModal(projectId) {
+        const data = projectData[projectId];
+        if (!data) return;
 
-        if (!data) {
-            modalBody.innerHTML = `<h3 class="text-2xl font-bold text-gray-900 mb-2">Error</h3><p class="text-red-500">프로젝트 ID "${id}"에 대한 데이터를 찾을 수 없습니다.</p>`;
-        } else {
-            // 모달 콘텐츠 HTML 생성
-            modalBody.innerHTML = `
-                <div class="flex flex-col md:flex-row gap-6">
-                    <div class="md:w-1/3 flex-shrink-0">
-                        <img src="${data.image}" alt="${data.title} Cover" class="rounded-lg shadow-md w-full aspect-square object-cover">
+        const modalBody = document.getElementById('modal-body');
+        modalBody.innerHTML = `
+            <div class="flex flex-col items-center">
+                <div class="w-full aspect-square bg-gray-100 rounded-lg overflow-hidden mb-6 shadow-md">
+                    <img src="${data.image}" alt="${data.title}" class="w-full h-full object-cover">
+                </div>
+                <h2 class="text-2xl font-bold text-gray-900 mb-1">${data.title}</h2>
+                <p class="text-lg text-blue-600 font-medium mb-4">${data.artist}</p>
+                
+                <div class="w-full text-left space-y-3 bg-gray-50 p-4 rounded-lg">
+                    <div class="flex justify-between border-b pb-2 border-gray-200">
+                        <span class="text-gray-500 font-medium">Role</span>
+                        <span class="text-gray-800">${data.role}</span>
                     </div>
-                    <div class="md:w-2/3">
-                        <h2 class="text-2xl font-extrabold text-gray-800 mb-2">${data.title}</h2>
-                        <p class="text-xl text-gray-600 mb-4">${data.artist} <span class="text-sm text-gray-400 ml-2">(${data.year})</span></p>
-                        
-                        <h3 class="text-lg font-semibold text-gray-700 mt-6 mb-2">상세 정보</h3>
-                        <p class="text-gray-600 mb-6">${data.description}</p>
-                        
-                        ${data.link ? `
-                            <a href="${data.link}" target="_blank" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition">
-                                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
-                                작품 보기
-                            </a>
-                        ` : ''}
+                    <div class="flex justify-between border-b pb-2 border-gray-200">
+                        <span class="text-gray-500 font-medium">Year</span>
+                        <span class="text-gray-800">${data.year}</span>
+                    </div>
+                    <div>
+                        <span class="text-gray-500 font-medium block mb-1">Description</span>
+                        <p class="text-gray-700 leading-relaxed text-sm">${data.description}</p>
                     </div>
                 </div>
-            `;
-        }
+                
+                <button class="mt-6 w-full py-3 bg-black text-white rounded-lg hover:bg-gray-800 transition font-medium" onclick="alert('데모 링크로 이동합니다 (준비중)');">
+                    Listen Demo
+                </button>
+            </div>
+        `;
 
-        // 모달 표시
-        modalOverlay.classList.add('show');
-        // 스크롤 방지
-        document.body.style.overflow = 'hidden';
+        const overlay = document.getElementById('modal-overlay');
+        overlay.classList.add('show');
+        document.body.style.overflow = 'hidden'; // 모달 열렸을 때 배경 스크롤 방지
     }
 
-    // 모달 닫기 함수 (수정됨: 오버레이 외 클릭 방지 로직 추가)
     function closeModal(event) {
-        // 오버레이 자체를 클릭했을 때만 닫히도록 조건 추가
-        if (event && event.target.id !== 'modal-overlay') return;
-
-        const modalOverlay = document.getElementById('modal-overlay');
-        modalOverlay.classList.remove('show');
-        // 스크롤 허용
-        document.body.style.overflow = '';
+        // 배경 클릭 시 또는 닫기 버튼 클릭 시 닫힘
+        // event가 없거나 (직접 호출), event.target이 overlay인 경우에만 닫음
+        if (!event || event.target.id === 'modal-overlay' || event.currentTarget.tagName === 'BUTTON') {
+            const overlay = document.getElementById('modal-overlay');
+            overlay.classList.remove('show');
+            document.body.style.overflow = ''; // 스크롤 복구
+        }
     }
 
-    // 이메일 복사 함수
+    // --- Contact Logic ---
     function copyContact() {
-        const email = document.getElementById('contact-email').textContent;
-        navigator.clipboard.writeText(email).then(() => {
-            const copyMessage = document.getElementById('copy-message');
-            copyMessage.style.opacity = '1';
-            setTimeout(() => {
-                copyMessage.style.opacity = '0';
-            }, 2000);
-        }).catch(err => {
-            console.error('Could not copy text: ', err);
-            alert('이메일 복사에 실패했습니다. 직접 복사해 주세요.');
-        });
+        const email = document.getElementById('contact-email').innerText;
+        
+        // Clipboard API 사용 (https 환경 권장, 실패시 fallback)
+        if (navigator.clipboard && window.isSecureContext) {
+            navigator.clipboard.writeText(email).then(() => {
+                showToast();
+            }).catch(err => {
+                console.error('클립보드 복사 실패:', err);
+                fallbackCopyTextToClipboard(email);
+            });
+        } else {
+            fallbackCopyTextToClipboard(email);
+        }
     }
 
-    // 초기 페이지 설정
+    function fallbackCopyTextToClipboard(text) {
+        const textArea = document.createElement("textarea");
+        textArea.value = text;
+        document.body.appendChild(textArea);
+        textArea.select();
+        try {
+            document.execCommand('copy');
+            showToast();
+        } catch (err) {
+            console.error('Fallback 복사 실패', err);
+            alert('이메일 복사에 실패했습니다. 직접 복사해주세요.');
+        }
+        document.body.removeChild(textArea);
+    }
+
+    function showToast() {
+        const msg = document.getElementById('copy-message');
+        msg.style.opacity = '1';
+        setTimeout(() => {
+            msg.style.opacity = '0';
+        }, 2000);
+    }
+
+    // --- Mobile Menu Logic ---
+    function toggleMobileMenu() {
+        const menu = document.getElementById('mobile-menu');
+        if (menu.classList.contains('translate-x-full')) {
+            menu.classList.remove('translate-x-full');
+        } else {
+            menu.classList.add('translate-x-full');
+        }
+    }
+
+    // 초기 페이지 로드 시 Main 탭 활성화 (HTML class로 처리되어 있지만 안전장치)
     document.addEventListener('DOMContentLoaded', () => {
-        navigateTo(currentPageId);
+        // URL 해시가 있다면 해당 페이지로 이동
+        const hash = window.location.hash.substring(1);
+        if (hash && document.getElementById(hash)) {
+            navigateTo(hash);
+        }
     });
 
 </script>
-
 </body>
 </html>
