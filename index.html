@@ -588,6 +588,8 @@
         const data = projectData[projectId];
         if (!data) return;
 
+        const showButton = projectId !== 'vid-1' && data.link;
+
         const modalBody = document.getElementById('modal-body');
         modalBody.innerHTML = `
             <div class="flex flex-col items-center">
@@ -610,9 +612,10 @@
                     </div>
                 </div>
                 
+                ${showButton ? `
                 <button class="mt-10 w-full py-3 bg-black text-white rounded-lg hover:bg-gray-800 transition font-medium" onclick="window.open('${data.link}', '_blank')">
                     Listen
-                </button>
+                </button>` : ''}
             </div>
         `;
         document.getElementById('modal-overlay').classList.add('show');
